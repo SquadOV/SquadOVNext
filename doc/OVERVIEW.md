@@ -163,7 +163,7 @@ Users will have to first get an API key that we can use to manage networks and t
 
 SquadOV will assume that each local player is authoritative over all the VODs/matches/annotations they create.
 Thus, for sharing, all that needs to be done is to share the appropriate pieces of the VOD and match database from one machine to another.
-Hypothetically, the Bittorrent protocol (via [libotrrent](https://www.libtorrent.org/)) can be used to do this sharing.
+Hypothetically, the Bittorrent protocol (via [libtorrent](https://www.libtorrent.org/)) can be used to do this sharing.
 To keep things in sync, each client must keep track the last time they fully-synced with another client and periodicially refresh this sync (as well on self startup and remote client startup in the same network).
 To know what needs to be synced, each client must keep a transaction log that indicates all the operations it performed and use the timestamped transaction log to determine what new information needs to be sent over the air to remote clients.
 
