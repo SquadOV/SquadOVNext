@@ -300,6 +300,7 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_LibTitanSystem(SWIG_CShar
 
 
 #include "titan/system/process.h"
+#include "titan/system/process_di.h"
 
 
 #include <string>
@@ -312,6 +313,16 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_LibTitanSystem(SWIG_CShar
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
+
+
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
 
 SWIGINTERN std::vector< titan::system::Process > *new_std_vector_Sl_titan_system_Process_Sg___SWIG_2(int capacity){
         std::vector< titan::system::Process >* pv = 0;
@@ -409,7 +420,143 @@ SWIGINTERN void std_vector_Sl_titan_system_Process_Sg__SetRange(std::vector< tit
 extern "C" {
 #endif
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_titan_new_Process(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_titan_delete_NativeProcessDI(void * jarg1) {
+  titan::system::NativeProcessDI *arg1 = (titan::system::NativeProcessDI *) 0 ;
+  std::shared_ptr< titan::system::NativeProcessDI > *smartarg1 = 0 ;
+  
+  
+  smartarg1 = (std::shared_ptr<  titan::system::NativeProcessDI > *)jarg1;
+  arg1 = (titan::system::NativeProcessDI *)(smartarg1 ? smartarg1->get() : 0); 
+  (void)arg1; delete smartarg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_NativeProcessDI_enumProcesses(void * jarg1) {
+  void * jresult ;
+  titan::system::NativeProcessDI *arg1 = (titan::system::NativeProcessDI *) 0 ;
+  std::shared_ptr< titan::system::NativeProcessDI > *smartarg1 = 0 ;
+  SwigValueWrapper< std::vector< NativeProcessId > > result;
+  
+  
+  smartarg1 = (std::shared_ptr<  titan::system::NativeProcessDI > *)jarg1;
+  arg1 = (titan::system::NativeProcessDI *)(smartarg1 ? smartarg1->get() : 0); 
+  result = (arg1)->enumProcesses();
+  jresult = new std::vector< NativeProcessId >((const std::vector< NativeProcessId > &)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_NativeProcessDI_getProcessPath(void * jarg1, void * jarg2) {
+  void * jresult ;
+  titan::system::NativeProcessDI *arg1 = (titan::system::NativeProcessDI *) 0 ;
+  NativeProcessHandle arg2 ;
+  std::shared_ptr< titan::system::NativeProcessDI > *smartarg1 = 0 ;
+  NativeProcessHandle *argp2 ;
+  NativeString result;
+  
+  
+  smartarg1 = (std::shared_ptr<  titan::system::NativeProcessDI > *)jarg1;
+  arg1 = (titan::system::NativeProcessDI *)(smartarg1 ? smartarg1->get() : 0); 
+  argp2 = (NativeProcessHandle *)jarg2; 
+  if (!argp2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null NativeProcessHandle", 0);
+    return 0;
+  }
+  arg2 = *argp2; 
+  result = (arg1)->getProcessPath(arg2);
+  jresult = new NativeString((const NativeString &)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_titan_NativeProcessDI_getProcessFriendlyName(void * jarg1, void * jarg2) {
+  char * jresult ;
+  titan::system::NativeProcessDI *arg1 = (titan::system::NativeProcessDI *) 0 ;
+  NativeString *arg2 = 0 ;
+  std::shared_ptr< titan::system::NativeProcessDI > *smartarg1 = 0 ;
+  std::string result;
+  
+  
+  smartarg1 = (std::shared_ptr<  titan::system::NativeProcessDI > *)jarg1;
+  arg1 = (titan::system::NativeProcessDI *)(smartarg1 ? smartarg1->get() : 0); 
+  arg2 = (NativeString *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NativeString const & type is null", 0);
+    return 0;
+  } 
+  result = (arg1)->getProcessFriendlyName((NativeString const &)*arg2);
+  jresult = SWIG_csharp_string_callback((&result)->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_NativeProcessDI_getProcessStartTime(void * jarg1, void * jarg2) {
+  void * jresult ;
+  titan::system::NativeProcessDI *arg1 = (titan::system::NativeProcessDI *) 0 ;
+  NativeProcessHandle arg2 ;
+  std::shared_ptr< titan::system::NativeProcessDI > *smartarg1 = 0 ;
+  NativeProcessHandle *argp2 ;
+  int64_t result;
+  
+  
+  smartarg1 = (std::shared_ptr<  titan::system::NativeProcessDI > *)jarg1;
+  arg1 = (titan::system::NativeProcessDI *)(smartarg1 ? smartarg1->get() : 0); 
+  argp2 = (NativeProcessHandle *)jarg2; 
+  if (!argp2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null NativeProcessHandle", 0);
+    return 0;
+  }
+  arg2 = *argp2; 
+  result = (arg1)->getProcessStartTime(arg2);
+  jresult = new int64_t((const int64_t &)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_new_NativeProcessDI() {
+  void * jresult ;
+  titan::system::NativeProcessDI *result = 0 ;
+  
+  result = (titan::system::NativeProcessDI *)new titan::system::NativeProcessDI();
+  
+  jresult = result ? new std::shared_ptr<  titan::system::NativeProcessDI >(result SWIG_NO_NULL_DELETER_1) : 0;
+  
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_getDefaultNativeProcessDI() {
+  void * jresult ;
+  titan::system::NativeProcessDIPtr result;
+  
+  result = titan::system::getDefaultNativeProcessDI();
+  jresult = result ? new titan::system::NativeProcessDIPtr(result) : 0; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_new_Process__SWIG_0(void * jarg1, void * jarg2) {
+  void * jresult ;
+  NativeProcessId arg1 ;
+  titan::system::NativeProcessDIPtr *arg2 = 0 ;
+  NativeProcessId *argp1 ;
+  titan::system::NativeProcessDIPtr tempnull2 ;
+  titan::system::Process *result = 0 ;
+  
+  argp1 = (NativeProcessId *)jarg1; 
+  if (!argp1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null NativeProcessId", 0);
+    return 0;
+  }
+  arg1 = *argp1; 
+  arg2 = jarg2 ? (titan::system::NativeProcessDIPtr *)jarg2 : &tempnull2; 
+  result = (titan::system::Process *)new titan::system::Process(arg1,(titan::system::NativeProcessDIPtr const &)*arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_new_Process__SWIG_1(void * jarg1) {
   void * jresult ;
   NativeProcessId arg1 ;
   NativeProcessId *argp1 ;
@@ -435,7 +582,20 @@ SWIGEXPORT void SWIGSTDCALL CSharp_titan_delete_Process(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_titan_loadRunningProcesses() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_loadRunningProcesses__SWIG_0(void * jarg1) {
+  void * jresult ;
+  titan::system::NativeProcessDIPtr *arg1 = 0 ;
+  titan::system::NativeProcessDIPtr tempnull1 ;
+  std::vector< titan::system::Process > result;
+  
+  arg1 = jarg1 ? (titan::system::NativeProcessDIPtr *)jarg1 : &tempnull1; 
+  result = titan::system::loadRunningProcesses((std::shared_ptr< titan::system::NativeProcessDI > const &)*arg1);
+  jresult = new std::vector< titan::system::Process >((const std::vector< titan::system::Process > &)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_titan_loadRunningProcesses__SWIG_1() {
   void * jresult ;
   std::vector< titan::system::Process > result;
   

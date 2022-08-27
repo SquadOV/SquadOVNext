@@ -44,7 +44,11 @@ public class Process : global::System.IDisposable {
     }
   }
 
-  public Process(SWIGTYPE_p_NativeProcessId id) : this(LibTitanSystemPINVOKE.new_Process(SWIGTYPE_p_NativeProcessId.getCPtr(id)), true) {
+  public Process(SWIGTYPE_p_NativeProcessId id, NativeProcessDI di) : this(LibTitanSystemPINVOKE.new_Process__SWIG_0(SWIGTYPE_p_NativeProcessId.getCPtr(id), NativeProcessDI.getCPtr(di)), true) {
+    if (LibTitanSystemPINVOKE.SWIGPendingException.Pending) throw LibTitanSystemPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public Process(SWIGTYPE_p_NativeProcessId id) : this(LibTitanSystemPINVOKE.new_Process__SWIG_1(SWIGTYPE_p_NativeProcessId.getCPtr(id)), true) {
     if (LibTitanSystemPINVOKE.SWIGPendingException.Pending) throw LibTitanSystemPINVOKE.SWIGPendingException.Retrieve();
   }
 

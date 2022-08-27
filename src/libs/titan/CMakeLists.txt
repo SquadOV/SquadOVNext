@@ -1,7 +1,9 @@
 set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/interface.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/process_di.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/process_internal.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/process_di.cpp
 )
 
 set(HEADERS
@@ -9,6 +11,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/interface.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process_internal.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/process_di.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/conversions.h
 )
 

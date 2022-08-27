@@ -17,14 +17,23 @@
 %module LibTitanSystem
 %{
 #include "titan/system/process.h"
+#include "titan/system/process_di.h"
 %}
 %include <windows.i>
 %include <std_string.i>
 %include <std_vector.i>
-
+%include <std_shared_ptr.i>
 %include "titan/dll.h"
-%include "titan/system/process.h"
 
+%shared_ptr(titan::system::NativeProcessDI)
+%include "titan/system/process_di.h"
+namespace titan {
+    namespace system {
+        %typedef std::shared_ptr<NativeProcessDI> NativeProcessDIPtr;
+    }
+};
+
+%include "titan/system/process.h"
 namespace std {
    %template(ProcessVector) vector<titan::system::Process>;
 };

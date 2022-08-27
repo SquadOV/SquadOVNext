@@ -14,21 +14,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#ifdef _WIN32
-#pragma once
+#include "titan/system/process_di.h"
 
-#include <Windows.h>
-#include <psapi.h>
-#include <processthreadsapi.h>
+namespace titan::system {
 
-#include "titan/system/process_internal.h"
-#include "titan/system/win32/conversions.h"
-
-namespace titan::system::internal {
-
-NativeProcessHandleWrapper::~NativeProcessHandleWrapper() {
-    CloseHandle(_handle);
+NativeProcessDIPtr getDefaultNativeProcessDI() {
+    static NativeProcessDIPtr global = std::make_shared<NativeProcessDI>();
+    return global;
 }
 
 }
-#endif // _WIN32

@@ -24,6 +24,7 @@
 
 #include "titan/dll.h"
 #include "titan/system/types.h"
+#include "titan/system/process_di.h"
 
 namespace titan::system {
 
@@ -36,9 +37,18 @@ namespace titan::system {
 // (e.g. if it's full-screen or not).
 class TITANEXPORT Process {
 public:
-    explicit Process(NativeProcessId id);
+    Process(
+        NativeProcessId id,
+        const NativeProcessDIPtr& di = getDefaultNativeProcessDI()
+    );
+
+    const std::string& name() const { return _name; }
+    const std::filesystem::path& path() const { return _fullPath; }
+    int64_t startTime() const { return _startTime; }
+
 private:
     NativeProcessId _id;
+    NativeProcessDIPtr _di;
 
     //
     // Cached properties of the process.
@@ -58,6 +68,6 @@ private:
 
 // Returns all the running processes at the time of this function call.
 // The process that *most recently* started (the newest process) will be first.
-TITANEXPORT std::vector<Process> loadRunningProcesses();
+TITANEXPORT std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di = getDefaultNativeProcessDI());
 
 }

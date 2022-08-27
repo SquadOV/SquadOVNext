@@ -11,8 +11,20 @@
 namespace titan {
 
 public class LibTitanSystem {
+  public static NativeProcessDI getDefaultNativeProcessDI() {
+    global::System.IntPtr cPtr = LibTitanSystemPINVOKE.getDefaultNativeProcessDI();
+    NativeProcessDI ret = (cPtr == global::System.IntPtr.Zero) ? null : new NativeProcessDI(cPtr, true);
+    return ret;
+  }
+
+  public static ProcessVector loadRunningProcesses(NativeProcessDI di) {
+    ProcessVector ret = new ProcessVector(LibTitanSystemPINVOKE.loadRunningProcesses__SWIG_0(NativeProcessDI.getCPtr(di)), true);
+    if (LibTitanSystemPINVOKE.SWIGPendingException.Pending) throw LibTitanSystemPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public static ProcessVector loadRunningProcesses() {
-    ProcessVector ret = new ProcessVector(LibTitanSystemPINVOKE.loadRunningProcesses(), true);
+    ProcessVector ret = new ProcessVector(LibTitanSystemPINVOKE.loadRunningProcesses__SWIG_1(), true);
     return ret;
   }
 

@@ -193,14 +193,41 @@ class LibTitanSystemPINVOKE {
   }
 
 
-  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_Process")]
-  public static extern global::System.IntPtr new_Process(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_delete_NativeProcessDI")]
+  public static extern void delete_NativeProcessDI(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_NativeProcessDI_enumProcesses")]
+  public static extern global::System.IntPtr NativeProcessDI_enumProcesses(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_NativeProcessDI_getProcessPath")]
+  public static extern global::System.IntPtr NativeProcessDI_getProcessPath(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_NativeProcessDI_getProcessFriendlyName")]
+  public static extern string NativeProcessDI_getProcessFriendlyName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_NativeProcessDI_getProcessStartTime")]
+  public static extern global::System.IntPtr NativeProcessDI_getProcessStartTime(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_NativeProcessDI")]
+  public static extern global::System.IntPtr new_NativeProcessDI();
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_getDefaultNativeProcessDI")]
+  public static extern global::System.IntPtr getDefaultNativeProcessDI();
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_Process__SWIG_0")]
+  public static extern global::System.IntPtr new_Process__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_Process__SWIG_1")]
+  public static extern global::System.IntPtr new_Process__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_delete_Process")]
   public static extern void delete_Process(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_loadRunningProcesses")]
-  public static extern global::System.IntPtr loadRunningProcesses();
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_loadRunningProcesses__SWIG_0")]
+  public static extern global::System.IntPtr loadRunningProcesses__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_loadRunningProcesses__SWIG_1")]
+  public static extern global::System.IntPtr loadRunningProcesses__SWIG_1();
 
   [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Clear")]
   public static extern void ProcessVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);

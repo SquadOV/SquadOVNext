@@ -23,8 +23,9 @@
 
 namespace titan::system {
 
-Process::Process(NativeProcessId id):
-    _id(id)
+Process::Process(NativeProcessId id, const NativeProcessDIPtr& di):
+    _id(id),
+    _di(di)
 {
     // Open up a process handle to use for the duration of the constructor.
     auto handle = internal::NativeProcessHandleWrapper::create(
@@ -33,13 +34,13 @@ Process::Process(NativeProcessId id):
 #endif
     );
 
-    _fullPath = internal::getProcessPath(handle.handle());
-    _name = internal::getProcessFriendlyName(_fullPath.native());
-    _startTime = internal::getProcessStartTime(handle.handle());
+    _fullPath = _di->getProcessPath(handle.handle());
+    _name = _di->getProcessFriendlyName(_fullPath.native());
+    _startTime = _di->getProcessStartTime(handle.handle());
 }
 
-std::vector<Process> loadRunningProcesses() {
-    std::vector<NativeProcessId> handles = internal::enumProcesses();
+std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di) {
+    std::vector<NativeProcessId> handles = di->enumProcesses();
 
     std::vector<Process> processes;
     processes.reserve(handles.size());

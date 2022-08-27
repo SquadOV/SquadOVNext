@@ -21,22 +21,8 @@
 #endif
 
 #include "titan/system/process.h"
-#include <stdint.h>
-#include <vector>
 
 namespace titan::system::internal {
-
-// An OS-specific function that will return all running process IDs.
-std::vector<NativeProcessId> enumProcesses();
-
-// An OS-specific function to get the full process path from a process handle.
-NativeString getProcessPath(NativeProcessHandle handle);
-
-// An OS-specific function to get a friendly name for the process given its executable path.
-std::string getProcessFriendlyName(const NativeString& fullPath);
-
-// An OS-specific function to get some integer representation of when the process started.
-int64_t getProcessStartTime(NativeProcessHandle handle);
 
 // A safe RAII wrappper for the OS's NativeProcessHandle.
 // Using this is safer since it's guaranteed to close the handle when going out of scope.
