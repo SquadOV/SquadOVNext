@@ -16,6 +16,10 @@
 //
 #pragma once
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 #include "titan/system/process.h"
 #include <stdint.h>
 #include <vector>
@@ -38,12 +42,23 @@ int64_t getProcessStartTime(NativeProcessHandle handle);
 // Using this is safer since it's guaranteed to close the handle when going out of scope.
 class NativeProcessHandleWrapper {
 public:
-    explicit NativeProcessHandleWrapper(NativeProcessHandle handle):
-        _handle(handle)
-    {}
+    template<typename... Args>
+    static NativeProcessHandleWrapper create(Args&&... args) {
+        return NativeProcessHandleWrapper(
+#ifdef _WIN32
+            OpenProcess(std::forward<Args>(args)...)
+#endif
+        );
+    }
     ~NativeProcessHandleWrapper();
 
     NativeProcessHandle handle() const { return _handle; }
+
+protected:
+    explicit NativeProcessHandleWrapper(NativeProcessHandle handle):
+        _handle(handle)
+    {}
+
 private:
     NativeProcessHandle _handle;
 };

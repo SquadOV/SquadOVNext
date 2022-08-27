@@ -27,9 +27,9 @@ Process::Process(NativeProcessId id):
     _id(id)
 {
     // Open up a process handle to use for the duration of the constructor.
-    internal::NativeProcessHandleWrapper handle(
+    auto handle = internal::NativeProcessHandleWrapper::create(
 #ifdef _WIN32
-        OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, _id)
+        PROCESS_QUERY_LIMITED_INFORMATION, FALSE, _id
 #endif
     );
 
