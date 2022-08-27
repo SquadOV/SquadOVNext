@@ -8,9 +8,9 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace av {
+namespace engine {
 
-public class LibAv {
+public class LibEngine {
 }
 
 }

@@ -14,9 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-%module LibTitan
-%{
-#include "titan/interface.h"
-%}
-%include <windows.i>
-%include "titan/interface.h"
+#include "engine/engine.h"
+
+namespace engine {
+
+Engine::Engine(const EngineOptions& options):
+    _options(options)
+{
+
+}
+
+}

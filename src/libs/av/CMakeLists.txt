@@ -30,16 +30,3 @@ target_link_libraries(libav
     libtitan
     WIL::WIL
 )
-
-set(SWIG_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/interface.i
-    ${CMAKE_CURRENT_SOURCE_DIR}/image/image.i
-)
-
-standard_swig_wrapper(
-    libavnet
-    libav
-    av
-    LIBAV_EXPORTS
-    "${SWIG_SOURCES}"
-)

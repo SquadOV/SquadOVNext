@@ -14,26 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-%module LibTitanSystem
-%{
-#include "titan/system/process.h"
-#include "titan/system/process_di.h"
-%}
-%include <windows.i>
-%include <std_string.i>
-%include <std_vector.i>
-%include <std_shared_ptr.i>
-%include "titan/dll.h"
+#pragma once
 
-%shared_ptr(titan::system::NativeProcessDI)
-%include "titan/system/process_di.h"
-namespace titan {
-    namespace system {
-        %typedef std::shared_ptr<NativeProcessDI> NativeProcessDIPtr;
-    }
-};
-
-%include "titan/system/process.h"
-namespace std {
-   %template(ProcessVector) vector<titan::system::Process>;
-};
+#if defined(SWIG) || defined(TESTS)
+    #define ENGINEEXPORT
+#else // SWIG
+    #ifdef LIBENGINE_EXPORTS
+        #define ENGINEEXPORT __declspec(dllexport)
+    #else // LIBENGINE_EXPORTS
+        #define ENGINEEXPORT __declspec(dllimport) 
+    #endif // LIBENGINE_EXPORTS
+#endif // SWIG

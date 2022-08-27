@@ -14,19 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-%module LibAvImage
+%module LibEngine
 %{
-#include "av/image/os_image.h"
-#include "av/image/image_capture.h"
-#include "av/image/dxgi_image_capture.h"
+#include "engine/engine.h"
 %}
+
 %include <windows.i>
 %include <std_shared_ptr.i>
+%include "engine/dll.h"
 
-%shared_ptr(av::ImageCapture)
-%shared_ptr(av::DxgiImageCapture)
-
-%include "av/dll.h"
-%include "av/image/os_image.h"
-%include "av/image/image_capture.h"
-%include "av/image/dxgi_image_capture.h"
+%shared_ptr(engine::Engine)
+%include "engine/engine.h"

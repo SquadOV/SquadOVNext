@@ -39,19 +39,6 @@ if(WIN32)
     )
 endif()
 
-set(SWIG_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/interface.i
-    ${CMAKE_CURRENT_SOURCE_DIR}/system/system.i
-)
-
-standard_swig_wrapper(
-    libtitannet
-    libtitan
-    titan
-    LIBTITAN_EXPORTS
-    "${SWIG_SOURCES}"
-)
-
 set(TEST_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process_tests.cpp

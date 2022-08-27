@@ -8,22 +8,22 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace titan {
+namespace engine {
 
-public class Process : global::System.IDisposable {
+public class EngineOptions : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
 
-  internal Process(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal EngineOptions(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(Process obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(EngineOptions obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~Process() {
+  ~EngineOptions() {
     Dispose(false);
   }
 
@@ -37,19 +37,24 @@ public class Process : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          LibTitanSystemPINVOKE.delete_Process(swigCPtr);
+          LibEnginePINVOKE.delete_EngineOptions(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public Process(SWIGTYPE_p_NativeProcessId id, NativeProcessDI di) : this(LibTitanSystemPINVOKE.new_Process__SWIG_0(SWIGTYPE_p_NativeProcessId.getCPtr(id), NativeProcessDI.getCPtr(di)), true) {
-    if (LibTitanSystemPINVOKE.SWIGPendingException.Pending) throw LibTitanSystemPINVOKE.SWIGPendingException.Retrieve();
+  public int cheese {
+    set {
+      LibEnginePINVOKE.EngineOptions_cheese_set(swigCPtr, value);
+    } 
+    get {
+      int ret = LibEnginePINVOKE.EngineOptions_cheese_get(swigCPtr);
+      return ret;
+    } 
   }
 
-  public Process(SWIGTYPE_p_NativeProcessId id) : this(LibTitanSystemPINVOKE.new_Process__SWIG_1(SWIGTYPE_p_NativeProcessId.getCPtr(id)), true) {
-    if (LibTitanSystemPINVOKE.SWIGPendingException.Pending) throw LibTitanSystemPINVOKE.SWIGPendingException.Retrieve();
+  public EngineOptions() : this(LibEnginePINVOKE.new_EngineOptions(), true) {
   }
 
 }

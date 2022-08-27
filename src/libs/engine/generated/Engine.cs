@@ -8,22 +8,22 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace av {
+namespace engine {
 
-public class ImageCapture : global::System.IDisposable {
+public class Engine : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   private bool swigCMemOwnBase;
 
-  internal ImageCapture(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal Engine(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwnBase = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(ImageCapture obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(Engine obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~ImageCapture() {
+  ~Engine() {
     Dispose(false);
   }
 
@@ -37,17 +37,15 @@ public class ImageCapture : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwnBase) {
           swigCMemOwnBase = false;
-          LibAvImagePINVOKE.delete_ImageCapture(swigCPtr);
+          LibEnginePINVOKE.delete_Engine(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public virtual NativeImage getCurrent() {
-    NativeImage ret = new NativeImage(LibAvImagePINVOKE.ImageCapture_getCurrent(swigCPtr), true);
-    if (LibAvImagePINVOKE.SWIGPendingException.Pending) throw LibAvImagePINVOKE.SWIGPendingException.Retrieve();
-    return ret;
+  public Engine(EngineOptions options) : this(LibEnginePINVOKE.new_Engine(EngineOptions.getCPtr(options)), true) {
+    if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
   }
 
 }

@@ -14,9 +14,24 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-%module LibAv
-%{
-#include "av/interface.h"
-%}
-%include <windows.i>
-%include "av/interface.h"
+#pragma once
+
+#include <memory>
+#include "engine/dll.h"
+
+namespace engine {
+
+struct ENGINEEXPORT EngineOptions {
+};
+
+class ENGINEEXPORT Engine {
+public:
+    explicit Engine(const EngineOptions& options);
+
+private:
+    EngineOptions _options;
+};
+
+using EnginePtr = std::shared_ptr<Engine>;
+
+}

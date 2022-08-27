@@ -49,6 +49,7 @@ std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di) {
     std::sort(processes.begin(), processes.end(), [](const Process& a, const Process& b){
         return a.startTime() > b.startTime();
     });
+    
     return processes;
 }
 
