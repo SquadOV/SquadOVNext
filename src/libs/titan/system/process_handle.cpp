@@ -21,13 +21,14 @@
 #include <psapi.h>
 #include <processthreadsapi.h>
 
-#include "titan/system/process_internal.h"
-#include "titan/system/win32/conversions.h"
+#include "titan/system/process_di.h"
+#include "titan/system/process_handle.h"
 
-namespace titan::system::internal {
+namespace titan::system {
 
 NativeProcessHandleWrapper::~NativeProcessHandleWrapper() {
-    CloseHandle(_handle);
+    _di->closeProcessHandle(_handle);
+    _handle = nullptr;
 }
 
 }

@@ -12,6 +12,11 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake
 )
 
+#
+# Project Options
+#
+option(ENABLE_TESTING "Whether to compile tests" ON)
+
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x64)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x64)
@@ -37,6 +42,14 @@ set (UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
 if(WIN32)
     find_package(WIL CONFIG REQUIRED)
+endif()
+
+add_subdirectory(deps)
+include(DoctestHelper)
+include(${CMAKE_SOURCE_DIR}/deps/doctest/scripts/cmake/doctest.cmake)
+
+if(ENABLE_TESTING)
+    enable_testing()
 endif()
 
 add_subdirectory(src)

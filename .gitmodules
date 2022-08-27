@@ -1,3 +1,6 @@
 [submodule "deps/CppSharp"]
 	path = deps/CppSharp
 	url = https://github.com/mono/CppSharp.git
+[submodule "deps/doctest"]
+	path = deps/doctest
+	url = https://github.com/doctest/doctest.git

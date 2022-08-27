@@ -18,15 +18,23 @@
 
 #include "titan/dll.h"
 #include "titan/system/types.h"
+#include "titan/system/process_handle.h"
 #include <memory>
 #include <stdint.h>
 #include <vector>
 
 namespace titan::system {
 
-class TITANEXPORT NativeProcessDI {
+class TITANEXPORT NativeProcessDI: public std::enable_shared_from_this<NativeProcessDI> {
 public:
     virtual ~NativeProcessDI() {}
+
+    // An OS-specific function that will open a "limited" process handle.
+    // On Windows, this will open a process handle that only has limited QUERY permissions.
+    virtual NativeProcessHandleWrapper openProcessHandleLimited(NativeProcessId id);
+
+    // An OS-specific function to close a process handle.
+    virtual void closeProcessHandle(NativeProcessHandle handle);
     
     // An OS-specific function that will return all running process IDs.
     virtual std::vector<NativeProcessId> enumProcesses();
@@ -43,6 +51,5 @@ private:
 };
 
 using NativeProcessDIPtr = std::shared_ptr<NativeProcessDI>;
-TITANEXPORT NativeProcessDIPtr getDefaultNativeProcessDI();
 
 }

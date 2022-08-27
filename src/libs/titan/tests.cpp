@@ -14,14 +14,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#pragma once
 
-#if defined(SWIG) || defined(TESTS)
-    #define AVEXPORT
-#else // SWIG
-    #ifdef LIBAV_EXPORTS
-        #define AVEXPORT __declspec(dllexport)
-    #else // LIBAV_EXPORTS
-        #define AVEXPORT __declspec(dllimport) 
-    #endif // LIBAV_EXPORTS
-#endif // SWIG
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>

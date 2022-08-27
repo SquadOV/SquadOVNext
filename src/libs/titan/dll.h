@@ -16,7 +16,7 @@
 //
 #pragma once
 
-#ifdef SWIG
+#if defined(SWIG) || defined(TESTS)
     #define TITANEXPORT
 #else // SWIG
     #ifdef LIBTITAN_EXPORTS

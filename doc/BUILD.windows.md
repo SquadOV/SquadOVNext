@@ -10,6 +10,10 @@
 
 * `wil:x64-windows`
 
+# Source Code
+
+* git clone --recurse-submodules git@github.com:SquadOV/SquadOVNext.git
+
 # C++ Components
 
 * `cd $SRC`

@@ -26,6 +26,19 @@
 
 namespace titan::system {
 
+NativeProcessHandleWrapper NativeProcessDI::openProcessHandleLimited(NativeProcessId id) {
+    return NativeProcessHandleWrapper::create(
+        shared_from_this(),
+        PROCESS_QUERY_LIMITED_INFORMATION,
+        FALSE,
+        id
+    );
+}
+
+void NativeProcessDI::closeProcessHandle(NativeProcessHandle handle) {
+    CloseHandle(handle);
+}
+
 std::vector<NativeProcessId> NativeProcessDI::enumProcesses() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     if ( !EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded) ) {

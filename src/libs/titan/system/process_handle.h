@@ -20,33 +20,46 @@
 #include <Windows.h>
 #endif
 
-#include "titan/system/process.h"
+#include "titan/system/types.h"
+#include "titan/system/process_di_forward.h"
 
-namespace titan::system::internal {
+namespace titan::system {
 
 // A safe RAII wrappper for the OS's NativeProcessHandle.
 // Using this is safer since it's guaranteed to close the handle when going out of scope.
 class NativeProcessHandleWrapper {
 public:
     template<typename... Args>
-    static NativeProcessHandleWrapper create(Args&&... args) {
+    static NativeProcessHandleWrapper create(const NativeProcessDIPtr& di, Args&&... args) {
         return NativeProcessHandleWrapper(
 #ifdef _WIN32
             OpenProcess(std::forward<Args>(args)...)
 #endif
+            , di
         );
     }
+
+    NativeProcessHandleWrapper(
+        NativeProcessHandle handle,
+        const NativeProcessDIPtr& di = getDefaultNativeProcessDI()
+    ):
+        _handle(handle),
+        _di(di)
+    {}
+
     ~NativeProcessHandleWrapper();
+
+    NativeProcessHandleWrapper(const NativeProcessHandleWrapper& o) = delete;
+    NativeProcessHandleWrapper& operator=(const NativeProcessHandleWrapper& o) = delete;
+
+    NativeProcessHandleWrapper(NativeProcessHandleWrapper&& o) = default;
+    NativeProcessHandleWrapper& operator=(NativeProcessHandleWrapper&& o) = default;
 
     NativeProcessHandle handle() const { return _handle; }
 
-protected:
-    explicit NativeProcessHandleWrapper(NativeProcessHandle handle):
-        _handle(handle)
-    {}
-
 private:
     NativeProcessHandle _handle;
+    NativeProcessDIPtr _di;
 };
 
 }

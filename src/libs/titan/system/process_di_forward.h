@@ -16,12 +16,13 @@
 //
 #pragma once
 
-#if defined(SWIG) || defined(TESTS)
-    #define AVEXPORT
-#else // SWIG
-    #ifdef LIBAV_EXPORTS
-        #define AVEXPORT __declspec(dllexport)
-    #else // LIBAV_EXPORTS
-        #define AVEXPORT __declspec(dllimport) 
-    #endif // LIBAV_EXPORTS
-#endif // SWIG
+#include "titan/dll.h"
+#include <memory>
+
+namespace titan::system {
+
+class NativeProcessDI;
+using NativeProcessDIPtr = std::shared_ptr<NativeProcessDI>;
+TITANEXPORT NativeProcessDIPtr getDefaultNativeProcessDI();
+
+}
