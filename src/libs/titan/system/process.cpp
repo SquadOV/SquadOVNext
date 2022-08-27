@@ -14,12 +14,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#include "titan/system/process.h"
-#include "titan/system/process_handle.h"
-
 #ifdef _WIN32
+#include <Windows.h>
 #include <processthreadsapi.h>
 #endif
+
+#include <map>
+
+#include "titan/system/process.h"
+#include "titan/system/process_handle.h"
 
 namespace titan::system {
 
@@ -39,16 +42,18 @@ std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di) {
 
     std::vector<Process> processes;
     processes.reserve(handles.size());
-
     for (const auto& hnd : handles) {
-        processes.emplace_back(Process{hnd});
+        processes.emplace_back(Process{hnd, di});
     }
+
+    std::sort(processes.begin(), processes.end(), [](const Process& a, const Process& b){
+        return a.startTime() > b.startTime();
+    });
 
     return processes;
 }
 
 }
-
 
 #ifdef TESTS
 
@@ -81,7 +86,12 @@ public:
     void closeProcessHandle(NativeProcessHandle handle) override {}
 
     std::vector<NativeProcessId> enumProcesses() override {
-        return {};
+        std::vector<NativeProcessId> p(_data.size());
+        size_t idx = 0;
+        for (const auto& d: _data) {
+            p[idx++] = d.first;
+        }
+        return p;
     }
 
     NativeString getProcessPath(NativeProcessHandle handle) override {
@@ -135,7 +145,18 @@ TEST_CASE("Process constructor -> accessor") {
         CHECK(process.path() == L"Test5");
         CHECK(process.startTime() == 1);
     }
+}
 
+TEST_CASE("Load Running Processes Order") {
+    TestProcessDI::TestMap cases = {
+        {256, {"Test1", L"/Path/123", 54421}},
+        {15243123, {"Test2", L"Test5", 1}}
+    };
+    auto di = std::make_shared<TestProcessDI>(cases);
+    auto processes = titan::system::loadRunningProcesses(di);
+    CHECK(processes.size() == 2);
+    CHECK(processes[0].startTime() == 54421);
+    CHECK(processes[1].startTime() == 1);
 }
 
 #endif // TESTS
