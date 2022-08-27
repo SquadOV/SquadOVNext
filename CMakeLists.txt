@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.24)
+project(
+    SquadOVNext
+    VERSION 0.0
+    LANGUAGES C CXX
+)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x64)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x64)
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x86)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x86)
+endif()
+
+if(WIN32)
+    add_definitions(-DNOMINMAX)
+    add_definitions(-DUNICODE)
+endif()
+
+if(WIN32)
+    SET(SWIG_DIR ${CMAKE_SOURCE_DIR}/deps/swig/Lib)
+    SET(SWIG_EXECUTABLE ${CMAKE_SOURCE_DIR}/deps/swig/swig.exe)
+endif()
+find_package(SWIG REQUIRED)
+include(UseSWIG)
+set (UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
+
+if(WIN32)
+    find_package(WIL CONFIG REQUIRED)
+endif()
+
+add_subdirectory(src)
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
