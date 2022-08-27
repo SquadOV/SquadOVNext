@@ -52,10 +52,13 @@ standard_swig_wrapper(
     "${SWIG_SOURCES}"
 )
 
+set(TEST_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/process_tests.cpp
+)
+
 doctest_wrapper(
     libtitantests
     libtitan
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp
-    "${SRCS}"
-    "${HEADERS}"
+    "${TEST_SRCS}"
 )
