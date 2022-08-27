@@ -17,11 +17,11 @@
 #pragma once
 
 #ifdef SWIG
-    #define DLLEXPORT
+    #define AVEXPORT
 #else // SWIG
     #ifdef LIBAV_EXPORTS
-        #define DLLEXPORT __declspec(dllexport)
+        #define AVEXPORT __declspec(dllexport)
     #else // LIBAV_EXPORTS
-        #define DLLEXPORT __declspec(dllimport) 
+        #define AVEXPORT __declspec(dllimport) 
     #endif // LIBAV_EXPORTS
 #endif // SWIG

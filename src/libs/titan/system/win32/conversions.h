@@ -14,12 +14,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#include "av/image/image_capture.h"
+#pragma once
 
-namespace av {
+#ifdef _WIN32
 
-ImageCapturePtr createImageCapture(const titan::system::Process& process) {
-    return nullptr;
+#include <Windows.h>
+#include <stdint.h>
+
+namespace titan::system::internal {
+
+inline
+int64_t fileTimeToI64(const FILETIME& tm) {
+    ULARGE_INTEGER ret;
+    ret.HighPart = tm.dwHighDateTime;
+    ret.LowPart = tm.dwLowDateTime;
+    return ret.QuadPart;
 }
 
 }
+
+#endif

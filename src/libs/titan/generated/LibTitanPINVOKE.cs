@@ -8,9 +8,9 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace av {
+namespace titan {
 
-class LibAvImagePINVOKE {
+class LibTitanPINVOKE {
 
   protected class SWIGExceptionHelper {
 
@@ -33,8 +33,8 @@ class LibAvImagePINVOKE {
     static ExceptionArgumentDelegate argumentNullDelegate = new ExceptionArgumentDelegate(SetPendingArgumentNullException);
     static ExceptionArgumentDelegate argumentOutOfRangeDelegate = new ExceptionArgumentDelegate(SetPendingArgumentOutOfRangeException);
 
-    [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="SWIGRegisterExceptionCallbacks_LibAvImage")]
-    public static extern void SWIGRegisterExceptionCallbacks_LibAvImage(
+    [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="SWIGRegisterExceptionCallbacks_LibTitan")]
+    public static extern void SWIGRegisterExceptionCallbacks_LibTitan(
                                 ExceptionDelegate applicationDelegate,
                                 ExceptionDelegate arithmeticDelegate,
                                 ExceptionDelegate divideByZeroDelegate, 
@@ -47,8 +47,8 @@ class LibAvImagePINVOKE {
                                 ExceptionDelegate overflowDelegate, 
                                 ExceptionDelegate systemExceptionDelegate);
 
-    [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="SWIGRegisterExceptionArgumentCallbacks_LibAvImage")]
-    public static extern void SWIGRegisterExceptionCallbacksArgument_LibAvImage(
+    [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="SWIGRegisterExceptionArgumentCallbacks_LibTitan")]
+    public static extern void SWIGRegisterExceptionCallbacksArgument_LibTitan(
                                 ExceptionArgumentDelegate argumentDelegate,
                                 ExceptionArgumentDelegate argumentNullDelegate,
                                 ExceptionArgumentDelegate argumentOutOfRangeDelegate);
@@ -102,7 +102,7 @@ class LibAvImagePINVOKE {
     }
 
     static SWIGExceptionHelper() {
-      SWIGRegisterExceptionCallbacks_LibAvImage(
+      SWIGRegisterExceptionCallbacks_LibTitan(
                                 applicationDelegate,
                                 arithmeticDelegate,
                                 divideByZeroDelegate,
@@ -115,7 +115,7 @@ class LibAvImagePINVOKE {
                                 overflowDelegate,
                                 systemDelegate);
 
-      SWIGRegisterExceptionCallbacksArgument_LibAvImage(
+      SWIGRegisterExceptionCallbacksArgument_LibTitan(
                                 argumentDelegate,
                                 argumentNullDelegate,
                                 argumentOutOfRangeDelegate);
@@ -174,51 +174,24 @@ class LibAvImagePINVOKE {
     public delegate string SWIGStringDelegate(string message);
     static SWIGStringDelegate stringDelegate = new SWIGStringDelegate(CreateString);
 
-    [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="SWIGRegisterStringCallback_LibAvImage")]
-    public static extern void SWIGRegisterStringCallback_LibAvImage(SWIGStringDelegate stringDelegate);
+    [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="SWIGRegisterStringCallback_LibTitan")]
+    public static extern void SWIGRegisterStringCallback_LibTitan(SWIGStringDelegate stringDelegate);
 
     static string CreateString(string cString) {
       return cString;
     }
 
     static SWIGStringHelper() {
-      SWIGRegisterStringCallback_LibAvImage(stringDelegate);
+      SWIGRegisterStringCallback_LibTitan(stringDelegate);
     }
   }
 
   static protected SWIGStringHelper swigStringHelper = new SWIGStringHelper();
 
 
-  static LibAvImagePINVOKE() {
+  static LibTitanPINVOKE() {
   }
 
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_new_NativeImage")]
-  public static extern global::System.IntPtr new_NativeImage();
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_delete_NativeImage")]
-  public static extern void delete_NativeImage(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_delete_ImageCapture")]
-  public static extern void delete_ImageCapture(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_ImageCapture_getCurrent")]
-  public static extern global::System.IntPtr ImageCapture_getCurrent(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_createImageCapture")]
-  public static extern global::System.IntPtr createImageCapture(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_DxgiImageCapture_getCurrent")]
-  public static extern global::System.IntPtr DxgiImageCapture_getCurrent(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_new_DxgiImageCapture")]
-  public static extern global::System.IntPtr new_DxgiImageCapture();
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_delete_DxgiImageCapture")]
-  public static extern void delete_DxgiImageCapture(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_DxgiImageCapture_SWIGSmartPtrUpcast")]
-  public static extern global::System.IntPtr DxgiImageCapture_SWIGSmartPtrUpcast(global::System.IntPtr jarg1);
 }
 
 }

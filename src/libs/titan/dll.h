@@ -14,12 +14,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#include "av/image/image_capture.h"
+#pragma once
 
-namespace av {
-
-ImageCapturePtr createImageCapture(const titan::system::Process& process) {
-    return nullptr;
-}
-
-}
+#ifdef SWIG
+    #define TITANEXPORT
+#else // SWIG
+    #ifdef LIBTITAN_EXPORTS
+        #define TITANEXPORT __declspec(dllexport)
+    #else // LIBTITAN_EXPORTS
+        #define TITANEXPORT __declspec(dllimport) 
+    #endif // LIBTITAN_EXPORTS
+#endif // SWIG

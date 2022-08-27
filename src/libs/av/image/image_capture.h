@@ -20,9 +20,11 @@
 #include "av/dll.h"
 #include "av/image/os_image.h"
 
+#include "titan/system/process.h"
+
 namespace av {
 
-class DLLEXPORT ImageCapture {
+class AVEXPORT ImageCapture {
 public:
     virtual ~ImageCapture() {}
 
@@ -34,6 +36,6 @@ using ImageCapturePtr = std::shared_ptr<ImageCapture>;
 // A generic function to create the appropriate ImageCapture class for the given circumstances.
 // Namely, we generally only care about what native process we're trying to record (i.e. a game).
 // This function will return the first available image capture object that successfully initializes.
-DLLEXPORT ImageCapturePtr createImageCapture();
+AVEXPORT ImageCapturePtr createImageCapture(const titan::system::Process& process);
 
 }

@@ -8,9 +8,9 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace av {
+namespace titan {
 
-class LibAvImagePINVOKE {
+class LibTitanSystemPINVOKE {
 
   protected class SWIGExceptionHelper {
 
@@ -33,8 +33,8 @@ class LibAvImagePINVOKE {
     static ExceptionArgumentDelegate argumentNullDelegate = new ExceptionArgumentDelegate(SetPendingArgumentNullException);
     static ExceptionArgumentDelegate argumentOutOfRangeDelegate = new ExceptionArgumentDelegate(SetPendingArgumentOutOfRangeException);
 
-    [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="SWIGRegisterExceptionCallbacks_LibAvImage")]
-    public static extern void SWIGRegisterExceptionCallbacks_LibAvImage(
+    [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="SWIGRegisterExceptionCallbacks_LibTitanSystem")]
+    public static extern void SWIGRegisterExceptionCallbacks_LibTitanSystem(
                                 ExceptionDelegate applicationDelegate,
                                 ExceptionDelegate arithmeticDelegate,
                                 ExceptionDelegate divideByZeroDelegate, 
@@ -47,8 +47,8 @@ class LibAvImagePINVOKE {
                                 ExceptionDelegate overflowDelegate, 
                                 ExceptionDelegate systemExceptionDelegate);
 
-    [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="SWIGRegisterExceptionArgumentCallbacks_LibAvImage")]
-    public static extern void SWIGRegisterExceptionCallbacksArgument_LibAvImage(
+    [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="SWIGRegisterExceptionArgumentCallbacks_LibTitanSystem")]
+    public static extern void SWIGRegisterExceptionCallbacksArgument_LibTitanSystem(
                                 ExceptionArgumentDelegate argumentDelegate,
                                 ExceptionArgumentDelegate argumentNullDelegate,
                                 ExceptionArgumentDelegate argumentOutOfRangeDelegate);
@@ -102,7 +102,7 @@ class LibAvImagePINVOKE {
     }
 
     static SWIGExceptionHelper() {
-      SWIGRegisterExceptionCallbacks_LibAvImage(
+      SWIGRegisterExceptionCallbacks_LibTitanSystem(
                                 applicationDelegate,
                                 arithmeticDelegate,
                                 divideByZeroDelegate,
@@ -115,7 +115,7 @@ class LibAvImagePINVOKE {
                                 overflowDelegate,
                                 systemDelegate);
 
-      SWIGRegisterExceptionCallbacksArgument_LibAvImage(
+      SWIGRegisterExceptionCallbacksArgument_LibTitanSystem(
                                 argumentDelegate,
                                 argumentNullDelegate,
                                 argumentOutOfRangeDelegate);
@@ -174,51 +174,99 @@ class LibAvImagePINVOKE {
     public delegate string SWIGStringDelegate(string message);
     static SWIGStringDelegate stringDelegate = new SWIGStringDelegate(CreateString);
 
-    [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="SWIGRegisterStringCallback_LibAvImage")]
-    public static extern void SWIGRegisterStringCallback_LibAvImage(SWIGStringDelegate stringDelegate);
+    [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="SWIGRegisterStringCallback_LibTitanSystem")]
+    public static extern void SWIGRegisterStringCallback_LibTitanSystem(SWIGStringDelegate stringDelegate);
 
     static string CreateString(string cString) {
       return cString;
     }
 
     static SWIGStringHelper() {
-      SWIGRegisterStringCallback_LibAvImage(stringDelegate);
+      SWIGRegisterStringCallback_LibTitanSystem(stringDelegate);
     }
   }
 
   static protected SWIGStringHelper swigStringHelper = new SWIGStringHelper();
 
 
-  static LibAvImagePINVOKE() {
+  static LibTitanSystemPINVOKE() {
   }
 
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_new_NativeImage")]
-  public static extern global::System.IntPtr new_NativeImage();
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_Process")]
+  public static extern global::System.IntPtr new_Process(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_delete_NativeImage")]
-  public static extern void delete_NativeImage(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_delete_Process")]
+  public static extern void delete_Process(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_delete_ImageCapture")]
-  public static extern void delete_ImageCapture(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_loadRunningProcesses")]
+  public static extern global::System.IntPtr loadRunningProcesses();
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_ImageCapture_getCurrent")]
-  public static extern global::System.IntPtr ImageCapture_getCurrent(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Clear")]
+  public static extern void ProcessVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_createImageCapture")]
-  public static extern global::System.IntPtr createImageCapture(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Add")]
+  public static extern void ProcessVector_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_DxgiImageCapture_getCurrent")]
-  public static extern global::System.IntPtr DxgiImageCapture_getCurrent(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_size")]
+  public static extern uint ProcessVector_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_new_DxgiImageCapture")]
-  public static extern global::System.IntPtr new_DxgiImageCapture();
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_capacity")]
+  public static extern uint ProcessVector_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_delete_DxgiImageCapture")]
-  public static extern void delete_DxgiImageCapture(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_reserve")]
+  public static extern void ProcessVector_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("libavnet", EntryPoint="CSharp_av_DxgiImageCapture_SWIGSmartPtrUpcast")]
-  public static extern global::System.IntPtr DxgiImageCapture_SWIGSmartPtrUpcast(global::System.IntPtr jarg1);
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_ProcessVector__SWIG_0")]
+  public static extern global::System.IntPtr new_ProcessVector__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_ProcessVector__SWIG_1")]
+  public static extern global::System.IntPtr new_ProcessVector__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_new_ProcessVector__SWIG_2")]
+  public static extern global::System.IntPtr new_ProcessVector__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_getitemcopy")]
+  public static extern global::System.IntPtr ProcessVector_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_getitem")]
+  public static extern global::System.IntPtr ProcessVector_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_setitem")]
+  public static extern void ProcessVector_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_AddRange")]
+  public static extern void ProcessVector_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_GetRange")]
+  public static extern global::System.IntPtr ProcessVector_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Insert")]
+  public static extern void ProcessVector_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_InsertRange")]
+  public static extern void ProcessVector_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_RemoveAt")]
+  public static extern void ProcessVector_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_RemoveRange")]
+  public static extern void ProcessVector_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Repeat")]
+  public static extern global::System.IntPtr ProcessVector_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Reverse__SWIG_0")]
+  public static extern void ProcessVector_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_Reverse__SWIG_1")]
+  public static extern void ProcessVector_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_ProcessVector_SetRange")]
+  public static extern void ProcessVector_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("libtitannet", EntryPoint="CSharp_titan_delete_ProcessVector")]
+  public static extern void delete_ProcessVector(global::System.Runtime.InteropServices.HandleRef jarg1);
 }
 
 }

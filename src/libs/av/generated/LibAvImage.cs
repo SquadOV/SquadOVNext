@@ -11,9 +11,10 @@
 namespace av {
 
 public class LibAvImage {
-  public static ImageCapture createImageCapture() {
-    global::System.IntPtr cPtr = LibAvImagePINVOKE.createImageCapture();
+  public static ImageCapture createImageCapture(SWIGTYPE_p_titan__system__Process process) {
+    global::System.IntPtr cPtr = LibAvImagePINVOKE.createImageCapture(SWIGTYPE_p_titan__system__Process.getCPtr(process));
     ImageCapture ret = (cPtr == global::System.IntPtr.Zero) ? null : new ImageCapture(cPtr, true);
+    if (LibAvImagePINVOKE.SWIGPendingException.Pending) throw LibAvImagePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 

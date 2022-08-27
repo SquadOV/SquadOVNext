@@ -23,7 +23,7 @@
 
 namespace av {
 
-class DLLEXPORT DxgiImageCapture: public ImageCapture {
+class AVEXPORT DxgiImageCapture: public ImageCapture {
 public:
 
     NativeImage getCurrent() const override;

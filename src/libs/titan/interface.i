@@ -14,12 +14,9 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#include "av/image/image_capture.h"
-
-namespace av {
-
-ImageCapturePtr createImageCapture(const titan::system::Process& process) {
-    return nullptr;
-}
-
-}
+%module LibTitan
+%{
+#include "titan/interface.h"
+%}
+%include <windows.i>
+%include "titan/interface.h"

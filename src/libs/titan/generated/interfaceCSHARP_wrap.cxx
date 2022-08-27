@@ -243,7 +243,7 @@ static void SWIGUNUSED SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpExcepti
 #ifdef __cplusplus
 extern "C" 
 #endif
-SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionCallbacks_LibAvImage(
+SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionCallbacks_LibTitan(
                                                 SWIG_CSharpExceptionCallback_t applicationCallback,
                                                 SWIG_CSharpExceptionCallback_t arithmeticCallback,
                                                 SWIG_CSharpExceptionCallback_t divideByZeroCallback, 
@@ -271,7 +271,7 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionCallbacks_LibAvImage(
 #ifdef __cplusplus
 extern "C" 
 #endif
-SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionArgumentCallbacks_LibAvImage(
+SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionArgumentCallbacks_LibTitan(
                                                 SWIG_CSharpExceptionArgumentCallback_t argumentCallback,
                                                 SWIG_CSharpExceptionArgumentCallback_t argumentNullCallback,
                                                 SWIG_CSharpExceptionArgumentCallback_t argumentOutOfRangeCallback) {
@@ -289,7 +289,7 @@ static SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback = NULL;
 #ifdef __cplusplus
 extern "C" 
 #endif
-SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_LibAvImage(SWIG_CSharpStringHelperCallback callback) {
+SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_LibTitan(SWIG_CSharpStringHelperCallback callback) {
   SWIG_csharp_string_callback = callback;
 }
 
@@ -299,126 +299,12 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_LibAvImage(SWIG_CSharpStr
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, msg, ""); return nullreturn; } else
 
 
-#include "av/image/os_image.h"
-#include "av/image/image_capture.h"
-#include "av/image/dxgi_image_capture.h"
-
-
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+#include "titan/interface.h"
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_av_new_NativeImage() {
-  void * jresult ;
-  av::NativeImage *result = 0 ;
-  
-  result = (av::NativeImage *)new av::NativeImage();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_av_delete_NativeImage(void * jarg1) {
-  av::NativeImage *arg1 = (av::NativeImage *) 0 ;
-  
-  arg1 = (av::NativeImage *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_av_delete_ImageCapture(void * jarg1) {
-  av::ImageCapture *arg1 = (av::ImageCapture *) 0 ;
-  std::shared_ptr< av::ImageCapture > *smartarg1 = 0 ;
-  
-  
-  smartarg1 = (std::shared_ptr<  av::ImageCapture > *)jarg1;
-  arg1 = (av::ImageCapture *)(smartarg1 ? smartarg1->get() : 0); 
-  (void)arg1; delete smartarg1;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_av_ImageCapture_getCurrent(void * jarg1) {
-  void * jresult ;
-  av::ImageCapture *arg1 = (av::ImageCapture *) 0 ;
-  std::shared_ptr< av::ImageCapture const > *smartarg1 = 0 ;
-  av::NativeImage result;
-  
-  
-  smartarg1 = (std::shared_ptr< const av::ImageCapture > *)jarg1;
-  arg1 = (av::ImageCapture *)(smartarg1 ? smartarg1->get() : 0); 
-  result = ((av::ImageCapture const *)arg1)->getCurrent();
-  jresult = new av::NativeImage((const av::NativeImage &)result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_av_createImageCapture(void * jarg1) {
-  void * jresult ;
-  titan::system::Process *arg1 = 0 ;
-  av::ImageCapturePtr result;
-  
-  arg1 = (titan::system::Process *)jarg1;
-  if (!arg1) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "titan::system::Process const & type is null", 0);
-    return 0;
-  } 
-  result = av::createImageCapture((titan::system::Process const &)*arg1);
-  jresult = result ? new av::ImageCapturePtr(result) : 0; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_av_DxgiImageCapture_getCurrent(void * jarg1) {
-  void * jresult ;
-  av::DxgiImageCapture *arg1 = (av::DxgiImageCapture *) 0 ;
-  std::shared_ptr< av::DxgiImageCapture const > *smartarg1 = 0 ;
-  av::NativeImage result;
-  
-  
-  smartarg1 = (std::shared_ptr< const av::DxgiImageCapture > *)jarg1;
-  arg1 = (av::DxgiImageCapture *)(smartarg1 ? smartarg1->get() : 0); 
-  result = ((av::DxgiImageCapture const *)arg1)->getCurrent();
-  jresult = new av::NativeImage((const av::NativeImage &)result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_av_new_DxgiImageCapture() {
-  void * jresult ;
-  av::DxgiImageCapture *result = 0 ;
-  
-  result = (av::DxgiImageCapture *)new av::DxgiImageCapture();
-  
-  jresult = result ? new std::shared_ptr<  av::DxgiImageCapture >(result SWIG_NO_NULL_DELETER_1) : 0;
-  
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_av_delete_DxgiImageCapture(void * jarg1) {
-  av::DxgiImageCapture *arg1 = (av::DxgiImageCapture *) 0 ;
-  std::shared_ptr< av::DxgiImageCapture > *smartarg1 = 0 ;
-  
-  
-  smartarg1 = (std::shared_ptr<  av::DxgiImageCapture > *)jarg1;
-  arg1 = (av::DxgiImageCapture *)(smartarg1 ? smartarg1->get() : 0); 
-  (void)arg1; delete smartarg1;
-}
-
-
-SWIGEXPORT std::shared_ptr< av::ImageCapture > * SWIGSTDCALL CSharp_av_DxgiImageCapture_SWIGSmartPtrUpcast(std::shared_ptr< av::DxgiImageCapture > *jarg1) {
-    return jarg1 ? new std::shared_ptr< av::ImageCapture >(*jarg1) : 0;
-}
 
 #ifdef __cplusplus
 }

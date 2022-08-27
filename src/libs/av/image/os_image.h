@@ -16,6 +16,8 @@
 //
 #pragma once
 
+#include "av/dll.h"
+
 #ifdef _WIN32
 #include <Windows.h>
 #include <d3d11.h>
@@ -31,7 +33,7 @@ namespace av {
 //      new ID3D11Texture2D((const ID3D11Texture2D&)stuff)
 // which isn't valid. Using this NativeImage wrapper gets us around that in most cases and we only have
 // to worry about that weird definition when implementing/defining the accessor in this class.
-class NativeImage {
+class AVEXPORT NativeImage {
 public:
 
 private:

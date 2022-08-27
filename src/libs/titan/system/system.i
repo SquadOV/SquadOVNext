@@ -14,12 +14,17 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#include "av/image/image_capture.h"
+%module LibTitanSystem
+%{
+#include "titan/system/process.h"
+%}
+%include <windows.i>
+%include <std_string.i>
+%include <std_vector.i>
 
-namespace av {
+%include "titan/dll.h"
+%include "titan/system/process.h"
 
-ImageCapturePtr createImageCapture(const titan::system::Process& process) {
-    return nullptr;
-}
-
-}
+namespace std {
+   %template(ProcessVector) vector<titan::system::Process>;
+};
