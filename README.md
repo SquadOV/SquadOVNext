@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/squadov/SquadOV_Color.png"></p>
+<p align="center"><img src="assets/squadov/SquadOV_Color_Icon_256.png"></p>
 
 <p align="center">
     <a href="https://opensource.org/licenses/GPL-3.0"><img src="https://img.shields.io/github/license/SquadOV/SquadOVNext?style=plastic" alt="License"></a>
