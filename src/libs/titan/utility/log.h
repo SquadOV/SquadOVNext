@@ -23,6 +23,10 @@
 
 #include <spdlog/spdlog.h>
 #include <spdlog/async.h>
+
+#include <fmt/core.h>
+#include <fmt/std.h>
+
 #include <vector>
 #include <thread>
 
@@ -113,7 +117,7 @@ void logWrapper(spdlog::logger& logger, spdlog::source_loc loc, spdlog::level::l
 #endif
 
 #if TITAN_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
-#    define TITAN_LOGGER_INFO(logger, ...) TITAN_LOGGER_CALL(logger, TITspdlogAN::level::info, __VA_ARGS__)
+#    define TITAN_LOGGER_INFO(logger, ...) TITAN_LOGGER_CALL(logger, spdlog::level::info, __VA_ARGS__)
 #    define TITAN_INFO(...) TITAN_LOGGER_INFO(spdlog::default_logger_raw(), __VA_ARGS__)
 #else
 #    define TITAN_LOGGER_INFO(logger, ...) (void)0

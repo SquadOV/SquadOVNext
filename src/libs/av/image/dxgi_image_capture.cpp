@@ -49,7 +49,7 @@ void DxgiImageCapture::refreshDevice() {
     _device->output()->GetDesc(&outputDesc);
 
     HRESULT hr =  _device->output()->QueryInterface(__uuidof(IDXGIOutput1), (void**)&_dxgiOutput1);
-    CHECK_WIN32_HRESULT_THROW(hr);
+    CHECK_WIN32_HRESULT_THROW(hr, "Failed to get IDXGIOutput1");
 
     hr = _device->output()->QueryInterface(__uuidof(IDXGIOutput5), (void**)&_dxgiOutput5);
     CHECK_WIN32_HRESULT_IF(hr) {
@@ -75,7 +75,7 @@ void DxgiImageCapture::reacquireDuplicationInterface() {
     HRESULT hr = _dxgiOutput5 ?
         _dxgiOutput5->DuplicateOutput1(_device->device(), 0, formats.size(), formats.data(), &_dupl) :
         _dxgiOutput1->DuplicateOutput(_device->device(), &_dupl);
-    CHECK_WIN32_HRESULT_THROW(hr);
+    CHECK_WIN32_HRESULT_THROW(hr, "Failed to create desktop duplication object.");
 }
 
 std::optional<NativeImage> DxgiImageCapture::getCurrent() {
@@ -112,9 +112,12 @@ std::optional<NativeImage> DxgiImageCapture::getCurrent() {
         } catch (const titan::system::win32::Win32HResultException& ex) {
             return std::nullopt;
         }
+    } else if (hr == DXGI_ERROR_INVALID_CALL) {
+        // Empty case here - we don't particularly care if we already released the frame.
+        // It's all the same to us.
+    } else {
+        CHECK_WIN32_HRESULT_RETURN(hr, std::nullopt);
     }
-
-    CHECK_WIN32_HRESULT_RETURN(hr, std::nullopt);
 
     wil::com_ptr<IDXGIResource> desktopResource = nullptr;
     DXGI_OUTDUPL_FRAME_INFO frameInfo;

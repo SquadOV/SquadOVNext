@@ -64,6 +64,16 @@ size_t NativeImage::channels() const {
     return 0;
 }
 
+bool NativeImage::areChannelsFlipped() const {
+    switch (_desc.Format) {
+        case DXGI_FORMAT_B8G8R8A8_UNORM:
+            return true;
+        default:
+            break;
+    }
+    return false;
+}
+
 void NativeImage::fillRawBuffer(std::vector<uint8_t>& buffer) const {
     if (!_native) {
         return;
@@ -74,12 +84,27 @@ void NativeImage::fillRawBuffer(std::vector<uint8_t>& buffer) const {
     const auto immediate = _device->immediate();
     const auto guard = immediate->get();
 
-    D3D11_MAPPED_SUBRESOURCE mappedData;
-    HRESULT hr = guard.context()->Map(_native.get(), 0, D3D11_MAP_READ, 0, &mappedData);
-    CHECK_WIN32_HRESULT_THROW(hr);
+    // We need to copy to a texture that we have CPU read access from.
+    D3D11_TEXTURE2D_DESC sharedDesc = { 0 };
+    sharedDesc.Width = width();
+    sharedDesc.Height = height();
+    sharedDesc.MipLevels = 1;
+    sharedDesc.ArraySize = 1;
+    sharedDesc.Format = _desc.Format;
+    sharedDesc.SampleDesc.Count = 1;
+    sharedDesc.Usage = D3D11_USAGE_STAGING;
+    sharedDesc.BindFlags = 0;
+    sharedDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    sharedDesc.MiscFlags = 0;
 
-    D3D11_TEXTURE2D_DESC desc;
-    _native->GetDesc(&desc);
+    wil::com_ptr<ID3D11Texture2D> stagingTexture;
+    HRESULT hr = _device->device()->CreateTexture2D(&sharedDesc, nullptr, &stagingTexture);
+    CHECK_WIN32_HRESULT_THROW(hr, "Failed to create staging texture.");
+    guard.context()->CopyResource(stagingTexture.get(), _native.get());
+
+    D3D11_MAPPED_SUBRESOURCE mappedData;
+    hr = guard.context()->Map(stagingTexture.get(), 0, D3D11_MAP_READ, 0, &mappedData);
+    CHECK_WIN32_HRESULT_THROW(hr, "Failed to map texture.");
 
     const uint8_t* src = reinterpret_cast<const uint8_t*>(mappedData.pData);
     uint8_t* dst = &buffer[0];
@@ -88,7 +113,7 @@ void NativeImage::fillRawBuffer(std::vector<uint8_t>& buffer) const {
         src += mappedData.RowPitch;
         dst += bytesPerRow();
     }
-    guard.context()->Unmap(_native.get(), 0);
+    guard.context()->Unmap(stagingTexture.get(), 0);
 
 }
 

@@ -14,6 +14,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+#pragma once
 
-#define STR(a) #a
-#define XSTR(a) STR(a)
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
+#include <Eigen/Geometry>
+
+namespace titan::math {
+
+#ifdef _WIN32
+Eigen::AlignedBox2i winRectToAlignedBox(RECT rect);
+#endif
+
+}

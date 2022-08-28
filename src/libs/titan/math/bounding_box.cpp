@@ -14,6 +14,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+#include "titan/math/bounding_box.h"
 
-#define STR(a) #a
-#define XSTR(a) STR(a)
+#include <Eigen/Dense>
+
+namespace titan::math {
+
+#ifdef _WIN32
+Eigen::AlignedBox2i winRectToAlignedBox(RECT rect) {
+    return Eigen::AlignedBox2i{
+        Eigen::Vector2i{rect.left, rect.top},
+        Eigen::Vector2i{rect.right, rect.bottom}
+    };
+}
+#endif
+
+}

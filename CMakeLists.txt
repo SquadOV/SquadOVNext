@@ -16,6 +16,8 @@ if(WIN32)
     add_definitions(-DNOMINMAX)
 endif()
 
+include(ExecutableHelper)
+
 #
 # Project Options
 #
@@ -59,7 +61,6 @@ if(ENABLE_TESTING)
     enable_testing()
 endif()
 
-include(ExecutableHelper)
 add_subdirectory(src)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

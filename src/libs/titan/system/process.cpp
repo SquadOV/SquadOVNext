@@ -20,6 +20,7 @@
 #endif
 
 #include <map>
+#include <ranges>
 
 #include "titan/system/process.h"
 #include "titan/system/process_handle.h"
@@ -37,8 +38,36 @@ Process::Process(NativeProcessId id, const NativeProcessDIPtr& di):
     _startTime = _di->getProcessStartTime(handle.handle());
 }
 
-void Process::initializeActiveWindow() {
+void Process::initializeActiveWindow(size_t minSize, const NativeWindowDIPtr& windowDi) {
+    const std::optional<NativeWindowHandle> window = windowDi->findWindowForProcess(_id, {
+        [&windowDi](NativeWindowHandle win){
+            return windowDi->isWindowActive(win);
+        },
+        [minSize, &windowDi](NativeWindowHandle win){
+            if (!minSize) {
+                return true;
+            }
 
+            const auto region = windowDi->getWindowClientBoundingBox(win);
+            if (region.isEmpty() && minSize) {
+                return false;
+            }
+
+            for (const auto dim : region.sizes()) {
+                if (dim < minSize) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+    });
+
+    if (!window) {
+        return;
+    }
+    
+    _activeWindow = window.value();
 }
 
 std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di) {

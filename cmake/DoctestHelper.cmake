@@ -6,6 +6,7 @@ MACRO(doctest_wrapper TARGET PARENT_TARGET TEST_SRC)
             doctest::doctest
             ${PARENT_TARGET}
         )
+        finalize_executable(${TARGET})
 
         doctest_discover_tests(${TARGET})
     endif()

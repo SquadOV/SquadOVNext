@@ -14,6 +14,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+#pragma once
 
-#define STR(a) #a
-#define XSTR(a) STR(a)
+#include "titan/dll.h"
+#include <memory>
+
+namespace titan::system {
+
+class NativeWindowDI;
+using NativeWindowDIPtr = std::shared_ptr<NativeWindowDI>;
+TITANEXPORT NativeWindowDIPtr getDefaultNativeWindowDI();
+
+}

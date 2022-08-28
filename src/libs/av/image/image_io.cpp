@@ -17,6 +17,8 @@
 #include "av/image/image_io.h"
 
 #include <OpenImageIO/imageio.h>
+#include <OpenImageIO/imagebuf.h>
+#include <OpenImageIO/imagebufalgo.h>
 namespace av {
 
 void writeImageToFile(const NativeImage& image, const std::filesystem::path& fname) {
@@ -39,7 +41,12 @@ void writeImageToFile(const NativeImage& image, const std::filesystem::path& fna
     std::vector<uint8_t> rawData;
     image.fillRawBuffer(rawData);
 
-    out->write_image(OIIO::TypeDesc::UINT8, rawData.data());
+    OIIO::ImageBuf buffer(spec, (void*)&rawData[0]);
+    if (image.areChannelsFlipped()) {
+        OIIO::ImageBufAlgo::channels(buffer, image.channels(), {2, 1, 0, 3}).write(out.get());
+    } else {
+        buffer.write(out.get());    
+    }
     out->close();
 }
 

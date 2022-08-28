@@ -16,6 +16,7 @@
 //
 #ifdef _WIN32
 #include "titan/system/win32/exceptions.h"
+#include <codecvt>
 #include <comdef.h>
 #include <sstream>
 
@@ -27,6 +28,32 @@ std::string hresultToString(HRESULT hr) {
     std::ostringstream str;
     str << std::hex << hr << " [" << err.ErrorMessage() << "]";
     return str.str();
+}
+
+std::string getLastWin32ErrorAsString() {
+    const auto err = GetLastError();
+    if (err == ERROR_SUCCESS) {
+        return "";
+    }
+
+    LPWSTR pBuffer = NULL;
+    FormatMessageW(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+        nullptr,
+        err,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPWSTR)&pBuffer, 
+        0,
+        nullptr
+    );
+
+    if (!pBuffer) {
+        return "";
+    }
+
+    std::wstring errStr(pBuffer);
+    LocalFree(pBuffer);
+    return std::wstring_convert<std::codecvt_utf8<wchar_t>>{}.to_bytes(errStr);
 }
 
 }

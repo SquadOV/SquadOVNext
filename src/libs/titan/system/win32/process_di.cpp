@@ -87,8 +87,9 @@ std::string NativeProcessDI::getProcessFriendlyName(const NativeString& fullPath
 }
 
 int64_t NativeProcessDI::getProcessStartTime(NativeProcessHandle handle) {
-    FILETIME creationTime;
-    if (!GetProcessTimes(handle, &creationTime, nullptr, nullptr, nullptr)) {
+    // Need the three unkX's because GetProcessTimes doesn't do a nullptr check before it writes. :(
+    FILETIME creationTime, unk1, unk2, unk3;
+    if (!GetProcessTimes(handle, &creationTime, &unk1, &unk2, &unk3)) {
         return 0;
     }
 

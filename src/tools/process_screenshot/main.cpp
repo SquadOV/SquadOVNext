@@ -21,6 +21,7 @@
 #include <av/image/image_io.h>
 #include <titan/system/process.h>
 #include <titan/utility/strings.h>
+#include <titan/utility/log.h>
 
 namespace po = boost::program_options;
 namespace fs = std::filesystem;
@@ -37,10 +38,18 @@ int main(int argc, char** argv) {
     const auto processName = vm["process"].as<std::string>();
     const fs::path outputPath(vm["output"].as<std::string>());
     std::wstring wProcessName = titan::utility::utf8ToWcs(processName);
+    TITAN_INFO("Screenshot {} to {}", processName, outputPath);
 
     std::vector<titan::system::Process> processes = titan::system::loadRunningProcesses();
-    for (const auto& p: processes) {
-        if (p.path().stem().native() != wProcessName) {
+    for (auto& p: processes) {
+        if (p.path().filename().native() != wProcessName) {
+            continue;
+        }
+
+        TITAN_INFO("Found Process: {}", p.path());
+        p.initializeActiveWindow();
+
+        if (!p.hasActiveWindow()) {
             continue;
         }
 
@@ -49,9 +58,15 @@ int main(int argc, char** argv) {
             continue;
         }
 
-        std::optional<av::NativeImage> image = capturer->getCurrent();
-        if (image) {
-            av::writeImageToFile(*image, outputPath);
+        TITAN_INFO("Made image capturer...");
+
+        for (auto i = 0; i < 10; ++i) {
+            std::optional<av::NativeImage> image = capturer->getCurrent();
+            if (image) {
+                TITAN_INFO("Writing image to output...");
+                av::writeImageToFile(*image, outputPath);
+                break;
+            }
         }
         break;
     }

@@ -19,7 +19,7 @@
 #include "titan/dll.h"
 #include "titan/system/types.h"
 #include "titan/system/process_handle.h"
-#include <memory>
+#include "titan/system/process_di_forward.h"
 #include <stdint.h>
 #include <vector>
 
@@ -49,7 +49,5 @@ public:
     virtual int64_t getProcessStartTime(NativeProcessHandle handle);
 private:
 };
-
-using NativeProcessDIPtr = std::shared_ptr<NativeProcessDI>;
 
 }

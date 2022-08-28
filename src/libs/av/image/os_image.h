@@ -41,7 +41,9 @@ public:
     size_t height() const override;
     size_t bytesPerPixel() const override;
     size_t channels() const override;
+    bool areChannelsFlipped() const override;
 
+    // Reads the image to a CPU buffer. This function should not be used very often.
     void fillRawBuffer(std::vector<uint8_t>& buffer) const override;
 private:
 

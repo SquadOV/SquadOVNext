@@ -34,6 +34,7 @@ public:
     virtual size_t channels() const = 0;
     size_t bytesPerElement() const { return bytesPerPixel() / channels(); }
     size_t bytesPerRow() const { return bytesPerPixel() * width(); }
+    virtual bool areChannelsFlipped() const = 0;
 
     virtual void fillRawBuffer(std::vector<uint8_t>& buffer) const = 0;
 };

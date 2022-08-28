@@ -25,6 +25,7 @@
 #include "titan/dll.h"
 #include "titan/system/types.h"
 #include "titan/system/process_di.h"
+#include "titan/system/window_di.h"
 
 namespace titan::system {
 
@@ -46,7 +47,7 @@ public:
     const std::filesystem::path& path() const { return _fullPath; }
     int64_t startTime() const { return _startTime; }
 
-    void initializeActiveWindow();
+    void initializeActiveWindow(size_t minSize = 0, const NativeWindowDIPtr& windowDi = getDefaultNativeWindowDI());
     bool hasActiveWindow() const { return _activeWindow; }
     NativeWindowHandle activeWindow() const { return _activeWindow; }
 

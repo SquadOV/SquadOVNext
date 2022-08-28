@@ -26,6 +26,7 @@
 
 #include "titan/dll.h"
 #include "titan/system/win32/directx/context.h"
+#include "titan/utility/exception.h"
 
 namespace titan::system::win32 {
 
@@ -51,7 +52,7 @@ public:
     ID3D11Device* device() const { return _device.get(); }
 
     // adapter will be non-NULL only if we loaded the device from a given monitor.
-    IDXGIAdapter* adapter() const { return _adapter.get(); }
+    IDXGIAdapter1* adapter() const { return _adapter.get(); }
 
     // output will be non-NULL only if we loaded the device from a given monitor.
     IDXGIOutput* output() const { return _output.get(); }
@@ -59,12 +60,12 @@ public:
     friend TITANEXPORT D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor);
 
 protected:
-    void setAdapter(const wil::com_ptr<IDXGIAdapter>& adapter) { _adapter = adapter; }
+    void setAdapter(const wil::com_ptr<IDXGIAdapter1>& adapter) { _adapter = adapter; }
     void setOutput(const wil::com_ptr<IDXGIOutput>& output) { _output = output; }
 
 private:
     wil::com_ptr<ID3D11Device> _device;
-    wil::com_ptr<IDXGIAdapter> _adapter;
+    wil::com_ptr<IDXGIAdapter1> _adapter;
     wil::com_ptr<IDXGIOutput> _output;
 
     D3d11SharedContextPtr _immediate;

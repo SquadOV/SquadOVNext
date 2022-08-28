@@ -18,6 +18,7 @@
 #ifdef _WIN32
 
 #include <Windows.h>
+#include <fmt/core.h>
 #include <string>
 #include "titan/dll.h"
 #include "titan/utility/exception.h"
@@ -28,14 +29,16 @@ std::string hresultToString(HRESULT hr);
 
 class TITANEXPORT Win32HResultException: public titan::utility::Exception {
 public:
-    Win32HResultException(HRESULT hr, const std::source_location& loc = std::source_location::current()):
-        titan::utility::Exception(hresultToString(hr), loc)
+    Win32HResultException(HRESULT hr, const std::string& context, const std::source_location& loc = std::source_location::current()):
+        titan::utility::Exception(fmt::format("{} :: {}", context, hresultToString(hr)) , loc)
     {}
 };
 
+TITANEXPORT std::string getLastWin32ErrorAsString();
+
 }
 
-#define CHECK_WIN32_HRESULT_THROW(HR) if (HR != S_OK) { throw titan::system::win32::Win32HResultException(HR); }
+#define CHECK_WIN32_HRESULT_THROW(HR, CONTEXT) if (HR != S_OK) { throw titan::system::win32::Win32HResultException(HR, CONTEXT); }
 #define CHECK_WIN32_HRESULT_IF(HR) if (HR != S_OK)
 #define CHECK_WIN32_HRESULT_RETURN(HR, RET) if (HR != S_OK) { return RET; }
 
