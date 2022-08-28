@@ -17,29 +17,38 @@
 #pragma once
 
 #include "av/dll.h"
+#include "av/image/image.h"
 
 #ifdef _WIN32
 #include <Windows.h>
 #include <d3d11.h>
 #include <wil/com.h>
+
+#include <titan/system/win32/directx/device.h>
 #endif
 
 namespace av {
 
 // A simple wrapper around whatever the "native" image format is for this operating system.
-// For example, on Windows, that would be ID3D11Texture2D. This is needed because otherwise
-// a pointer to the underlying native image (e.g. a ID3D11Texture2D*) would be exposed to SWIG/C#.
-// This is problematic since SWIG creates a wrapper that uses the copy constructor to return something like
-//      new ID3D11Texture2D((const ID3D11Texture2D&)stuff)
-// which isn't valid. Using this NativeImage wrapper gets us around that in most cases and we only have
-// to worry about that weird definition when implementing/defining the accessor in this class.
-class AVEXPORT NativeImage {
+class AVEXPORT NativeImage: public IImage {
 public:
+#ifdef _WIN32
+    // The input device should be the same device the texture was created on.
+    NativeImage(ID3D11Texture2D* texture, const titan::system::win32::D3d11SharedDevicePtr& device);
+#endif
 
+    size_t width() const override;
+    size_t height() const override;
+    size_t bytesPerPixel() const override;
+    size_t channels() const override;
+
+    void fillRawBuffer(std::vector<uint8_t>& buffer) const override;
 private:
 
 #ifdef _WIN32
     wil::com_ptr<ID3D11Texture2D> _native;
+    D3D11_TEXTURE2D_DESC _desc;
+    titan::system::win32::D3d11SharedDevicePtr _device;
 #endif
 
 };

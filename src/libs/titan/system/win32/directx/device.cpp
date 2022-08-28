@@ -14,15 +14,22 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+#pragma once
+
 #ifdef _WIN32
 
-#include "av/image/dxgi_image_capture.h"
+#include "titan/system/win32/directx/device.h"
+#include "titan/system/win32/exceptions.h"
 
-namespace av {
+namespace titan::system::win32 {
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
+D3d11SharedDevice::D3d11SharedDevice(const wil::com_ptr<ID3D11Device>& device, const wil::com_ptr<ID3D11DeviceContext>& context):
+    _device(device)
+{
+    HRESULT hr = _device->QueryInterface(__uuidof(ID3D11Device1), (void**)&_device1);
+    CHECK_WIN32_HRESULT_THROW(hr);
 }
 
 }
-#endif // _WIN32
+
+#endif

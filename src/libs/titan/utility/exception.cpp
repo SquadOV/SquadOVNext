@@ -14,15 +14,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#ifdef _WIN32
+#include "titan/utility/exception.h"
 
-#include "av/image/dxgi_image_capture.h"
+#include <boost/stacktrace.hpp>
+#include <sstream>
 
-namespace av {
+namespace titan::utility {
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
+Exception::Exception(const std::string& what, const std::source_location& loc) noexcept {
+    std::ostringstream str;
+    str << "[" << loc.file_name() << "(" << loc.line() << ":" << loc.column() << ")" << loc.function_name() << "]"
+        << what << std::endl
+        << boost::stacktrace::stacktrace();
+    _what = str.str();
 }
 
 }
-#endif // _WIN32

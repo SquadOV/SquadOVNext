@@ -4,6 +4,11 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process_di.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process_handle.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/process_di.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/exceptions.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/context.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/device.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/strings.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/exception.cpp
 )
 
 set(HEADERS
@@ -14,6 +19,11 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process_di.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/process_di_forward.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/conversions.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/exceptions.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/context.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/device.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/strings.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/exception.h
 )
 
 add_library(libtitan
@@ -36,6 +46,10 @@ if(WIN32)
     target_link_libraries(libtitan PUBLIC    
         Kernel32
         Version
+        Boost::stacktrace_windbg
+        ole32
+        dbgeng
+        comsuppw
     )
 endif()
 

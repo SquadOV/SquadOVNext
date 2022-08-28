@@ -14,15 +14,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#ifdef _WIN32
+#pragma once
 
-#include "av/image/dxgi_image_capture.h"
+#include "av/dll.h"
+#include <vector>
+#include <stdint.h>
 
 namespace av {
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
-}
+// An interface that we expect everything that represents an "Image" should satisfy.
+class AVEXPORT IImage {
+public:
+    virtual ~IImage() {}
+
+    virtual size_t width() const = 0;
+    virtual size_t height() const = 0;
+    virtual size_t bytesPerPixel() const = 0;
+    virtual size_t channels() const = 0;
+    size_t bytesPerElement() const { return bytesPerPixel() / channels(); }
+    size_t bytesPerRow() const { return bytesPerPixel() * width(); }
+
+    virtual void fillRawBuffer(std::vector<uint8_t>& buffer) const = 0;
+};
 
 }
-#endif // _WIN32

@@ -44,16 +44,6 @@ public class EngineOptions : global::System.IDisposable {
     }
   }
 
-  public int cheese {
-    set {
-      LibEnginePINVOKE.EngineOptions_cheese_set(swigCPtr, value);
-    } 
-    get {
-      int ret = LibEnginePINVOKE.EngineOptions_cheese_get(swigCPtr);
-      return ret;
-    } 
-  }
-
   public EngineOptions() : this(LibEnginePINVOKE.new_EngineOptions(), true) {
   }
 

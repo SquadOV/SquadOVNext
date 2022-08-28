@@ -18,17 +18,32 @@
 
 #ifdef _WIN32
 
-#include <Windows.h>
-#include <stdint.h>
+#include "titan/system/win32/directx/context.h"
 
 namespace titan::system::win32 {
 
-inline
-int64_t fileTimeToI64(const FILETIME& tm) {
-    ULARGE_INTEGER ret;
-    ret.HighPart = tm.dwHighDateTime;
-    ret.LowPart = tm.dwLowDateTime;
-    return ret.QuadPart;
+D3d11ContextGuard::D3d11ContextGuard(std::unique_lock<std::recursive_mutex>&& guard, const wil::com_ptr<ID3D11DeviceContext>& context):
+    _guard(std::move(guard)),
+    _context(context) {
+}
+
+D3d11ContextGuard::D3d11ContextGuard(D3d11ContextGuard&& o):
+    _guard(std::move(o._guard)),
+    _context(o._context) {
+    o._context = nullptr;
+}
+
+D3d11ContextGuard::~D3d11ContextGuard() {
+}
+
+D3d11SharedContext::D3d11SharedContext(const wil::com_ptr<ID3D11DeviceContext>& context):
+    _context(context)
+{
+}
+
+D3d11ContextGuard D3d11SharedContext::get() {
+    std::unique_lock lock(_mutex);
+    return D3d11ContextGuard{std::move(lock), _context};
 }
 
 }

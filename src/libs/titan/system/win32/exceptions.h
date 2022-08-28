@@ -14,15 +14,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+#pragma once
 #ifdef _WIN32
 
-#include "av/image/dxgi_image_capture.h"
+#include <Windows.h>
+#include <string>
+#include "titan/dll.h"
+#include "titan/utility/exception.h"
 
-namespace av {
+namespace titan::system::win32 {
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
+std::string hresultToString(HRESULT hr);
+
+class TITANEXPORT Win32HResultException: public titan::utility::Exception {
+public:
+    Win32HResultException(HRESULT hr, const std::source_location& loc = std::source_location::current()):
+        titan::utility::Exception(hresultToString(hr), loc)
+    {}
+};
+
 }
 
-}
+#define CHECK_WIN32_HRESULT_THROW(HR) if (HR != S_OK) { throw titan::system::win32::Win32HResultException(HR); }
+
 #endif // _WIN32

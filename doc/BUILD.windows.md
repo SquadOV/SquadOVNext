@@ -3,16 +3,19 @@
 * [Visual Studio 2022](https://visualstudio.microsoft.com/)
 * [.NET 6.0 x64 SDK](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
 * [CMake 3.24](https://cmake.org)
-* [SWIG 4.0.2](https://www.swig.org/)
 * [VCPKG](https://vcpkg.io)
 
 # VCPkg Packages
 
+We will assume vcpkg is at commit `e85b5bb95a14ff7e014601e88a8dc2fea6798e33`.
+
 * `wil:x64-windows`
+* `boost:x64-windows` - must be v1.80+
+* `openimageio:x64-windows`
 
 # Source Code
 
-* git clone --recurse-submodules git@github.com:SquadOV/SquadOVNext.git
+* `git clone --recurse-submodules https://github.com/SquadOV/SquadOVNext.git`
 
 # C++ Components
 

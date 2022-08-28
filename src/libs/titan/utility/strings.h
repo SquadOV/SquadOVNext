@@ -14,15 +14,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#ifdef _WIN32
+#pragma once
 
-#include "av/image/dxgi_image_capture.h"
+#include <string>
 
-namespace av {
+#include "titan/dll.h"
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
+namespace titan::utility {
+
+// Convert a CHAR string to WCHAR string.
+TITANEXPORT std::wstring utf8ToWcs(const std::string& str);
+
+// Convert a WCHAR string to CHAR string.
+TITANEXPORT std::string wcsToUtf8(const std::wstring& str);
+    
 }
-
-}
-#endif // _WIN32

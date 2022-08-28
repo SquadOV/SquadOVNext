@@ -5,12 +5,16 @@ project(
     LANGUAGES C CXX
 )
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH} 
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake
 )
+
+if(WIN32)
+    add_definitions(-DNOMINMAX)
+endif()
 
 #
 # Project Options
@@ -26,11 +30,6 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif()
 
 if(WIN32)
-    add_definitions(-DNOMINMAX)
-    add_definitions(-DUNICODE)
-endif()
-
-if(WIN32)
     SET(SWIG_DIR ${CMAKE_SOURCE_DIR}/deps/swig/Lib)
     SET(SWIG_EXECUTABLE ${CMAKE_SOURCE_DIR}/deps/swig/swig.exe)
 endif()
@@ -39,10 +38,26 @@ include(UseSWIG)
 include(SWIGHelper)
 set (UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
+set(Boost_NO_WARN_NEW_VERSIONS ON)
+set(BOOST_COMPONENTS
+    filesystem
+    system
+    program_options
+)
+
+if(WIN32)
+    set(BOOST_COMPONENTS ${BOOST_COMPONENTS} stacktrace_windbg)
+endif()
+
+find_package(Boost 1.80.0 REQUIRED
+    COMPONENTS "${BOOST_COMPONENTS}"
+)
 
 if(WIN32)
     find_package(WIL CONFIG REQUIRED)
 endif()
+
+find_package(OpenImageIO CONFIG REQUIRED)
 
 add_subdirectory(deps)
 include(DoctestHelper)

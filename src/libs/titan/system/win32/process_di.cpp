@@ -92,7 +92,7 @@ int64_t NativeProcessDI::getProcessStartTime(NativeProcessHandle handle) {
         return 0;
     }
 
-    return internal::fileTimeToI64(creationTime);
+    return win32::fileTimeToI64(creationTime);
 }
 
 }

@@ -4,3 +4,6 @@
 [submodule "deps/doctest"]
 	path = deps/doctest
 	url = https://github.com/doctest/doctest.git
+[submodule "deps/oiio"]
+	path = deps/oiio
+	url = https://github.com/OpenImageIO/oiio.git

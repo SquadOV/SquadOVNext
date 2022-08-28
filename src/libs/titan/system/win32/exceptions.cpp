@@ -15,14 +15,20 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 #ifdef _WIN32
+#include "titan/system/win32/exceptions.h"
+#include <comdef.h>
+#include <sstream>
 
-#include "av/image/dxgi_image_capture.h"
+namespace titan::system::win32 {
 
-namespace av {
+std::string hresultToString(HRESULT hr) {
+    _com_error err(hr);
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
+    std::ostringstream str;
+    str << std::hex << hr << " [" << err.ErrorMessage() << "]";
+    return str.str();
 }
 
 }
-#endif // _WIN32
+
+#endif

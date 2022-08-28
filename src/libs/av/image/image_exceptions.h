@@ -14,15 +14,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#ifdef _WIN32
+#pragma once
 
-#include "av/image/dxgi_image_capture.h"
+#include "av/dll.h"
+#include <titan/utility/exception.h>
 
 namespace av {
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
-}
+CREATE_SIMPLE_EXCEPTION_CLASS(InvalidImageFormat, "Invalid Image Format");
 
 }
-#endif // _WIN32

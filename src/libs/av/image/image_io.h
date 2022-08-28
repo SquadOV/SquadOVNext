@@ -14,15 +14,17 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#ifdef _WIN32
+#pragma once
 
-#include "av/image/dxgi_image_capture.h"
+#include <filesystem>
+
+#include "av/dll.h"
+#include "av/image/os_image.h"
 
 namespace av {
 
-NativeImage DxgiImageCapture::getCurrent() const {
-    return NativeImage{nullptr, nullptr};
-}
+// Simple function to write the given image to the specified filepath.
+// The type of image (jpg, png, etc.) is dependent on the filename.
+AVEXPORT void writeImageToFile(const NativeImage& image, const std::filesystem::path& fname);
 
 }
-#endif // _WIN32

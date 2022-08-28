@@ -5,3 +5,4 @@ Includes a number of sub-namespaces that provides a wide variety of functionalit
 
 * Math - general math/computational utility functions/objects.
 * System - general lower-level functionality surrounding native API wrappers (e.g. window/process handles).
+* Utility - generally useful functions for dealing with common data types.
