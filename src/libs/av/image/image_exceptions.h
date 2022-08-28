@@ -21,6 +21,6 @@
 
 namespace av {
 
-CREATE_SIMPLE_EXCEPTION_CLASS(InvalidImageFormat, "Invalid Image Format");
+CREATE_SIMPLE_EXCEPTION_CLASS(UnsupportedImageFormat, "Unsupported Image Format");
 
 }

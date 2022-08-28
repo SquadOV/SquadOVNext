@@ -45,7 +45,7 @@ size_t NativeImage::bytesPerPixel() const {
         case DXGI_FORMAT_B8G8R8A8_UNORM:
             return 4;
         default:
-            throw av::InvalidImageFormat{};
+            throw av::UnsupportedImageFormat{};
             break;
     }
     return 0;
@@ -56,7 +56,7 @@ size_t NativeImage::channels() const {
         case DXGI_FORMAT_B8G8R8A8_UNORM:
             return 4;
         default:
-            throw av::InvalidImageFormat{};
+            throw av::UnsupportedImageFormat{};
             break;
     }
     return 0;
