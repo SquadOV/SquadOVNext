@@ -6,3 +6,5 @@ target_link_libraries(process_screenshot PRIVATE
     libav
     Boost::program_options
 )
+
+finalize_executable(process_screenshot)

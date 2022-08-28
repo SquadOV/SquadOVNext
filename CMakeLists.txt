@@ -21,14 +21,6 @@ endif()
 #
 option(ENABLE_TESTING "Whether to compile tests" ON)
 
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x64)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x64)
-elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x86)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/x86)
-endif()
-
 if(WIN32)
     SET(SWIG_DIR ${CMAKE_SOURCE_DIR}/deps/swig/Lib)
     SET(SWIG_EXECUTABLE ${CMAKE_SOURCE_DIR}/deps/swig/swig.exe)
@@ -67,6 +59,7 @@ if(ENABLE_TESTING)
     enable_testing()
 endif()
 
+include(ExecutableHelper)
 add_subdirectory(src)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

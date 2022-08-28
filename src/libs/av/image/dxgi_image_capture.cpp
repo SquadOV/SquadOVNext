@@ -35,6 +35,7 @@ DxgiImageCapture::DxgiImageCapture(const titan::system::Process& process):
         throw DxgiNoMonitorFound{};
     }
 
+    _logger = titan::utility::Logger::get()->createScopedLogger("dxgi");
     refreshDevice();
 }
 
@@ -123,6 +124,7 @@ std::optional<NativeImage> DxgiImageCapture::getCurrent() {
             try {
                 reacquireDuplicationInterface();
             } catch (const titan::system::win32::Win32HResultException& ex) {
+                TITAN_LOGGER_WARN(_logger, "Failed to reacquire duplication interface after access lost: {}", ex.what());
             }
         }
 

@@ -1,5 +1,4 @@
 MACRO(standard_swig_wrapper TARGET NATIVE_TARGET NAMESPACE EXPORT_DEF SWIG_FILES)
-    MESSAGE(STATUS SWIG Compile...${SWIG_FILES})
     if(WIN32)
         set(SWIG_FLAGS _WIN32)
     endif()

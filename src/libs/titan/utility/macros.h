@@ -14,24 +14,5 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#include "av/image/image_capture.h"
-#include "av/image/dxgi_image_capture.h"
 
-#include <titan/utility/log.h>
-
-namespace av {
-
-ImageCapturePtr createImageCapture(const titan::system::Process& process) {
-#ifdef _WIN32
-    try {
-        auto dxgi = std::make_shared<DxgiImageCapture>(process);
-        return dxgi;
-    } catch (std::exception& ex) {
-        TITAN_WARN("Failed to initialize DxgiImageCapture: {}", ex.what());
-    }
-#endif
-
-    return nullptr;
-}
-
-}
+#define STRINGIFY(s) #s

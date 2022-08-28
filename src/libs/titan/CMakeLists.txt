@@ -9,6 +9,7 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/device.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/strings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/exception.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/log.cpp
 )
 
 set(HEADERS
@@ -24,6 +25,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/device.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/strings.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/exception.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/log.h
 )
 
 add_library(libtitan
@@ -41,6 +43,8 @@ target_include_directories(libtitan
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/../
 )
+
+target_link_libraries(libtitan PUBLIC spdlog::spdlog)
 
 if(WIN32)
     target_link_libraries(libtitan PUBLIC    

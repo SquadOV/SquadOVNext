@@ -7,3 +7,6 @@
 [submodule "deps/oiio"]
 	path = deps/oiio
 	url = https://github.com/OpenImageIO/oiio.git
+[submodule "deps/spdlog"]
+	path = deps/spdlog
+	url = https://github.com/gabime/spdlog.git

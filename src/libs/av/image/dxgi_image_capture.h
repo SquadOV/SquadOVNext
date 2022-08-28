@@ -27,6 +27,7 @@
 #include <titan/system/process.h>
 #include <titan/system/win32/directx/device.h>
 #include <titan/utility/exception.h>
+#include <titan/utility/log.h>
 
 namespace av {
 
@@ -70,6 +71,8 @@ private:
     wil::com_ptr<IDXGIOutput1> _dxgiOutput1;
     wil::com_ptr<IDXGIOutput5> _dxgiOutput5;
     wil::com_ptr<IDXGIOutputDuplication> _dupl;
+
+    titan::utility::LoggerInstPtr _logger;
 };
 
 CREATE_SIMPLE_EXCEPTION_CLASS(DxgiNoWindowFound, "DxgiImageCapture failed to find the process window.");
