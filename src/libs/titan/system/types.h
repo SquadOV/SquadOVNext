@@ -23,4 +23,5 @@
 using NativeProcessId = DWORD;
 using NativeProcessHandle = HANDLE;
 using NativeString = std::wstring;
+using NativeWindowHandle = HWND;
 #endif

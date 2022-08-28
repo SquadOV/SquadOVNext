@@ -26,8 +26,14 @@ namespace titan::system::win32 {
 D3d11SharedDevice::D3d11SharedDevice(const wil::com_ptr<ID3D11Device>& device, const wil::com_ptr<ID3D11DeviceContext>& context):
     _device(device)
 {
-    HRESULT hr = _device->QueryInterface(__uuidof(ID3D11Device1), (void**)&_device1);
-    CHECK_WIN32_HRESULT_THROW(hr);
+}
+
+D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor) {
+    return nullptr;
+}
+
+D3d11SharedDevicePtr loadD3d11DeviceOnLocation(D3d11DeviceLocation loc) {
+    return nullptr;
 }
 
 }

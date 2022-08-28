@@ -19,6 +19,7 @@
 #include "av/dll.h"
 #include <vector>
 #include <stdint.h>
+#include <titan/utility/exception.h>
 
 namespace av {
 
@@ -36,5 +37,7 @@ public:
 
     virtual void fillRawBuffer(std::vector<uint8_t>& buffer) const = 0;
 };
+
+CREATE_SIMPLE_EXCEPTION_CLASS(UnsupportedImageFormat, "Unsupported Image Format");
 
 }

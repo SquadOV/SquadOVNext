@@ -25,8 +25,15 @@ void writeImageToFile(const NativeImage& image, const std::filesystem::path& fna
         return;
     }
 
-    // TODO: Handle other types? Probably OK since we'll generally only be dealing with UINT8 images.
-    OIIO::ImageSpec spec(image.width(), image.height(), image.channels(), OIIO::TypeDesc::UINT8);
+    OIIO::ImageSpec spec(
+        image.width(),
+        image.height(),
+        image.channels(),
+        (image.bytesPerElement() == 1) ? OIIO::TypeDesc::UINT8 :
+            (image.bytesPerElement() == 2) ? OIIO::TypeDesc::HALF :
+            (image.bytesPerElement() == 4) ? OIIO::TypeDesc::FLOAT :
+            (image.bytesPerElement() == 8) ? OIIO::TypeDesc::DOUBLE : OIIO::TypeDesc::UNKNOWN
+    );
     out->open(fname.native(), spec);
 
     std::vector<uint8_t> rawData;

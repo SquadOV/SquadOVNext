@@ -21,6 +21,14 @@
 #include <source_location>
 #include <string>
 
+#define CREATE_SIMPLE_EXCEPTION_CLASS(NAME, WHAT) \
+    class NAME: public titan::utility::Exception { \
+    public: \
+        explicit NAME(const std::source_location& loc = std::source_location::current()):\
+            titan::utility::Exception(WHAT, loc)\
+        {}\
+    }
+
 namespace titan::utility {
 
 // A generic exception class that contains additional information
@@ -38,12 +46,10 @@ private:
     std::string _what;
 };
 
+CREATE_SIMPLE_EXCEPTION_CLASS(MemoryAllocationException, "Failed to allocate memory.");
+
 }
 
-#define CREATE_SIMPLE_EXCEPTION_CLASS(NAME, WHAT) \
-    class NAME: public titan::utility::Exception { \
-    public: \
-        explicit NAME(const std::source_location& loc = std::source_location::current()):\
-            titan::utility::Exception(WHAT, loc)\
-        {}\
-    }
+#define CHECK_NULLPTR_THROW(X) if (!X) { throw titan::utility::MemoryAllocationException{}; }
+#define CHECK_NULLPTR_IF(X) if (!X)
+#define CHECK_NULLPTR_IF_RETURN(X, RET) if (!X) { return RET; }

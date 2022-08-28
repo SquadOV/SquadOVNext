@@ -49,8 +49,10 @@ int main(int argc, char** argv) {
             continue;
         }
 
-        av::NativeImage image = capturer->getCurrent();
-        av::writeImageToFile(image, outputPath);
+        std::optional<av::NativeImage> image = capturer->getCurrent();
+        if (image) {
+            av::writeImageToFile(*image, outputPath);
+        }
         break;
     }
     return 0;

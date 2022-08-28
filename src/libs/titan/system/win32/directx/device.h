@@ -29,6 +29,13 @@
 
 namespace titan::system::win32 {
 
+enum class D3d11DeviceLocation {
+    CPU,
+    GPU
+};
+
+using D3d11SharedDevicePtr = std::shared_ptr<class D3d11SharedDevice>;
+
 // A wrapper around a ID3D11Device. It contains a shared D3d11SharedContext
 // that we can use to synchronize tasks that require the same context (e.g. two tasks
 // that require the same texture and we don't want to go through the trouble of doing
@@ -40,14 +47,33 @@ public:
     // Returns the immediate context that was created along with the device.
     // The D3d11SharedContext contains the mechanism to make it thread-safe.
     const D3d11SharedContextPtr& immediate() const { return _immediate; }
+
+    ID3D11Device* device() const { return _device.get(); }
+
+    // adapter will be non-NULL only if we loaded the device from a given monitor.
+    IDXGIAdapter* adapter() const { return _adapter.get(); }
+
+    // output will be non-NULL only if we loaded the device from a given monitor.
+    IDXGIOutput* output() const { return _output.get(); }
+
+    friend TITANEXPORT D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor);
+
+protected:
+    void setAdapter(const wil::com_ptr<IDXGIAdapter>& adapter) { _adapter = adapter; }
+    void setOutput(const wil::com_ptr<IDXGIOutput>& output) { _output = output; }
+
 private:
     wil::com_ptr<ID3D11Device> _device;
-    wil::com_ptr<ID3D11Device1> _device1;
+    wil::com_ptr<IDXGIAdapter> _adapter;
+    wil::com_ptr<IDXGIOutput> _output;
 
     D3d11SharedContextPtr _immediate;
 };
 
 using D3d11SharedDevicePtr = std::shared_ptr<D3d11SharedDevice>;
+
+TITANEXPORT D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor);
+TITANEXPORT D3d11SharedDevicePtr loadD3d11DeviceOnLocation(D3d11DeviceLocation loc);
 
 }
 

@@ -37,6 +37,10 @@ Process::Process(NativeProcessId id, const NativeProcessDIPtr& di):
     _startTime = _di->getProcessStartTime(handle.handle());
 }
 
+void Process::initializeActiveWindow() {
+
+}
+
 std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di) {
     std::vector<NativeProcessId> handles = di->enumProcesses();
 

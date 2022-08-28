@@ -18,11 +18,10 @@
 #include <titan/system/win32/exceptions.h>
 
 #include "av/image/os_image.h"
-#include "av/image/image_exceptions.h"
 
 namespace av {
 
-NativeImage::NativeImage(ID3D11Texture2D* texture, const titan::system::win32::D3d11SharedDevicePtr& device):
+NativeImage::NativeImage(const wil::com_ptr<ID3D11Texture2D>& texture, const titan::system::win32::D3d11SharedDevicePtr& device):
     _native(texture),
     _device(device)
 {
@@ -44,6 +43,8 @@ size_t NativeImage::bytesPerPixel() const {
     switch (_desc.Format) {
         case DXGI_FORMAT_B8G8R8A8_UNORM:
             return 4;
+        case DXGI_FORMAT_R16G16B16A16_FLOAT:
+            return 8;
         default:
             throw av::UnsupportedImageFormat{};
             break;
@@ -54,6 +55,7 @@ size_t NativeImage::bytesPerPixel() const {
 size_t NativeImage::channels() const {
     switch (_desc.Format) {
         case DXGI_FORMAT_B8G8R8A8_UNORM:
+        case DXGI_FORMAT_R16G16B16A16_FLOAT:
             return 4;
         default:
             throw av::UnsupportedImageFormat{};

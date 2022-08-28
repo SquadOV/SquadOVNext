@@ -34,7 +34,7 @@ class AVEXPORT NativeImage: public IImage {
 public:
 #ifdef _WIN32
     // The input device should be the same device the texture was created on.
-    NativeImage(ID3D11Texture2D* texture, const titan::system::win32::D3d11SharedDevicePtr& device);
+    NativeImage(const wil::com_ptr<ID3D11Texture2D>& texture, const titan::system::win32::D3d11SharedDevicePtr& device);
 #endif
 
     size_t width() const override;

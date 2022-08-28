@@ -17,6 +17,7 @@
 #pragma once
 
 #include <memory>
+#include <optional>
 #include "av/dll.h"
 #include "av/image/os_image.h"
 
@@ -28,7 +29,7 @@ class AVEXPORT ImageCapture {
 public:
     virtual ~ImageCapture() {}
 
-    virtual NativeImage getCurrent() const = 0;
+    virtual std::optional<NativeImage> getCurrent() = 0;
 };
 
 using ImageCapturePtr = std::shared_ptr<ImageCapture>;

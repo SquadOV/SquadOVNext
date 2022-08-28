@@ -46,6 +46,10 @@ public:
     const std::filesystem::path& path() const { return _fullPath; }
     int64_t startTime() const { return _startTime; }
 
+    void initializeActiveWindow();
+    bool hasActiveWindow() const { return _activeWindow; }
+    NativeWindowHandle activeWindow() const { return _activeWindow; }
+
 private:
     NativeProcessId _id;
     NativeProcessDIPtr _di;
@@ -64,6 +68,11 @@ private:
     // Time at which the process started running. This isn't guaranteed to be UNIX time.
     // This is only relevant when comparing the start times of two different processes.
     int64_t _startTime = 0;
+
+    //
+    // Cached data about what we consider to be the "active" window.
+    //
+    NativeWindowHandle _activeWindow = nullptr;
 };
 
 // Returns all the running processes at the time of this function call.

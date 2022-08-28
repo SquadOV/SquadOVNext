@@ -36,5 +36,7 @@ public:
 }
 
 #define CHECK_WIN32_HRESULT_THROW(HR) if (HR != S_OK) { throw titan::system::win32::Win32HResultException(HR); }
+#define CHECK_WIN32_HRESULT_IF(HR) if (HR != S_OK)
+#define CHECK_WIN32_HRESULT_RETURN(HR, RET) if (HR != S_OK) { return RET; }
 
 #endif // _WIN32
