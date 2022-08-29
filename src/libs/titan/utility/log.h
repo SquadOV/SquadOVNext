@@ -31,6 +31,7 @@
 #include <thread>
 
 #include "titan/dll.h"
+#include "titan/utility/time.h"
 
 namespace titan::utility {
 
@@ -89,7 +90,7 @@ void logWrapper(spdlog::logger& logger, spdlog::source_loc loc, spdlog::level::l
     spdlog::memory_buf_t buf;
     fmt::detail::vformat_to(buf, fmt, fmt::make_format_args(std::forward<Args>(args)...));
 
-    spdlog::log_clock::time_point tm;
+    spdlog::log_clock::time_point tm = convertClockTime<TimePoint, spdlog::log_clock::time_point>(now());
     logger.log(tm, loc, lvl, spdlog::string_view_t{buf.data(), buf.size()});
 }
 

@@ -37,6 +37,7 @@ set(BOOST_COMPONENTS
     filesystem
     system
     program_options
+    date_time
 )
 
 if(WIN32)

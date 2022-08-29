@@ -26,7 +26,7 @@
 #define FILE_LOC_PATTERN [loc: (%@) %!:%#]
 #endif 
 
-#define LOG_PATTERN [%D %X][%l][%n][pid: %P][tid: %t]FILE_LOC_PATTERN %v 
+#define LOG_PATTERN [%D %X.%e][%l][%n][pid: %P][tid: %t]FILE_LOC_PATTERN %v 
 
 namespace titan::utility {
 namespace {
