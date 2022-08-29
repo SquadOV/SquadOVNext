@@ -44,9 +44,7 @@ Logger* Logger::get() {
 
 Logger::Logger() {
     spdlog::init_thread_pool(8192, 1);
-
-    // Be careful about setting this very large - it'll cause a delay in program exit otherwise.
-    spdlog::flush_every(std::chrono::seconds(1));
+    spdlog::flush_every(std::chrono::seconds(5));
 
     // Create the default console (stdout) sink that everyone should use.
     _sinks.push_back(std::make_shared<spdlog::sinks::stdout_sink_mt>());
