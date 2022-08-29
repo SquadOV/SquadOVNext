@@ -14,6 +14,7 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/ntp_client.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/time.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/processing.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/math/bounding_box.cpp
 )
 
@@ -36,6 +37,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/ntp_client.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/time_forward.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/processing.h
     ${CMAKE_CURRENT_SOURCE_DIR}/math/bounding_box.h
 )
 
