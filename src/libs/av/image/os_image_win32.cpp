@@ -16,6 +16,7 @@
 //
 #ifdef _WIN32
 #include <titan/system/win32/exceptions.h>
+#include <titan/system/win32/directx/shared_texture.h>
 
 #include "av/image/os_image.h"
 
@@ -39,82 +40,78 @@ size_t NativeImage::height() const {
     return _desc.Height;
 }
 
-size_t NativeImage::bytesPerPixel() const {
+ImageFormat NativeImage::format() const {
     switch (_desc.Format) {
+        using enum ImageFormat;
         case DXGI_FORMAT_B8G8R8A8_UNORM:
-            return 4;
+            return B8R8G8A8_UNORM;
         case DXGI_FORMAT_R16G16B16A16_FLOAT:
-            return 8;
+            return R16G16B16A16_FLOAT;
         default:
             throw av::UnsupportedImageFormat{};
             break;
     }
-    return 0;
 }
 
-size_t NativeImage::channels() const {
-    switch (_desc.Format) {
-        case DXGI_FORMAT_B8G8R8A8_UNORM:
-        case DXGI_FORMAT_R16G16B16A16_FLOAT:
-            return 4;
-        default:
-            throw av::UnsupportedImageFormat{};
-            break;
-    }
-    return 0;
+NativeImage NativeImage::createCompatibleStagingImage() const {
+    D3D11_TEXTURE2D_DESC newDesc = { 0 };
+    newDesc.Width = width();
+    newDesc.Height = height();
+    newDesc.MipLevels = 1;
+    newDesc.ArraySize = 1;
+    newDesc.Format = nativeFormat();
+    newDesc.SampleDesc.Count = 1;
+    newDesc.Usage = D3D11_USAGE_STAGING;
+    newDesc.BindFlags = 0;
+    newDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    newDesc.MiscFlags = 0;
+
+    wil::com_ptr<ID3D11Texture2D> newTexture;
+    HRESULT hr = _device->device()->CreateTexture2D(&newDesc, nullptr, &newTexture);
+    CHECK_WIN32_HRESULT_THROW(hr, "Failed to create compatible staging texture.");
+    return NativeImage{newTexture, _device};
 }
 
-bool NativeImage::areChannelsFlipped() const {
-    switch (_desc.Format) {
-        case DXGI_FORMAT_B8G8R8A8_UNORM:
-            return true;
-        default:
-            break;
+void NativeImage::copyToSameDeviceLocation(NativeImage& to) const {
+    assert(areGenericImagesCompatible(*this, to));
+    auto immediate = _device->immediate()->get();
+
+    if (to.device().get() != device().get()) {
+        titan::system::win32::D3d11SharedTextureHandle sharedHandle{*_device, to._native.get(), false};
+        immediate.context()->CopyResource(sharedHandle.texture(), _native.get());
+        immediate.context()->Flush();
+    } else {
+        immediate.context()->CopyResource(to._native.get(), _native.get());
     }
-    return false;
 }
 
-void NativeImage::fillRawBuffer(std::vector<uint8_t>& buffer) const {
-    if (!_native) {
-        return;
-    }
+void NativeImage::copyToCpu(CpuImage& to) const {
+    assert(areGenericImagesCompatible(*this, to));
 
-    buffer.resize(width() * height() * bytesPerPixel());
-
-    const auto immediate = _device->immediate();
-    const auto guard = immediate->get();
-
-    // We need to copy to a texture that we have CPU read access from.
-    D3D11_TEXTURE2D_DESC sharedDesc = { 0 };
-    sharedDesc.Width = width();
-    sharedDesc.Height = height();
-    sharedDesc.MipLevels = 1;
-    sharedDesc.ArraySize = 1;
-    sharedDesc.Format = _desc.Format;
-    sharedDesc.SampleDesc.Count = 1;
-    sharedDesc.Usage = D3D11_USAGE_STAGING;
-    sharedDesc.BindFlags = 0;
-    sharedDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-    sharedDesc.MiscFlags = 0;
-
-    wil::com_ptr<ID3D11Texture2D> stagingTexture;
-    HRESULT hr = _device->device()->CreateTexture2D(&sharedDesc, nullptr, &stagingTexture);
-    CHECK_WIN32_HRESULT_THROW(hr, "Failed to create staging texture.");
-    guard.context()->CopyResource(stagingTexture.get(), _native.get());
-
+    auto immediate = _device->immediate()->get();
     D3D11_MAPPED_SUBRESOURCE mappedData;
-    hr = guard.context()->Map(stagingTexture.get(), 0, D3D11_MAP_READ, 0, &mappedData);
+    HRESULT hr = immediate.context()->Map(_native.get(), 0, D3D11_MAP_READ, 0, &mappedData);
     CHECK_WIN32_HRESULT_THROW(hr, "Failed to map texture.");
 
     const uint8_t* src = reinterpret_cast<const uint8_t*>(mappedData.pData);
-    uint8_t* dst = &buffer[0];
-    for (size_t r = 0; r < height(); ++r) {
-        std::memcpy(dst, src, bytesPerRow());
-        src += mappedData.RowPitch;
-        dst += bytesPerRow();
-    }
-    guard.context()->Unmap(stagingTexture.get(), 0);
+    OIIO::ImageBuf& dst = to.raw();
+    dst.set_pixels(OIIO::ROI::All(), dst.pixeltype(), src, OIIO::AutoStride, mappedData.RowPitch);
+    immediate.context()->Unmap(_native.get(), 0);
+}
 
+void NativeImage::copyFromCpu(const CpuImage& from) {
+    assert(areGenericImagesCompatible(*this, from));
+
+    D3D11_BOX box;
+    box.left = 0;
+    box.right = width();
+    box.top = 0;
+    box.bottom = height();
+    box.front = 0;
+    box.back = 1;
+
+    auto immediate = _device->immediate()->get();
+    immediate.context()->UpdateSubresource(_native.get(), 0, &box, from.raw().localpixels(), from.raw().scanline_stride(), 0);
 }
 
 }

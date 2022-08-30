@@ -9,6 +9,7 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/exceptions.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/context.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/device.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/shared_texture.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/strings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/exception.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/log.cpp
@@ -31,6 +32,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/exceptions.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/context.h
     ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/device.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/win32/directx/shared_texture.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/strings.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/exception.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/log.h

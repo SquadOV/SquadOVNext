@@ -43,19 +43,23 @@ using D3d11SharedDevicePtr = std::shared_ptr<class D3d11SharedDevice>;
 // shared textures).
 class TITANEXPORT D3d11SharedDevice {
 public:
-    D3d11SharedDevice(const wil::com_ptr<ID3D11Device>& device, const wil::com_ptr<ID3D11DeviceContext>& context);
+    D3d11SharedDevice(D3d11DeviceLocation location, const wil::com_ptr<ID3D11Device>& device, const wil::com_ptr<ID3D11DeviceContext>& context);
 
     // Returns the immediate context that was created along with the device.
     // The D3d11SharedContext contains the mechanism to make it thread-safe.
     const D3d11SharedContextPtr& immediate() const { return _immediate; }
 
     ID3D11Device* device() const { return _device.get(); }
+    ID3D11Device1* device1() const { return _device1.get(); }
 
     // adapter will be non-NULL only if we loaded the device from a given monitor.
     IDXGIAdapter1* adapter() const { return _adapter.get(); }
 
     // output will be non-NULL only if we loaded the device from a given monitor.
     IDXGIOutput* output() const { return _output.get(); }
+
+    // 
+    D3d11DeviceLocation location() const { return _location; }
 
     friend TITANEXPORT D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor);
 
@@ -65,10 +69,12 @@ protected:
 
 private:
     wil::com_ptr<ID3D11Device> _device;
+    wil::com_ptr<ID3D11Device1> _device1;
     wil::com_ptr<IDXGIAdapter1> _adapter;
     wil::com_ptr<IDXGIOutput> _output;
 
     D3d11SharedContextPtr _immediate;
+    D3d11DeviceLocation _location;
 };
 
 using D3d11SharedDevicePtr = std::shared_ptr<D3d11SharedDevice>;

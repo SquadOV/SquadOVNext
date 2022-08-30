@@ -46,10 +46,12 @@ private:
     std::string _what;
 };
 
-CREATE_SIMPLE_EXCEPTION_CLASS(MemoryAllocationException, "Failed to allocate memory.");
+CREATE_SIMPLE_EXCEPTION_CLASS(MemoryAllocationException, "Failed to allocate memory or unexpected nullptr.");
+CREATE_SIMPLE_EXCEPTION_CLASS(UnsupportedException, "Unsupported operation.");
 
 }
 
-#define CHECK_NULLPTR_THROW(X) if (!X) { throw titan::utility::MemoryAllocationException{}; }
+#define CHECK_NULLPTR_THROW_EXCEPTION(X, E) if (!X) { throw E; }
+#define CHECK_NULLPTR_THROW(X) CHECK_NULLPTR_THROW_EXCEPTION(X, titan::utility::MemoryAllocationException{})
 #define CHECK_NULLPTR_IF(X) if (!X)
 #define CHECK_NULLPTR_IF_RETURN(X, RET) if (!X) { return RET; }

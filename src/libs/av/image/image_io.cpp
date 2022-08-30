@@ -15,9 +15,9 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 #include "av/image/image_io.h"
+#include "av/image/cpu_image.h"
 
 #include <OpenImageIO/imageio.h>
-#include <OpenImageIO/imagebuf.h>
 #include <OpenImageIO/imagebufalgo.h>
 namespace av {
 
@@ -38,14 +38,17 @@ void writeImageToFile(const NativeImage& image, const std::filesystem::path& fna
     );
     out->open(fname.native(), spec);
 
-    std::vector<uint8_t> rawData;
-    image.fillRawBuffer(rawData);
+    NativeImage stagedImage = image.createCompatibleStagingImage();
+    image.copyToSameDeviceLocation(stagedImage);
 
-    OIIO::ImageBuf buffer(spec, (void*)&rawData[0]);
+    CpuImage buffer(image.width(), image.height(), image.format());
+    stagedImage.copyToCpu(buffer);
+
+    OIIO::ImageBuf& raw = buffer.raw();
     if (image.areChannelsFlipped()) {
-        OIIO::ImageBufAlgo::channels(buffer, image.channels(), {2, 1, 0, 3}).write(out.get());
+        OIIO::ImageBufAlgo::channels(raw, image.channels(), {2, 1, 0, 3}).write(out.get());
     } else {
-        buffer.write(out.get());    
+        raw.write(out.get());    
     }
     out->close();
 }

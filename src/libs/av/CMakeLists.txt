@@ -3,7 +3,11 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/image/dxgi_image_capture.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/image/image_capture.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/image/image_io.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/image.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/image/os_image_win32.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/cpu_image.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_capture_source.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_dx11_ingest.cpp
 )
 
 set(HEADERS
@@ -13,6 +17,10 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/image/image_io.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/image.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/os_image.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/cpu_image.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_capture_source.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_sink.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_dx11_ingest.h
 )
 
 add_library(libav

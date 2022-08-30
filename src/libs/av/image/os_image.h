@@ -18,6 +18,7 @@
 
 #include "av/dll.h"
 #include "av/image/image.h"
+#include "av/image/cpu_image.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -30,21 +31,36 @@
 namespace av {
 
 // A simple wrapper around whatever the "native" image format is for this operating system.
+// Generally, we'll assume that the image can either live in hardware or on the CPU.
 class AVEXPORT NativeImage: public IImage {
 public:
 #ifdef _WIN32
     // The input device should be the same device the texture was created on.
     NativeImage(const wil::com_ptr<ID3D11Texture2D>& texture, const titan::system::win32::D3d11SharedDevicePtr& device);
+
+    const titan::system::win32::D3d11SharedDevicePtr& device() const { return _device; }
 #endif
 
     size_t width() const override;
     size_t height() const override;
-    size_t bytesPerPixel() const override;
-    size_t channels() const override;
-    bool areChannelsFlipped() const override;
+    ImageFormat format() const override;
 
-    // Reads the image to a CPU buffer. This function should not be used very often.
-    void fillRawBuffer(std::vector<uint8_t>& buffer) const override;
+#ifdef _WIN32
+    DXGI_FORMAT nativeFormat() const { return _desc.Format; };
+#endif
+
+    // Create an image in a place that's accessible by the CPU that is compatible with this image.
+    NativeImage createCompatibleStagingImage() const;
+
+    // Same device location copying is easy and can generally be done with a simple graphics API call.
+    void copyToSameDeviceLocation(NativeImage& to) const;
+
+    // Copying to the CPU will generally rely on us copying to a temporary staging buffer that we can use to
+    // ensure that we can actually read from the GPU to the CPU.
+    void copyToCpu(CpuImage& to) const;
+
+    // Copying from an image on the CPU. Pretty straightforward operation.
+    void copyFromCpu(const CpuImage& from);
 private:
 
 #ifdef _WIN32

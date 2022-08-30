@@ -77,6 +77,7 @@ private:
 
 CREATE_SIMPLE_EXCEPTION_CLASS(DxgiNoWindowFound, "DxgiImageCapture failed to find the process window.");
 CREATE_SIMPLE_EXCEPTION_CLASS(DxgiNoMonitorFound, "DxgiImageCapture failed to find the window monitor.");
+CREATE_SIMPLE_EXCEPTION_CLASS(DxgiUnsupportedOperation, "DxgiImageCapture encountered an unsupported state.");
 
 }
 

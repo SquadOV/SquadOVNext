@@ -19,6 +19,10 @@
 
 #include <av/image/image_capture.h>
 #include <av/image/image_io.h>
+#include <av/image/processing/image_capture_source.h>
+#include <av/image/processing/image_dx11_ingest.h>
+#include <av/image/processing/image_sink.h>
+#include <titan/system/win32/directx/device.h>
 #include <titan/system/process.h>
 #include <titan/utility/strings.h>
 #include <titan/utility/log.h>
@@ -26,10 +30,13 @@
 namespace po = boost::program_options;
 namespace fs = std::filesystem;
 int main(int argc, char** argv) {
+    bool useCpu = false;
+
     po::options_description desc("Options");
     desc.add_options()
         ("process", po::value<std::string>()->required(), "Process to capture.")
-        ("output", po::value<std::string>()->required(), "Image output file.");
+        ("output", po::value<std::string>()->required(), "Image output file.")
+        ("cpu", po::bool_switch(&useCpu), "Use CPU-based processing");
 
     po::variables_map vm;
     po::store(po::command_line_parser(argc, argv).options(desc).run(), vm);
@@ -53,15 +60,26 @@ int main(int argc, char** argv) {
             continue;
         }
 
+        TITAN_INFO("Creating image capturer...");
         av::ImageCapturePtr capturer = av::createImageCapture(p);
         if (!capturer) {
             continue;
         }
 
-        TITAN_INFO("Made image capturer...");
+        TITAN_INFO("Create context...");
+        auto device = titan::system::win32::loadD3d11DeviceOnLocation(useCpu ? titan::system::win32::D3d11DeviceLocation::CPU : titan::system::win32::D3d11DeviceLocation::GPU);
+
+        TITAN_INFO("Setup processing graph...");
+        auto captureNode = std::make_shared<av::ImageCaptureSource>(capturer);
+        auto ingestNode = std::make_shared<av::ImageDx11IngestNode>(device);
+        auto sinkNode = std::make_shared<av::ImageSinkNode>();
+
+        ingestNode->connectInputTo(ingestNode->kInput, captureNode, captureNode->kOutput);
+        sinkNode->connectInputTo(sinkNode->kInput, ingestNode, ingestNode->kOutput);
 
         for (auto i = 0; i < 10; ++i) {
-            std::optional<av::NativeImage> image = capturer->getCurrent();
+            titan::utility::ProcessingCacheContainer cache;
+            const std::optional<av::NativeImage>& image = sinkNode->get(cache);
             if (image) {
                 TITAN_INFO("Writing image to output...");
                 av::writeImageToFile(*image, outputPath);

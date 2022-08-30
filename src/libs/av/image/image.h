@@ -23,6 +23,15 @@
 
 namespace av {
 
+enum class ImageFormat {
+    B8R8G8A8_UNORM,
+    R16G16B16A16_FLOAT
+};
+
+AVEXPORT size_t formatToBytesPerPixel(ImageFormat format);
+AVEXPORT size_t formatToChannels(ImageFormat format);
+AVEXPORT size_t areFormatChannelsFlipped(ImageFormat format);
+
 // An interface that we expect everything that represents an "Image" should satisfy.
 class AVEXPORT IImage {
 public:
@@ -30,15 +39,23 @@ public:
 
     virtual size_t width() const = 0;
     virtual size_t height() const = 0;
-    virtual size_t bytesPerPixel() const = 0;
-    virtual size_t channels() const = 0;
-    size_t bytesPerElement() const { return bytesPerPixel() / channels(); }
-    size_t bytesPerRow() const { return bytesPerPixel() * width(); }
-    virtual bool areChannelsFlipped() const = 0;
+    virtual ImageFormat format() const = 0;
 
-    virtual void fillRawBuffer(std::vector<uint8_t>& buffer) const = 0;
+    size_t bytesPerPixel() const { return formatToBytesPerPixel(format()); }
+    size_t channels() const { return formatToBytesPerPixel(format()); }
+    size_t bytesPerElement() const { return bytesPerPixel() / channels(); }
+    virtual size_t bytesPerRow() const { return bytesPerPixel() * width(); }
+    bool areChannelsFlipped() const { return areFormatChannelsFlipped(format()); }
 };
 
 CREATE_SIMPLE_EXCEPTION_CLASS(UnsupportedImageFormat, "Unsupported Image Format");
+
+inline
+bool areGenericImagesCompatible(const IImage& a, const IImage& b) {
+    return a.width() == b.width() &&
+        a.height() == b.height() &&
+        a.channels() == b.channels() &&
+        a.format() == b.format();
+}
 
 }

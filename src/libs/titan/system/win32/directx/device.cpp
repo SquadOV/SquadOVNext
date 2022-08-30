@@ -47,10 +47,13 @@ const std::vector<D3D_FEATURE_LEVEL> kDefaultDeviceFeatures{
 
 }
 
-D3d11SharedDevice::D3d11SharedDevice(const wil::com_ptr<ID3D11Device>& device, const wil::com_ptr<ID3D11DeviceContext>& context):
-    _device(device)
+D3d11SharedDevice::D3d11SharedDevice(D3d11DeviceLocation location, const wil::com_ptr<ID3D11Device>& device, const wil::com_ptr<ID3D11DeviceContext>& context):
+    _device(device),
+    _location(location)
 {
     _immediate = std::make_shared<D3d11SharedContext>(context);
+    HRESULT hr = _device->QueryInterface(__uuidof(ID3D11Device1), (void**)&_device1);
+    CHECK_WIN32_HRESULT_THROW(hr, "Failed to get ID3D11Device1 interface.");
 }
 
 D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor) {
@@ -109,7 +112,7 @@ D3d11SharedDevicePtr loadD3d11DeviceOnMonitor(HMONITOR monitor) {
         &context
     );
     CHECK_WIN32_HRESULT_THROW(hr, "Failed to create D3D11 device from adapater.");
-    auto shared = std::make_shared<D3d11SharedDevice>(device, context);
+    auto shared = std::make_shared<D3d11SharedDevice>(D3d11DeviceLocation::GPU, device, context);
     shared->setAdapter(adapter);
     shared->setOutput(output);
     return shared;
@@ -131,7 +134,7 @@ D3d11SharedDevicePtr loadD3d11DeviceOnLocation(D3d11DeviceLocation loc) {
         &context
     );
     CHECK_WIN32_HRESULT_THROW(hr, "Failed to create D3D11 device from device location.");
-    return std::make_shared<D3d11SharedDevice>(device, context);
+    return std::make_shared<D3d11SharedDevice>(loc, device, context);
 }
 
 }

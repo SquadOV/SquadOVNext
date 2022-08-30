@@ -19,6 +19,7 @@
 #include <any>
 #include <atomic>
 #include <boost/functional/hash.hpp>
+#include <functional>
 #include <memory>
 #include <optional>
 #include <stdint.h>
@@ -57,14 +58,14 @@ enum class NodeValueDirection {
 class TITANEXPORT ProcessingCache {
 public:
     template<typename T>
-    std::optional<const T&> getValue(NodeId node, ParamId param) {
+    std::optional<std::reference_wrapper<T>> getValue(NodeId node, ParamId param) {
         const auto it = _values.find(std::make_pair(node, param));
         if (it == _values.end()) {
             return std::nullopt;
         }
         
         try {
-            return std::any_cast<const T&>(it->second);
+            return std::any_cast<T&>(it->second);
         } catch (...) {
             throw NodeIncorrectTypeException{};
         }
@@ -72,7 +73,7 @@ public:
 
     template<typename T>
     void setValue(NodeId node, ParamId param, const T& v) {
-        _values[std::make_pair(node, param)] = std::make_any(v);
+        _values[std::make_pair(node, param)] = v;
     }
 
     void clear() { _values.clear(); }
@@ -96,10 +97,10 @@ enum class ProcessingCacheType {
 class TITANEXPORT ProcessingCacheContainer {
 public:
     template<typename T>
-    std::optional<const T&> getValue(ProcessingCacheType type, NodeId node, ParamId param) {
+    std::optional<std::reference_wrapper<T>> getValue(ProcessingCacheType type, NodeId node, ParamId param) {
         return (type == ProcessingCacheType::Ephemeral) ?
-            _ephemeral.getValue(node, param) :
-            _persistent.getValue(node, param);
+            _ephemeral.getValue<T>(node, param) :
+            _persistent.getValue<T>(node, param);
     }
 
     template<typename T>
@@ -109,6 +110,25 @@ public:
         } else {
             _persistent.setValue(node, param, v);
         }
+    }
+
+    // Returns true if value needs to be recreated
+    template<typename T>
+    using ConditionalFn = std::function<bool(const T&)>;
+
+    // Function to create said value.
+    template<typename T>
+    using CreateFn = std::function<T()>;
+
+    template<typename T>
+    std::reference_wrapper<T> getValueOrComputeIf(ProcessingCacheType type, NodeId node, ParamId param, const ConditionalFn<T>& cond, const CreateFn<T>& create) {
+        auto value = getValue<T>(type, node, param);
+        if (!value || cond(value->get())) {
+            setValue(type, node, param, create());
+            value = getValue<T>(type, node, param);
+        }
+        CHECK_NULLPTR_THROW_EXCEPTION(value, ComputeNodeOutputException{});
+        return *value;
     }
 
     void clearEphemeral() { _ephemeral.clear(); }
@@ -149,14 +169,14 @@ public:
     // Retrieve the output value (doing computation and storing in the cache if necessary).
     template<typename T>
     const T& getOutputValue(ParamId outputId, ProcessingCacheContainer& cache) const {
-        const auto value = cache.getValue(ProcessingCacheType::Ephemeral, id(), outputId);
+        const auto value = cache.getValue<T>(ProcessingCacheType::Ephemeral, id(), outputId);
         if (value) {
             return *value;
         }
         
         compute(outputId, cache);
 
-        const auto newValue = cache.getValue(ProcessingCacheType::Ephemeral, id(), outputId);
+        const auto newValue = cache.getValue<T>(ProcessingCacheType::Ephemeral, id(), outputId);
         if (!newValue) [[unlikely]] {
             throw ComputeNodeOutputException{};
         }
@@ -168,13 +188,13 @@ public:
 
 protected:
     template<typename T>
-    ParamId registerInputParameter(ParamId paramId) {
-        return registerParameter<T>(NodeValueDirection::Input, paramId);
+    void registerInputParameter(ParamId paramId) {
+        registerParameter<T>(NodeValueDirection::Input, paramId);
     }
 
     template<typename T>
-    ParamId registerOutputParameter(ParamId paramId) {
-        return registerParameter<T>(NodeValueDirection::Output, paramId);
+    void registerOutputParameter(ParamId paramId) {
+        registerParameter<T>(NodeValueDirection::Output, paramId);
     }
 
     // Effectively the same as getOutputValue but for querying the inputs.
@@ -203,7 +223,7 @@ private:
 
     template<typename T>
     void registerParameter(NodeValueDirection dir, ParamId paramId) {
-        _parameterTypeMap[std::make_pair(dir, paramId)] = std::type_index(typeid(std::remove_cv_t<T>));
+        _parameterTypeMap.insert({std::make_pair(dir, paramId), std::type_index(typeid(std::remove_cv_t<T>))});
     }
 
     // What we'll use to do type-checking when two nodes get connected before values start flowing.
@@ -218,6 +238,33 @@ private:
 
     // What derived nodes should override to compute values and put values into the cache.
     virtual void compute(ParamId outputId, ProcessingCacheContainer& cache) const = 0;
+};
+
+// A simple sink node that has only 1 input and 1 output where the
+// output is literally just the same thing as the input.
+template<typename T>
+class SimpleSinkNode: public ProcessingNode {
+public:
+    enum Params {
+        kInput = 0,
+        kOutput = 1
+    };
+
+    SimpleSinkNode() {
+        registerInputParameter<T>(kInput);
+        registerOutputParameter<T>(kOutput);
+    }
+
+    const T& get(ProcessingCacheContainer& cache) const {
+        return getOutputValue<T>(kOutput, cache);
+    }
+
+private:
+    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) const override {
+        assert(outputId == kOutput);
+        const auto value = getInputValue<T>(kInput, cache);
+        cache.setValue(titan::utility::ProcessingCacheType::Ephemeral, id(), outputId, value);
+    }
 };
 
 // A fairly dumb container mainly meant to take ownership of the ProcessingNode objects.

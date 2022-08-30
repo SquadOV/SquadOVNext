@@ -48,6 +48,12 @@ void DxgiImageCapture::refreshDevice() {
     DXGI_OUTPUT_DESC outputDesc;
     _device->output()->GetDesc(&outputDesc);
 
+    // Sure we could probably support the rotation somehow. But it seems like wasted work...
+    // I don't think anyone is playing video games on a rotated screen.
+    if (outputDesc.Rotation != DXGI_MODE_ROTATION_IDENTITY) {
+        throw DxgiUnsupportedOperation{};
+    }
+
     HRESULT hr =  _device->output()->QueryInterface(__uuidof(IDXGIOutput1), (void**)&_dxgiOutput1);
     CHECK_WIN32_HRESULT_THROW(hr, "Failed to get IDXGIOutput1");
 
