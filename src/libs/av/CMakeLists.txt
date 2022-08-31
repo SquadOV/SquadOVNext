@@ -19,7 +19,6 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/image/os_image.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/cpu_image.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_capture_source.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_sink.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_dx11_ingest.h
 )
 

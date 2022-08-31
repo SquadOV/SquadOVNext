@@ -240,33 +240,6 @@ private:
     virtual void compute(ParamId outputId, ProcessingCacheContainer& cache) const = 0;
 };
 
-// A simple sink node that has only 1 input and 1 output where the
-// output is literally just the same thing as the input.
-template<typename T>
-class SimpleSinkNode: public ProcessingNode {
-public:
-    enum Params {
-        kInput = 0,
-        kOutput = 1
-    };
-
-    SimpleSinkNode() {
-        registerInputParameter<T>(kInput);
-        registerOutputParameter<T>(kOutput);
-    }
-
-    const T& get(ProcessingCacheContainer& cache) const {
-        return getOutputValue<T>(kOutput, cache);
-    }
-
-private:
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) const override {
-        assert(outputId == kOutput);
-        const auto value = getInputValue<T>(kInput, cache);
-        cache.setValue(titan::utility::ProcessingCacheType::Ephemeral, id(), outputId, value);
-    }
-};
-
 // A fairly dumb container mainly meant to take ownership of the ProcessingNode objects.
 class TITANEXPORT ProcessingGraph {
 public:

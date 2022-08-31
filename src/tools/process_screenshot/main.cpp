@@ -21,7 +21,6 @@
 #include <av/image/image_io.h>
 #include <av/image/processing/image_capture_source.h>
 #include <av/image/processing/image_dx11_ingest.h>
-#include <av/image/processing/image_sink.h>
 #include <titan/system/win32/directx/device.h>
 #include <titan/system/process.h>
 #include <titan/utility/strings.h>
@@ -72,14 +71,12 @@ int main(int argc, char** argv) {
         TITAN_INFO("Setup processing graph...");
         auto captureNode = std::make_shared<av::ImageCaptureSource>(capturer);
         auto ingestNode = std::make_shared<av::ImageDx11IngestNode>(device);
-        auto sinkNode = std::make_shared<av::ImageSinkNode>();
 
         ingestNode->connectInputTo(ingestNode->kInput, captureNode, captureNode->kOutput);
-        sinkNode->connectInputTo(sinkNode->kInput, ingestNode, ingestNode->kOutput);
 
         for (auto i = 0; i < 10; ++i) {
             titan::utility::ProcessingCacheContainer cache;
-            const std::optional<av::NativeImage>& image = sinkNode->get(cache);
+            const auto& image = ingestNode->getOutputValue<std::optional<av::NativeImage>>(ingestNode->kOutput, cache);
             if (image) {
                 TITAN_INFO("Writing image to output...");
                 av::writeImageToFile(*image, outputPath);
