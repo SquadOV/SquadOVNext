@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
 
         for (auto i = 0; i < 10; ++i) {
             titan::utility::ProcessingCacheContainer cache;
-            const auto& image = ingestNode->getOutputValue<std::optional<av::NativeImage>>(ingestNode->kOutput, cache);
+            const auto& image = ingestNode->getOutputValue<av::NativeImagePtr>(ingestNode->kOutput, cache);
             if (image) {
                 TITAN_INFO("Writing image to output...");
                 av::writeImageToFile(*image, outputPath);

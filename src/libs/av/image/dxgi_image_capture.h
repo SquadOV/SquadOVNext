@@ -39,7 +39,7 @@ class DxgiImageCapture: public ImageCapture {
 public:
     explicit DxgiImageCapture(const titan::system::Process& process);
 
-    std::optional<NativeImage> getCurrent() override;
+    NativeImagePtr getCurrent() override;
 
 private:
     titan::system::Process _process;

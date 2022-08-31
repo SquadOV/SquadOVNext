@@ -38,11 +38,11 @@ void writeImageToFile(const NativeImage& image, const std::filesystem::path& fna
     );
     out->open(fname.native(), spec);
 
-    NativeImage stagedImage = image.createCompatibleStagingImage();
-    image.copyToSameDeviceLocation(stagedImage);
+    NativeImagePtr stagedImage = image.createCompatibleStagingImage();
+    image.copyToSameDeviceLocation(*stagedImage);
 
     CpuImage buffer(image.width(), image.height(), image.format());
-    stagedImage.copyToCpu(buffer);
+    stagedImage->copyToCpu(buffer);
 
     OIIO::ImageBuf& raw = buffer.raw();
     if (image.areChannelsFlipped()) {

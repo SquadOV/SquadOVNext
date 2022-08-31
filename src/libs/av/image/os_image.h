@@ -16,10 +16,6 @@
 //
 #pragma once
 
-#include "av/dll.h"
-#include "av/image/image.h"
-#include "av/image/cpu_image.h"
-
 #ifdef _WIN32
 #include <Windows.h>
 #include <d3d11.h>
@@ -28,8 +24,15 @@
 #include <titan/system/win32/directx/device.h>
 #endif
 
+#include "av/dll.h"
+#include "av/image/image.h"
+#include "av/image/cpu_image.h"
+
+#include <memory>
+
 namespace av {
 
+using NativeImagePtr = std::shared_ptr<class NativeImage>;
 // A simple wrapper around whatever the "native" image format is for this operating system.
 // Generally, we'll assume that the image can either live in hardware or on the CPU.
 class AVEXPORT NativeImage: public IImage {
@@ -50,7 +53,7 @@ public:
 #endif
 
     // Create an image in a place that's accessible by the CPU that is compatible with this image.
-    NativeImage createCompatibleStagingImage() const;
+    NativeImagePtr createCompatibleStagingImage() const;
 
     // Same device location copying is easy and can generally be done with a simple graphics API call.
     void copyToSameDeviceLocation(NativeImage& to) const;

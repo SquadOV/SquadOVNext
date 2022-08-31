@@ -28,12 +28,12 @@ namespace av {
 ImageDx11IngestNode::ImageDx11IngestNode(const titan::system::win32::D3d11SharedDevicePtr& device):
     _device(device)
 {
-    registerInputParameter<std::optional<NativeImage>>(kInput);
-    registerOutputParameter<std::optional<NativeImage>>(kOutput);
+    registerInputParameter<NativeImagePtr>(kInput);
+    registerOutputParameter<NativeImagePtr>(kOutput);
 }
 
 void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheContainer& cache) const {
-    const auto& image = getInputValue<std::optional<NativeImage>>(kInput, cache);
+    const auto& image = getInputValue<NativeImagePtr>(kInput, cache);
     if (!image) {
         cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, std::nullopt);
         return;
@@ -41,11 +41,11 @@ void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheConta
 
     // Create a DX11 texture and store it into the persistent cache. This will get re-used as continue
     // to evaluate this node so we don't have to keep on recreating it.
-    auto ingestedImage = cache.getValueOrComputeIf<NativeImage>(
+    auto ingestedImage = cache.getValueOrComputeIf<NativeImagePtr>(
         tu::ProcessingCacheType::Persistent,
         id(),
         kCache,
-        [&image](const NativeImage& a) { return !areGenericImagesCompatible(image.value(), a); },
+        [&image](const NativeImagePtr& a) { return !image || !a || !areGenericImagesCompatible(*image, *a); },
         [&image, this](){
             D3D11_TEXTURE2D_DESC newDesc = { 0 };
             newDesc.Width = image->width();
@@ -65,7 +65,7 @@ void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheConta
             wil::com_ptr<ID3D11Texture2D> newTexture;
             HRESULT hr = _device->device()->CreateTexture2D(&newDesc, nullptr, &newTexture);
             CHECK_WIN32_HRESULT_THROW(hr, "Failed to create ingested texture.");
-            return NativeImage{newTexture, _device};
+            return std::make_shared<NativeImage>(newTexture, _device);
         }
     );
 
@@ -73,42 +73,42 @@ void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheConta
     // CPU -> GPU transfer, or a CPU -> CPU transfer since the mechanics of most of them will be different.
     // Note that going from the GPU to the CPU will require the use of an intermediate buffer.
     const auto srcLoc = image->device()->location();
-    const auto dstLoc = ingestedImage.get().device()->location();
+    const auto dstLoc = ingestedImage.get()->device()->location();
     if (srcLoc == dstLoc) {
         // A naive simple copy works fine.
-        image->copyToSameDeviceLocation(ingestedImage);
+        image->copyToSameDeviceLocation(*ingestedImage.get());
     } else if (srcLoc == titan::system::win32::D3d11DeviceLocation::GPU) {
         // There are two textures that need to be made here.
         //  1) The CPU texture that we will use as an intermediary for copying from the GPU back to the final CPU image.
         //     Note that the "CPU" destination image is still a "hardware" image but we can't copy directly from hardware to "hardware"
         //     since the "hardware" is a WARP device for DirectX 11.
-        auto cpuStaging = cache.getValueOrComputeIf<CpuImage>(
+        auto cpuStaging = cache.getValueOrComputeIf<CpuImagePtr>(
             tu::ProcessingCacheType::Persistent,
             id(),
             kStagingCpu,
-            [&image](const CpuImage& a) { return !areGenericImagesCompatible(image.value(), a); },
-            [&image](){ return CpuImage{image->width(), image->height(), image->format()}; }
+            [&image](const CpuImagePtr& a) { return !image || !a || !areGenericImagesCompatible(*image, *a); },
+            [&image](){ return std::make_shared<CpuImage>(image->width(), image->height(), image->format()); }
         );
 
         //  2) The GPU texture that we will use to stage the texture for copying from the input (otherwise it can't be read from the CPU).
-        auto gpuStaging = cache.getValueOrComputeIf<NativeImage>(
+        auto gpuStaging = cache.getValueOrComputeIf<NativeImagePtr>(
             tu::ProcessingCacheType::Persistent,
             id(),
             kStagingGpu,
-            [&image](const NativeImage& a) { return !areGenericImagesCompatible(image.value(), a); },
+            [&image](const NativeImagePtr& a) { return !image || !a || !areGenericImagesCompatible(*image, *a); },
             [&image, this](){
                 return image->createCompatibleStagingImage();
             }
         );
         
-        image->copyToSameDeviceLocation(gpuStaging);
-        gpuStaging.get().copyToCpu(cpuStaging);
-        ingestedImage.get().copyFromCpu(cpuStaging);
+        image->copyToSameDeviceLocation(*gpuStaging.get());
+        gpuStaging.get()->copyToCpu(*cpuStaging.get());
+        ingestedImage.get()->copyFromCpu(*cpuStaging.get());
     } else {
         throw tu::UnsupportedException{};
     }
 
-    cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, std::optional{NativeImage{ingestedImage.get()}});
+    cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, std::make_shared<NativeImage>(*ingestedImage.get()));
 }
 
 }

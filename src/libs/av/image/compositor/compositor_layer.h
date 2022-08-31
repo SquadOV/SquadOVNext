@@ -16,27 +16,19 @@
 //
 #pragma once
 
-#include <memory>
-#include <optional>
 #include "av/dll.h"
-#include "av/image/os_image.h"
-
-#include <titan/system/process.h>
+#include <memory>
 
 namespace av {
 
-class AVEXPORT ImageCapture {
+// A compositor layer is composed of an input image and a number of compositor operations.
+// These operations will only be applied to the pixels of the input image in the final, composited image.
+class AVEXPORT CompositorLayer {
 public:
-    virtual ~ImageCapture() {}
 
-    virtual NativeImagePtr getCurrent() = 0;
+private:
 };
 
-using ImageCapturePtr = std::shared_ptr<ImageCapture>;
-
-// A generic function to create the appropriate ImageCapture class for the given circumstances.
-// Namely, we generally only care about what native process we're trying to record (i.e. a game).
-// This function will return the first available image capture object that successfully initializes.
-AVEXPORT ImageCapturePtr createImageCapture(const titan::system::Process& process);
+using CompositorLayerPtr = std::shared_ptr<CompositorLayer>;
 
 }

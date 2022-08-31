@@ -20,6 +20,9 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/image/cpu_image.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_capture_source.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_dx11_ingest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_node.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/compositor_layer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/compositor_op.h
 )
 
 add_library(libav

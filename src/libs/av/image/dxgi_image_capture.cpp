@@ -84,7 +84,7 @@ void DxgiImageCapture::reacquireDuplicationInterface() {
     CHECK_WIN32_HRESULT_THROW(hr, "Failed to create desktop duplication object.");
 }
 
-std::optional<NativeImage> DxgiImageCapture::getCurrent() {
+NativeImagePtr DxgiImageCapture::getCurrent() {
     // Note that the check here is slightly different from the check in the constructor.
     // If the monitor was null in the constructor, we'll assume that something went wrong
     // we should abort. If a monitor is null here, we'll just carry on using the previous
@@ -104,10 +104,10 @@ std::optional<NativeImage> DxgiImageCapture::getCurrent() {
             _dxgiOutput1.reset();
             _dxgiOutput5.reset();
             _device.reset();
-            return std::nullopt;
+            return nullptr;
         }
     }
-    CHECK_NULLPTR_IF_RETURN(_dupl, std::nullopt);
+    CHECK_NULLPTR_IF_RETURN(_dupl, nullptr);
 
     HRESULT hr = !!_dupl ? _dupl->ReleaseFrame() : DXGI_ERROR_ACCESS_LOST;
     if (hr == DXGI_ERROR_ACCESS_LOST) {
@@ -116,13 +116,13 @@ std::optional<NativeImage> DxgiImageCapture::getCurrent() {
         try {
             reacquireDuplicationInterface();
         } catch (const titan::system::win32::Win32HResultException& ex) {
-            return std::nullopt;
+            return nullptr;
         }
     } else if (hr == DXGI_ERROR_INVALID_CALL) {
         // Empty case here - we don't particularly care if we already released the frame.
         // It's all the same to us.
     } else {
-        CHECK_WIN32_HRESULT_RETURN(hr, std::nullopt);
+        CHECK_WIN32_HRESULT_RETURN(hr, nullptr);
     }
 
     wil::com_ptr<IDXGIResource> desktopResource = nullptr;
@@ -137,17 +137,17 @@ std::optional<NativeImage> DxgiImageCapture::getCurrent() {
             }
         }
 
-        return std::nullopt;
+        return nullptr;
     }
 
     if (frameInfo.AccumulatedFrames == 0) {
-        return std::nullopt;
+        return nullptr;
     }
 
     wil::com_ptr<ID3D11Texture2D> tex;
     hr = desktopResource->QueryInterface(__uuidof(ID3D11Texture2D), (void**)&tex);
-    CHECK_WIN32_HRESULT_RETURN(hr, std::nullopt);
-    return NativeImage{tex, _device};
+    CHECK_WIN32_HRESULT_RETURN(hr, nullptr);
+    return std::make_shared<NativeImage>(tex, _device);
 }
 
 }

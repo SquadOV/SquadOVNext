@@ -23,7 +23,7 @@ namespace av {
 ImageCaptureSource::ImageCaptureSource(const ImageCapturePtr& capture):
     _capture(capture)
 {
-    registerOutputParameter<std::optional<NativeImage>>(kOutput);
+    registerOutputParameter<NativeImagePtr>(kOutput);
 }
 
 void ImageCaptureSource::compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) const {

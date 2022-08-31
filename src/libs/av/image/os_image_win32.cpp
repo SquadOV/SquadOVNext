@@ -53,7 +53,7 @@ ImageFormat NativeImage::format() const {
     }
 }
 
-NativeImage NativeImage::createCompatibleStagingImage() const {
+NativeImagePtr NativeImage::createCompatibleStagingImage() const {
     D3D11_TEXTURE2D_DESC newDesc = { 0 };
     newDesc.Width = width();
     newDesc.Height = height();
@@ -69,7 +69,7 @@ NativeImage NativeImage::createCompatibleStagingImage() const {
     wil::com_ptr<ID3D11Texture2D> newTexture;
     HRESULT hr = _device->device()->CreateTexture2D(&newDesc, nullptr, &newTexture);
     CHECK_WIN32_HRESULT_THROW(hr, "Failed to create compatible staging texture.");
-    return NativeImage{newTexture, _device};
+    return std::make_shared<NativeImage>(newTexture, _device);
 }
 
 void NativeImage::copyToSameDeviceLocation(NativeImage& to) const {

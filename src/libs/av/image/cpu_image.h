@@ -45,4 +45,6 @@ private:
     std::shared_ptr<OIIO::ImageBuf> _buffer;
 };
 
+using CpuImagePtr = std::shared_ptr<CpuImage>;
+
 }
