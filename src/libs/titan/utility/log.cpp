@@ -42,6 +42,10 @@ Logger* Logger::get() {
     return gLogger.get();
 }
 
+void Logger::shutdown() {
+    gLogger.reset();
+}
+
 Logger::Logger() {
     spdlog::init_thread_pool(8192, 1);
     spdlog::flush_every(std::chrono::seconds(5));

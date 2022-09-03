@@ -12,6 +12,7 @@ We will assume vcpkg is at commit `e85b5bb95a14ff7e014601e88a8dc2fea6798e33`.
 * `wil:x64-windows`
 * `boost:x64-windows` - must be v1.80+
 * `openimageio:x64-windows`
+* `directxmath:x64-windows`
 
 # Source Code
 

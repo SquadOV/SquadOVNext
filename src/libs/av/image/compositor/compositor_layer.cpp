@@ -14,27 +14,31 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#pragma once
-
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#include "av/image/compositor/compositor_layer.h"
 
 namespace av {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
+CompositorLayer::CompositorLayer(size_t numOps) {
+    _ops.resize(numOps);
+}
 
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
+void CompositorLayer::setOp(size_t idx, const CompositorOpPtr& op) {
+    _ops[idx] = op;
+}
 
-private:
-    ImageCapturePtr _capture;
+void CompositorLayer::renderTo(const NativeImagePtr& canvas, const Eigen::AlignedBox2i& bounds) const {
+    if (!_baseImage) {
+        return;
+    }
 
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+    for (const auto& op: _ops) {
+        if (!op) {
+            continue;
+        }
+
+        op->updateCanvas(bounds);
+        op->render(*canvas, *_baseImage);
+    }
+}
 
 }

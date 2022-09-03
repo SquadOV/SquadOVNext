@@ -16,25 +16,20 @@
 //
 #pragma once
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#include "titan/dll.h"
+#include "titan/utility/exception.h"
+#include <filesystem>
 
-namespace av {
+namespace titan::utility {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
+// A resource manager that will help us search through a bunch of different filesystem paths
+// to find/load the given "resource" whatever said resource may be.
+class TITANEXPORT ResourceManager {
 public:
-    enum Params {
-        kOutput = 0
-    };
-
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
+    static ResourceManager& get();
+    std::filesystem::path findResourceFromRelativePath(const std::filesystem::path& path) const;
 };
+
+CREATE_SIMPLE_EXCEPTION_CLASS(ResourceNotFoundException, "Resource not found.");
 
 }

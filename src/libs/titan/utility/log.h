@@ -44,6 +44,7 @@ using LoggerInstPtr = std::shared_ptr<spdlog::logger>;
 class TITANEXPORT Logger {
 public:
     static Logger* get();
+    static void shutdown();
 
     Logger();
     ~Logger();

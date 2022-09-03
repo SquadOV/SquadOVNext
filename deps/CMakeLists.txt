@@ -1,5 +1,6 @@
 add_subdirectory(doctest)
 
+set(BUILD_SHARED_LIBS ON)
 add_subdirectory(fmt)
 
 set(SPDLOG_BUILD_SHARED ON)

@@ -14,27 +14,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#pragma once
+#include "titan/utility/resource_manager.h"
+#include <memory>
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+namespace fs = std::filesystem;
+namespace titan::utility {
 
-namespace av {
+ResourceManager& ResourceManager::get() {
+    static auto global = std::make_unique<ResourceManager>();
+    return *global;
+}
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
-
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+std::filesystem::path ResourceManager::findResourceFromRelativePath(const fs::path& path) const {
+    auto retPath = fs::absolute(path);
+    if (!fs::exists(retPath)) {
+        throw ResourceNotFoundException{};
+    }
+    return retPath;
+}
 
 }

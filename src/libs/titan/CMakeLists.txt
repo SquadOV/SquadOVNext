@@ -16,7 +16,10 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/ntp_client.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/time.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/processing.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/resource_manager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/file_io.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/math/bounding_box.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/math/matrix.cpp
 )
 
 set(HEADERS
@@ -40,7 +43,11 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/time_forward.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utility/processing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/resource_manager.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/file_io.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/utility/stl.h
     ${CMAKE_CURRENT_SOURCE_DIR}/math/bounding_box.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/math/matrix.h
 )
 
 add_library(libtitan
@@ -75,6 +82,7 @@ if(WIN32)
         comsuppw
         d3d11
         dxgi
+        Microsoft::DirectXMath
     )
 endif()
 

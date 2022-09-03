@@ -16,25 +16,12 @@
 //
 #pragma once
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#include "titan/dll.h"
+#include <string>
+#include <filesystem>
 
-namespace av {
+namespace titan::utility {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
-
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+TITANEXPORT std::string readFileAsString(const std::filesystem::path& path);
 
 }

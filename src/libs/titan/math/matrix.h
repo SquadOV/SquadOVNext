@@ -16,25 +16,19 @@
 //
 #pragma once
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#ifdef _WIN32
+#include <directxmath.h>
+#endif
 
-namespace av {
+#include <Eigen/Core>
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
+#include "titan/dll.h"
 
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
+namespace titan::math {
 
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+#ifdef _WIN32
+TITANEXPORT DirectX::XMFLOAT4X4 matrixToDirectX(const Eigen::Matrix3f& mat);
+TITANEXPORT DirectX::XMUINT2 vectorToDirectXUnsigned(const Eigen::Vector2i& mat);
+#endif
 
 }

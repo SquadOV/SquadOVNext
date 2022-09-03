@@ -53,6 +53,7 @@ if(WIN32)
 endif()
 
 find_package(OpenImageIO CONFIG REQUIRED)
+find_package(directxmath CONFIG REQUIRED)
 
 add_subdirectory(deps)
 include(DoctestHelper)

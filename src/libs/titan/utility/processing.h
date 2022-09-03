@@ -168,7 +168,7 @@ public:
 
     // Retrieve the output value (doing computation and storing in the cache if necessary).
     template<typename T>
-    const T& getOutputValue(ParamId outputId, ProcessingCacheContainer& cache) const {
+    const T& getOutputValue(ParamId outputId, ProcessingCacheContainer& cache) {
         const auto value = cache.getValue<T>(ProcessingCacheType::Ephemeral, id(), outputId);
         if (value) {
             return *value;
@@ -237,7 +237,28 @@ private:
     std::unordered_map<ParamId, std::pair<std::weak_ptr<ProcessingNode>, ParamId >> _inputMapping;
 
     // What derived nodes should override to compute values and put values into the cache.
-    virtual void compute(ParamId outputId, ProcessingCacheContainer& cache) const = 0;
+    virtual void compute(ParamId outputId, ProcessingCacheContainer& cache) = 0;
+};
+
+template<typename T>
+class ConstantValueNode: public ProcessingNode {
+public:
+    enum Params {
+        kOutput = 0
+    };
+
+    ConstantValueNode(const T& v):
+        _v(v)
+    {
+        registerOutputParameter<T>(kOutput);
+    }
+
+private:
+    T _v;
+
+    void compute(ParamId outputId, ProcessingCacheContainer& cache) override {
+        cache.setValue(ProcessingCacheType::Ephemeral, id(), kOutput, _v);
+    }
 };
 
 // A fairly dumb container mainly meant to take ownership of the ProcessingNode objects.

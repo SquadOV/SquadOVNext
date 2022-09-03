@@ -17,7 +17,12 @@
 #pragma once
 
 #include "av/dll.h"
+#include "av/image/compositor/compositor_op.h"
+#include "av/image/os_image.h"
+#include <filesystem>
+#include <Eigen/Geometry>
 #include <memory>
+#include <vector>
 
 namespace av {
 
@@ -25,8 +30,17 @@ namespace av {
 // These operations will only be applied to the pixels of the input image in the final, composited image.
 class AVEXPORT CompositorLayer {
 public:
+    explicit CompositorLayer(size_t numOps);
+
+    void setOp(size_t idx, const CompositorOpPtr& op);
+    size_t size() const { return _ops.size(); }
+
+    void setBase(const NativeImagePtr& v) { _baseImage = v; }
+    void renderTo(const NativeImagePtr& canvas, const Eigen::AlignedBox2i& bounds) const;
 
 private:
+    std::vector<CompositorOpPtr> _ops;
+    NativeImagePtr _baseImage;
 };
 
 using CompositorLayerPtr = std::shared_ptr<CompositorLayer>;

@@ -7,7 +7,14 @@ set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/image/os_image_win32.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/image/cpu_image.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_capture_source.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_dx11_ingest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_node.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_layer_node.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_op_node.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/directx/image_dx11_ingest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/directx/compositor_dx11_node.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/compositor_layer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/directx/transform_op_dx11.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/directx/base_op_dx11.cpp
 )
 
 set(HEADERS
@@ -19,10 +26,17 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/image/os_image.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/cpu_image.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_capture_source.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/image_dx11_ingest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/directx/image_dx11_ingest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/directx/compositor_dx11_node.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_node.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_layer_node.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/processing/compositor_op_node.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/compositor_layer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/compositor_op.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/transform_op.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/transform_op_node.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/directx/transform_op_dx11.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/image/compositor/directx/base_op_dx11.h
 )
 
 add_library(libav
@@ -44,6 +58,15 @@ target_include_directories(libav
 target_link_libraries(libav
     PUBLIC
     libtitan
-    WIL::WIL
     OpenImageIO::OpenImageIO
+    Eigen3::Eigen
 )
+
+if(WIN32)
+    target_link_libraries(libav
+        PUBLIC
+        WIL::WIL
+        Microsoft::DirectXMath
+        d3dcompiler
+    )
+endif()

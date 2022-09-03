@@ -18,10 +18,10 @@
 #ifdef _WIN32
 
 #include "av/dll.h"
-#include "titan/utility/processing.h"
-#include "titan/system/win32/directx/device.h"
+#include <titan/utility/processing.h>
+#include <titan/system/win32/directx/device.h>
 
-namespace av {
+namespace av::directx {
 
 // This ingest node generally needs to be created and placed right after the image capture source.
 // This is because the image capture source could be on a different device/context and we want to
@@ -40,7 +40,7 @@ public:
 private:
     titan::system::win32::D3d11SharedDevicePtr _device;
 
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) const override;
+    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
 };
 
 }

@@ -14,10 +14,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+
+#ifdef _WIN32
+// Necessary to avoid a compiler warning
+#include <sdkddkver.h>
+#endif
+
+// Life will be easiest keeping this the first include aside from SDKDDKVER
+#include <boost/asio.hpp>
+
 #include "titan/utility/ntp_client.h"
 #include "titan/utility/log.h"
 
-#include <boost/asio.hpp>
+
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/endian/buffers.hpp>
 #include <type_traits>

@@ -17,13 +17,13 @@
 #ifdef _WIN32
 #include <Windows.h>
 #include <d3d11.h>
-#include "av/image/processing/image_dx11_ingest.h"
+#include "av/image/processing/directx/image_dx11_ingest.h"
 #include "av/image/os_image.h"
 #include "av/image/cpu_image.h"
-#include "titan/system/win32/exceptions.h"
+#include <titan/system/win32/exceptions.h>
 
 namespace tu = titan::utility;
-namespace av {
+namespace av::directx {
 
 ImageDx11IngestNode::ImageDx11IngestNode(const titan::system::win32::D3d11SharedDevicePtr& device):
     _device(device)
@@ -32,7 +32,7 @@ ImageDx11IngestNode::ImageDx11IngestNode(const titan::system::win32::D3d11Shared
     registerOutputParameter<NativeImagePtr>(kOutput);
 }
 
-void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheContainer& cache) const {
+void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheContainer& cache) {
     const auto& image = getInputValue<NativeImagePtr>(kInput, cache);
     if (!image) {
         cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, std::nullopt);
@@ -108,7 +108,7 @@ void ImageDx11IngestNode::compute(tu::ParamId outputId, tu::ProcessingCacheConta
         throw tu::UnsupportedException{};
     }
 
-    cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, std::make_shared<NativeImage>(*ingestedImage.get()));
+    cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, ingestedImage.get());
 }
 
 }

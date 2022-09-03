@@ -15,26 +15,34 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 #pragma once
+#ifdef _WIN32
 
 #include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#include "av/image/processing/compositor_node.h"
+#include <titan/system/win32/directx/device.h>
 
-namespace av {
+namespace av::directx {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
+// This ingest node generally needs to be created and placed right after the image capture source.
+// This is because the image capture source could be on a different device/context and we want to
+// bring it into some shared device/context that'll be used for the rest of the pipeline.
+class AVEXPORT CompositorDx11Node : public av::CompositorNode {
 public:
     enum Params {
-        kOutput = 0
+        kInput = 0,
+        kOutput = 1,
+        kCache = 2,
+        kStagingGpu = 3,
+        kStagingCpu = 4
     };
 
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
+    CompositorDx11Node(const titan::system::win32::D3d11SharedDevicePtr& device, size_t numLayers, size_t width, size_t height);
 private:
-    ImageCapturePtr _capture;
+    titan::system::win32::D3d11SharedDevicePtr _device;
 
     void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
 };
 
 }
+
+#endif

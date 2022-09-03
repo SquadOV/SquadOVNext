@@ -17,22 +17,23 @@
 #pragma once
 
 #include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#include <titan/utility/processing.h>
 
 namespace av {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
+// The compositor layer will output into a compositor and will have as input
+// some input image along with a number of compositor operations.
+class AVEXPORT CompositorLayerNode: public titan::utility::ProcessingNode {
 public:
     enum Params {
-        kOutput = 0
+        kOutput = 0,
+        kInputImage = 1,
+        kCacheLayer = 2,
+        kOpStart = 3
     };
-
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
+    explicit CompositorLayerNode(size_t numOps);
 private:
-    ImageCapturePtr _capture;
+    size_t _numOps = 0;
 
     void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
 };

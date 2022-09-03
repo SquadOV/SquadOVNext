@@ -17,14 +17,18 @@
 #pragma once
 
 #include "av/dll.h"
+#include "av/image/os_image.h"
+#include <Eigen/Geometry>
 #include <memory>
 
 namespace av {
 
-// A compositor operation modifies the pixels of the input image of its compositor layer.
 class AVEXPORT CompositorOp {
 public:
-
+    virtual ~CompositorOp() {}
+    virtual void finalize() = 0;
+    virtual void render(av::NativeImage& output, const av::NativeImage& input) = 0;
+    virtual void updateCanvas(const Eigen::AlignedBox2i& box) = 0;
 private:
 };
 

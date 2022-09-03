@@ -14,27 +14,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#pragma once
+#include "titan/utility/file_io.h"
+#include <fstream>
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+namespace titan::utility {
 
-namespace av {
+std::string readFileAsString(const std::filesystem::path& path) {
+    std::ifstream inp(path);
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
-
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+    std::ostringstream ret;
+    ret << inp.rdbuf();
+    
+    return ret.str();;
+}
 
 }

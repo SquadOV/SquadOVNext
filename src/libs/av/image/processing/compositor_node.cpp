@@ -14,27 +14,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#pragma once
+#ifdef _WIN32
+#include <Windows.h>
+#include <d3d11.h>
+#endif
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
+#include "av/image/processing/compositor_node.h"
+#include "av/image/os_image.h"
+#include "av/image/compositor/compositor_layer.h"
 
+namespace tu = titan::utility;
 namespace av {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
-
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
-
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+CompositorNode::CompositorNode(size_t numLayers, size_t width, size_t height):
+    _numLayers(numLayers),
+    _width(width),
+    _height(height)
+{
+    registerOutputParameter<NativeImagePtr>(kOutput);
+    for (size_t i = 0; i < _numLayers; ++i) {
+        registerInputParameter<CompositorLayerPtr>(kLayerStart + i);
+    }
+}
 
 }

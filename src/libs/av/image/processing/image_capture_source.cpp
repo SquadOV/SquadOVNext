@@ -26,7 +26,7 @@ ImageCaptureSource::ImageCaptureSource(const ImageCapturePtr& capture):
     registerOutputParameter<NativeImagePtr>(kOutput);
 }
 
-void ImageCaptureSource::compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) const {
+void ImageCaptureSource::compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) {
     const auto value = _capture->getCurrent();
     cache.setValue(titan::utility::ProcessingCacheType::Ephemeral, id(), outputId, value);
 }

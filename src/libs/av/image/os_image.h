@@ -50,6 +50,7 @@ public:
 
 #ifdef _WIN32
     DXGI_FORMAT nativeFormat() const { return _desc.Format; };
+    ID3D11Texture2D* nativeHandle() const { return _native.get(); }
 #endif
 
     // Create an image in a place that's accessible by the CPU that is compatible with this image.

@@ -14,27 +14,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-#pragma once
+#include "av/image/processing/compositor_op_node.h"
 
-#include "av/dll.h"
-#include "av/image/image_capture.h"
-#include "titan/utility/processing.h"
-
+namespace tu = titan::utility;
 namespace av {
 
-// A processing node that wraps around the behavior of our ImageCapture objects.
-class AVEXPORT ImageCaptureSource: public titan::utility::ProcessingNode {
-public:
-    enum Params {
-        kOutput = 0
-    };
+CompositorOpNode::CompositorOpNode(const CompositorOpPtr& op):
+    _op(op)
+{
+    registerOutputParameter<CompositorOpPtr>(kOutput);
+    _op->finalize();
+}
 
-    explicit ImageCaptureSource(const ImageCapturePtr& capture);
+void CompositorOpNode::compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) {
+    // Derived nodes should figure out how to pull in parameters themselves.
+    updateOpNodeParams(cache);
 
-private:
-    ImageCapturePtr _capture;
-
-    void compute(titan::utility::ParamId outputId, titan::utility::ProcessingCacheContainer& cache) override;
-};
+    cache.setValue(tu::ProcessingCacheType::Ephemeral, id(), kOutput, _op);
+}
 
 }
