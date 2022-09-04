@@ -154,18 +154,16 @@ We therefore have two options:
 1. Implement an offline-first, P2P solution
 2. Rely on external programs (e.g. Dropbox) to handle sync for us
 
-Unfortunately, using external programs won't allow us to perform selective sharing.
-Furthermore, both paths lead to sub-optimal user-setup experiences if we have the constraint of deploying minimal server resources.
-A reasonable compromise is to use the well-established [ZeroTier](https://www.zerotier.com/) to build our sharing functionality on.
-Users will have to first get an API key that we can use to manage networks and the like for them, but this should be a small price to pay at setup.
+Unfortunately, using external programs won't allow us to perform selective sharing so we need to implement a P2P solution.
 
-### In-App Sharing
+### Peer Discovery
 
-SquadOV will assume that each local player is authoritative over all the VODs/matches/annotations they create.
-Thus, for sharing, all that needs to be done is to share the appropriate pieces of the VOD and match database from one machine to another.
-Hypothetically, the Bittorrent protocol (via [libtorrent](https://www.libtorrent.org/)) can be used to do this sharing.
-To keep things in sync, each client must keep track the last time they fully-synced with another client and periodicially refresh this sync (as well on self startup and remote client startup in the same network).
-To know what needs to be synced, each client must keep a transaction log that indicates all the operations it performed and use the timestamped transaction log to determine what new information needs to be sent over the air to remote clients.
+We can draw inspiration from programs like [Retroshare](https://retroshare.cc/).
+Retroshare uses a [DHT](https://en.wikipedia.org/wiki/Distributed_hash_table) to discover peers.
+Users have to share a "certificate" file with eachother where the peer would use that certificate to lookup the value in the DHT to get the proper network address to communicate with.
+Then, a direct UDP connection is established between every pair of peers and getting through NAT via UPnP or NAT-PMP.
+It'd be fairly simple to parallel this structure using [OpenDHT](https://github.com/savoirfairelinux/opendht).
+We can also establish "squads" as paralleling BitTorrent swarms and have users connect to peers in a group fashion.
 
 ### External Sharing
 
