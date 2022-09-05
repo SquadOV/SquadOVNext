@@ -1,19 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.IO;
+using ReactiveUI;
 
 namespace SquadOV.Models
 {
-    internal abstract class BaseConfigModel: INotifyPropertyChanged
+    internal abstract class BaseConfigModel: ReactiveObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         // This function allows us to add new config parameters and allow users with existing configs
         // to migrate over by generating the default values properly.
         public void FillInMissing(BaseConfigModel from)
@@ -49,22 +43,14 @@ namespace SquadOV.Models
         public string? DatabasePath
         {
             get => _databasePath;
-            set
-            {
-                _databasePath = value;
-                NotifyPropertyChanged("DatabasePath");
-            }
+            set => this.RaiseAndSetIfChanged(ref _databasePath, value);
         }
 
         private string? _culture;
         public string? Culture
         {
             get => _culture;
-            set
-            {
-                _culture = value;
-                NotifyPropertyChanged("Culture");
-            }
+            set => this.RaiseAndSetIfChanged(ref _culture, value);
         }
 
         public static CoreConfigModel CreateDefault(string location)
@@ -91,23 +77,7 @@ namespace SquadOV.Models
         public CoreConfigModel? Core
         {
             get => _core;
-            private set
-            {
-                if (_core != null)
-                {
-                    _core.PropertyChanged -= CoreChanged;
-                }
-
-                _core = value;
-
-                if (_core != null)
-                {
-                    _core.PropertyChanged += CoreChanged;
-                }
-
-                void CoreChanged(object? sender, PropertyChangedEventArgs args) => NotifyPropertyChanged("Core");
-                NotifyPropertyChanged("Core");
-            }
+            private set => this.RaiseAndSetIfChanged(ref _core, value);
         }
     }
 }

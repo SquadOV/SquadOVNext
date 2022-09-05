@@ -8,8 +8,7 @@ namespace SquadOV.Views
     {
         public SettingsView()
         {
-            this.WhenActivated(disposables => { });
-            AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
         }
     }
 }

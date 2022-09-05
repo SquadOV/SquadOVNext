@@ -16,6 +16,11 @@
 //
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using Avalonia.Media;
+using ReactiveUI;
+using System;
+using System.Reactive.Linq;
+using System.Reactive.Disposables;
 
 namespace SquadOV.Views
 {
@@ -23,7 +28,20 @@ namespace SquadOV.Views
     {
         public MainWindow()
         {
-            AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
+
+            this.WhenActivated(dispoables =>
+            {
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/settings") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.SettingsButton.Background)
+                    .DisposeWith(dispoables);
+            });
         }
     }
 }

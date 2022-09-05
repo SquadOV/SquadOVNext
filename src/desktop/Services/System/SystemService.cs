@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Splat;
+using ReactiveUI;
 
 namespace SquadOV.Services.System
 {
@@ -17,11 +18,13 @@ namespace SquadOV.Services.System
         public SystemService()
         {
             _config = Locator.Current.GetService<Config.IConfigService>();
-            _config.Config.PropertyChanged += OnConfigChange;
-            OnConfigChange(null, new PropertyChangedEventArgs(null));
+            this.WhenAnyValue(x => x._config.Config.Core.Culture).Subscribe(_ => OnCultureChange());
+
+            // Everything needs to get called once to load up the config.
+            OnCultureChange();
         }
 
-        private void OnConfigChange(object? sender, PropertyChangedEventArgs args)
+        private void OnCultureChange()
         {
             // Culture setting - handle user's choice of localization.
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(_config.Config.Core!.Culture!);
