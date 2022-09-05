@@ -17,6 +17,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Splat;
 
 namespace SquadOV
 {
@@ -29,16 +30,20 @@ namespace SquadOV
 
         public override void OnFrameworkInitializationCompleted()
         {
+            // The config service needs to be loaded first since everything will rely on the config somewhat.
+            Locator.CurrentMutable.RegisterConstant(new Services.Config.ConfigService(), typeof(Services.Config.IConfigService));
+            // Dealing with foundational stuff related to how the app runs (e.g. "system settings").
+            Locator.CurrentMutable.RegisterConstant(new Services.System.SystemService(), typeof(Services.System.ISystemService));
+            // The engine service is primarily reponsible for most of the behind the scenes work the app will do - recording, etc.
+            Locator.CurrentMutable.RegisterConstant(new Services.Engine.EngineService(), typeof(Services.Engine.IEngineService));
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var mainWindow = new Views.MainWindow();
-
-                var setupWindow = new Views.SetupWindow()
+                var mainWindow = new Views.MainWindow()
                 {
-                    ViewModel = new ViewModels.SetupWindowViewModel(),
+                    DataContext = new ViewModels.MainWindowViewModel(),
                 };
 
-                // Create a splash screen that'll handle initialization and loading resources and what not before the user gets to interacting with the app.
                 var splashScreen = new Views.SplashScreen()
                 {
                     ViewModel = new ViewModels.SplashScreenViewModel(),
@@ -48,8 +53,19 @@ namespace SquadOV
                 // Only after all the above is done do we want to actually want to show the main window and proceed with normal operating behavior.
                 splashScreen.ViewModel.LoadingFinished += delegate (bool needsSetup)
                 {
-                    if (needsSetup)
+                    if (needsSetup || Locator.Current.GetService<Services.Config.IConfigService>().IsNewlyCreated)
                     {
+                        var setupWindow = new Views.SetupWindow()
+                        {
+                            ViewModel = new ViewModels.SetupWindowViewModel(),
+                        };
+
+                        setupWindow.ViewModel.SetupFinished += delegate ()
+                        {
+                            desktop.MainWindow = mainWindow;
+                            mainWindow.Show();
+                            setupWindow.Close();
+                        };
                         desktop.MainWindow = setupWindow;
                     }
                     else
@@ -61,12 +77,6 @@ namespace SquadOV
                     splashScreen.Close();
                 };
 
-                setupWindow.ViewModel.SetupFinished += delegate ()
-                {
-                    desktop.MainWindow = mainWindow;
-                    mainWindow.Show();
-                    setupWindow.Close();
-                };
 
                 desktop.MainWindow = splashScreen;
             }

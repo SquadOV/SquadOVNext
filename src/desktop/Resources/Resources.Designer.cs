@@ -61,6 +61,24 @@ namespace SquadOV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string NavHome {
+            get {
+                return ResourceManager.GetString("NavHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string NavSettings {
+            get {
+                return ResourceManager.GetString("NavSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string SplashLoading {

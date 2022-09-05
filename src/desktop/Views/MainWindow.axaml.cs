@@ -14,15 +14,16 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
 
 namespace SquadOV.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : ReactiveWindow<ViewModels.MainWindowViewModel>
     {
         public MainWindow()
         {
-            InitializeComponent();
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }
