@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="620" d:DesignHeight="300"
+        Width="620" Height="300"
+        x:Class="SquadOV.Views.SplashScreen"
+        Title="SplashScreen"
+        WindowStartupLocation="CenterScreen" 
+        ExtendClientAreaToDecorationsHint="True"
+        HasSystemDecorations="False">
+  <Canvas Width="620" Height="300">
+    <TextBlock Canvas.Bottom="110" Canvas.Left="10" Text="{Binding LoadingMessage}"/>
+    <ProgressBar Canvas.Bottom="0" Canvas.Left="0" Width="620" IsIndeterminate="True" />
+    
+    <Canvas.Background>
+      <ImageBrush Source="/Assets/splash.png"/>
+    </Canvas.Background>
+  </Canvas>
+</Window>

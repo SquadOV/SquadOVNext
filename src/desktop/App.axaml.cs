@@ -18,7 +18,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace desktop
+namespace SquadOV
 {
     public partial class App : Application
     {
@@ -31,7 +31,44 @@ namespace desktop
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow();
+                var mainWindow = new Views.MainWindow();
+
+                var setupWindow = new Views.SetupWindow()
+                {
+                    ViewModel = new ViewModels.SetupWindowViewModel(),
+                };
+
+                // Create a splash screen that'll handle initialization and loading resources and what not before the user gets to interacting with the app.
+                var splashScreen = new Views.SplashScreen()
+                {
+                    ViewModel = new ViewModels.SplashScreenViewModel(),
+                };
+
+                // After the splash screen has loaded stuff that we consider necessary to run the app - check if there's any setup items that need to be done for the user.
+                // Only after all the above is done do we want to actually want to show the main window and proceed with normal operating behavior.
+                splashScreen.ViewModel.LoadingFinished += delegate (bool needsSetup)
+                {
+                    if (needsSetup)
+                    {
+                        desktop.MainWindow = setupWindow;
+                    }
+                    else
+                    {
+                        desktop.MainWindow = mainWindow;
+                    }
+
+                    desktop.MainWindow.Show();
+                    splashScreen.Close();
+                };
+
+                setupWindow.ViewModel.SetupFinished += delegate ()
+                {
+                    desktop.MainWindow = mainWindow;
+                    mainWindow.Show();
+                    setupWindow.Close();
+                };
+
+                desktop.MainWindow = splashScreen;
             }
 
             base.OnFrameworkInitializationCompleted();

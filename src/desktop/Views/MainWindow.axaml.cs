@@ -16,7 +16,7 @@
 //
 using Avalonia.Controls;
 
-namespace desktop
+namespace SquadOV.Views
 {
     public partial class MainWindow : Window
     {

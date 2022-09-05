@@ -15,9 +15,10 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 using Avalonia;
+using Avalonia.ReactiveUI;
 using System;
 
-namespace desktop
+namespace SquadOV
 {
     class Program
     {
@@ -32,6 +33,7 @@ namespace desktop
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseReactiveUI()
                 .LogToTrace();
     }
 }

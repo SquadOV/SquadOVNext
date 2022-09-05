@@ -1,7 +1,14 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="desktop.App">
-    <Application.Styles>
-        <FluentTheme Mode="Light"/>
-    </Application.Styles>
+             x:Class="SquadOV.App">
+  <Application.Styles>
+    <FluentTheme Mode="Dark"/>
+  </Application.Styles>
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="ControlContentThemeFontSize">12</x:Double>
+    </ResourceDictionary>
+  </Application.Resources>
+  
 </Application>
