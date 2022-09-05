@@ -123,6 +123,24 @@
   <data name="NavSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SettingsApp" xml:space="preserve">
+    <value>App Settings</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Check for Updates</value>
+  </data>
+  <data name="SettingsOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="SettingsStorage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="SettingsSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Loading...</value>
   </data>

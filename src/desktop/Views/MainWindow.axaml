@@ -5,7 +5,7 @@
         xmlns:rxui="clr-namespace:Avalonia.ReactiveUI;assembly=Avalonia.ReactiveUI"
         xmlns:sqvm="using:SquadOV.ViewModels"
         xmlns:p="using:SquadOV.Resources"
-        xmlns:sq="using:SquadOV"
+        xmlns:sql="using:SquadOV.Locators"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="SquadOV.Views.MainWindow"
         WindowStartupLocation="CenterScreen" 
@@ -49,11 +49,6 @@
             <ToolTip.Tip>
               <TextBlock Text="{x:Static p:Resources.NavHome}"></TextBlock>
             </ToolTip.Tip>
-            <Button.Styles>
-              <Style Selector="Button">
-                <Setter Property="Background" Value="Transparent" />
-              </Style>
-            </Button.Styles>
             <Image
               Source="/Assets/squadov.png"
               Width="32"
@@ -93,14 +88,14 @@
         </DockPanel>
 
         <DockPanel>
-          <Panel
-            IsHitTestVisible="False"
+          <StackPanel
+            Orientation="Horizontal"
             DockPanel.Dock="Top"
             Height="32">
-            <Panel.Background>
+            <StackPanel.Background>
               <SolidColorBrush Color="#202020"></SolidColorBrush>
-            </Panel.Background>  
-          </Panel>
+            </StackPanel.Background>
+          </StackPanel>
 
           <rxui:RoutedViewHost Router="{Binding Router}" PageTransition="{x:Null}">
             <rxui:RoutedViewHost.DefaultContent>
@@ -109,7 +104,7 @@
                          VerticalAlignment="Center" />
             </rxui:RoutedViewHost.DefaultContent>
             <rxui:RoutedViewHost.ViewLocator>
-              <sq:AppViewLocator />
+              <sql:AppViewLocator />
             </rxui:RoutedViewHost.ViewLocator>
           </rxui:RoutedViewHost>
         </DockPanel>

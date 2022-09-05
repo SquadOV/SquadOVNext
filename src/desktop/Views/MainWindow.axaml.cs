@@ -30,7 +30,7 @@ namespace SquadOV.Views
         {
             InitializeComponent();
 
-            this.WhenActivated(dispoables =>
+            this.WhenActivated(disposables =>
             {
                 this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
                     .Select(x =>
@@ -40,7 +40,7 @@ namespace SquadOV.Views
                             new SolidColorBrush();
                     })
                     .BindTo(this, x => x.SettingsButton.Background)
-                    .DisposeWith(dispoables);
+                    .DisposeWith(disposables);
             });
         }
     }

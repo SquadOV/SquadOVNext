@@ -4,7 +4,10 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reactive.Linq;
+using System.Reactive.Disposables;
 using ReactiveUI;
+using Splat;
 
 namespace SquadOV.ViewModels
 {
@@ -17,11 +20,9 @@ namespace SquadOV.ViewModels
         public void GoHome() => Router.Navigate.Execute(new HomeViewModel(this));
         public void GoSettings() => Router.Navigate.Execute(new SettingsViewModel(this));
 
-        public ReactiveCommand<Unit, Unit> GoBack => Router.NavigateBack;
-
         public MainWindowViewModel()
         {
-            Router.Navigate.Execute(new HomeViewModel(this));
+            GoHome();
         }
     }
 }

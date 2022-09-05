@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System;
 
-namespace SquadOV
+namespace SquadOV.Locators
 {
     public class AppViewLocator: IViewLocator
     {

@@ -123,6 +123,24 @@
   <data name="NavSettings" xml:space="preserve">
     <value>Réglages</value>
   </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>À propos de</value>
+  </data>
+  <data name="SettingsApp" xml:space="preserve">
+    <value>Paramètres de l'application</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Vérifier les mises à jour</value>
+  </data>
+  <data name="SettingsOther" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="SettingsStorage" xml:space="preserve">
+    <value>Stockage</value>
+  </data>
+  <data name="SettingsSystem" xml:space="preserve">
+    <value>Système</value>
+  </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Chargement...</value>
   </data>
