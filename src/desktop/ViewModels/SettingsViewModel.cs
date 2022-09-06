@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using System.Reactive;
+using System.Reactive.Linq;
+using ReactiveUI;
 using Splat;
 using SquadOV.ViewModels.Settings;
 using System.Reactive.Disposables;
@@ -16,6 +18,13 @@ namespace SquadOV.ViewModels
         {
             HostScreen = screen;
             GoToStorageSettings();
+
+            ShowAboutInteraction = new Interaction<Dialogs.AboutViewModel, Unit>();
+            ShowAboutCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var store = new Dialogs.AboutViewModel();
+                await ShowAboutInteraction.Handle(store);
+            });
         }
 
         public void GoToStorageSettings() => Router.Navigate.Execute(new StorageSettingsViewModel(this));
@@ -26,9 +35,7 @@ namespace SquadOV.ViewModels
 
         }
 
-        public void ShowAbout()
-        {
-
-        }
+        public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
+        public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
     }
 }

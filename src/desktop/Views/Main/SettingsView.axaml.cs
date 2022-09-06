@@ -1,9 +1,12 @@
-using Avalonia.Markup.Xaml;
+using System.Threading.Tasks;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using Avalonia.Media;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace SquadOV.Views.Main
 {
@@ -34,7 +37,19 @@ namespace SquadOV.Views.Main
                     })
                     .BindTo(this, x => x.SystemSettingsButton.Background)
                     .DisposeWith(disposables);
+
+                ViewModel!.ShowAboutInteraction.RegisterHandler(ShowAboutDialog).DisposeWith(disposables);
             });
+        }
+
+        private async Task ShowAboutDialog(InteractionContext<ViewModels.Dialogs.AboutViewModel, Unit> interaction)
+        {
+            var dialog = new Dialogs.AboutDialog()
+            {
+                DataContext = interaction.Input,
+            };
+            await dialog.ShowDialog(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            interaction.SetOutput(new Unit());
         }
     }
 }

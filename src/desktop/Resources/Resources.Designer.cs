@@ -61,6 +61,24 @@ namespace SquadOV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SquadOV is open-source software to record, watch, and share gaming VODs..
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string DialogOk {
+            get {
+                return ResourceManager.GetString("DialogOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string NavHome {

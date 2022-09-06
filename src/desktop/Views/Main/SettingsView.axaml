@@ -52,7 +52,7 @@
         <Button Command="{Binding CheckForUpdates}">
           <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsCheckForUpdates}"></TextBlock>
         </Button>
-        <Button Command="{Binding ShowAbout}">
+        <Button Command="{Binding ShowAboutCommand}">
           <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsAbout}"></TextBlock>
         </Button>
       </StackPanel>

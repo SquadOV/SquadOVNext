@@ -2,8 +2,100 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:sys="using:System"
+        xmlns:p="using:SquadOV.Resources"
+        xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="650"
+        Width="500" Height="650"
         x:Class="SquadOV.Views.Dialogs.AboutDialog"
-        Title="AboutDialog">
-  Welcome to Avalonia!
+        Title="ConfirmQuitDialog"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="AcrylicBlur"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        HasSystemDecorations="False">
+  <Window.Background>
+    <SolidColorBrush Color="#202020"></SolidColorBrush>
+  </Window.Background>
+
+  <Window.Styles>
+    <Style Selector="TextBlock.header">
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#BBFFFFFF"/>
+      <Setter Property="Padding" Value="3"/>
+    </Style>
+
+    <Style Selector="TabControl">
+      <Setter Property="Background" Value="#101010"/>
+    </Style>
+
+    <Style Selector="TabItem">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#BBFFFFFF"/>
+      <Setter Property="Background" Value="#202020"/>
+      <Setter Property="Padding" Value="3"/>
+    </Style>
+  </Window.Styles>
+
+  <Border
+    BorderBrush="Black"
+    BorderThickness="2">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+      <Image
+        Source="/Assets/squadov_text.png"
+        Height="100"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+      />
+      <TextBlock
+        Classes="header"
+        Padding="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="{Binding SquadOvVersion}">
+      </TextBlock>
+
+      <TextBlock
+        Padding="0,0,0,20"
+        TextWrapping="Wrap"
+        Text="{x:Static p:Resources.About}">
+      </TextBlock>
+
+      <TabControl>
+        <TabItem>
+          <TabItem.Header>
+            <TextBlock>Credits</TextBlock>
+          </TabItem.Header>
+
+          <md:MarkdownScrollViewer Width="400" Height="300" VerticalAlignment="Stretch" Source="avares://SquadOv/Assets/Text/Credits.md"/>
+        </TabItem>
+
+        <TabItem>
+          <TabItem.Header>
+            License
+          </TabItem.Header>
+
+          <md:MarkdownScrollViewer Width="400" Height="300" VerticalAlignment="Stretch" Source="avares://SquadOv/Assets/Text/License.md"/>
+        </TabItem>
+      </TabControl>
+
+      <Button
+        Width="80"
+        Margin="0,16,0,16"
+        HorizontalAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Command="{Binding CloseCommand}"
+        Content="{x:Static p:Resources.DialogOk}">
+        <Button.Styles>
+          <Style Selector="Button">
+            <Setter Property="Background" Value="#505050" />
+          </Style>
+        </Button.Styles>
+      </Button>
+    </StackPanel>
+  </Border>
+
 </Window>

@@ -17,10 +17,6 @@
     <SolidColorBrush Color="#202020"></SolidColorBrush>
   </Window.Background>
 
-  <Window.Styles>
-    
-  </Window.Styles>
-
   <Border
     BorderBrush="Black"
     BorderThickness="2">

@@ -11,6 +11,7 @@
         WindowStartupLocation="CenterScreen" 
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
+        Icon="/Assets/squadov.ico"
         ExtendClientAreaToDecorationsHint="True">
 
     <Design.DataContext>
