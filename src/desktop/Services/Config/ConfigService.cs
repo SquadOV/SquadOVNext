@@ -8,7 +8,7 @@ namespace SquadOV.Services.Config
     // Provides an easy way to get/modify any USER-FACING setting.
     internal class ConfigService: IConfigService
     {
-        private Models.ConfigModel _model;
+        private Models.Settings.ConfigModel _model;
 
         public ConfigService()
         {
@@ -18,7 +18,7 @@ namespace SquadOV.Services.Config
                 Directory.CreateDirectory(UserFolder);
             }
 
-            var defaultModel = Models.ConfigModel.CreateDefault(UserFolder);
+            var defaultModel = Models.Settings.ConfigModel.CreateDefault(UserFolder);
             _isNewlyCreated = !File.Exists(ConfigFile);
             if (IsNewlyCreated)
             {
@@ -26,11 +26,12 @@ namespace SquadOV.Services.Config
             }
             else
             {
-                _model = Toml.ToModel<Models.ConfigModel>(File.ReadAllText(ConfigFile));
+                _model = Toml.ToModel<Models.Settings.ConfigModel>(File.ReadAllText(ConfigFile));
             }
 
             _model.FillInMissing(defaultModel);
             _model.PropertyChanged += OnModelChange;
+            _model.Core!.PropertyChanged += OnModelChange;
             OnModelChange(null, new PropertyChangedEventArgs(""));
         }
 
@@ -50,7 +51,7 @@ namespace SquadOV.Services.Config
             get => Path.Combine(UserFolder, "config.toml");
         }
 
-        public Models.ConfigModel Config
+        public Models.Settings.ConfigModel Config
         {
             get => _model;
         }

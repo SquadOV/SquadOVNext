@@ -39,6 +39,8 @@ namespace SquadOV
             Locator.CurrentMutable.RegisterConstant(new Services.System.SystemService(), typeof(Services.System.ISystemService));
             // The engine service is primarily reponsible for most of the behind the scenes work the app will do - recording, etc.
             Locator.CurrentMutable.RegisterConstant(new Services.Engine.EngineService(), typeof(Services.Engine.IEngineService));
+            // Reactive localization so we can change this at runtime without usings restarting.
+            Locator.CurrentMutable.RegisterConstant(new Models.Localization.Localization());
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

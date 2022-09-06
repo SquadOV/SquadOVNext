@@ -61,7 +61,7 @@
       <TextBlock
         Padding="0,0,0,20"
         TextWrapping="Wrap"
-        Text="{x:Static p:Resources.About}">
+        Text="{Binding Loc.About}">
       </TextBlock>
 
       <TabControl>
@@ -88,7 +88,7 @@
         HorizontalAlignment="Center"
         HorizontalContentAlignment="Center"
         Command="{Binding CloseCommand}"
-        Content="{x:Static p:Resources.DialogOk}">
+        Content="{Binding Loc.DialogOk}">
         <Button.Styles>
           <Style Selector="Button">
             <Setter Property="Background" Value="#505050" />

@@ -6,7 +6,7 @@ namespace SquadOV.ViewModels.Settings
     {
         public IScreen HostScreen { get; }
         public string UrlPathSegment { get; } = "/system";
-        public SystemSettingsViewModel(SettingsViewModel parent)
+        public SystemSettingsViewModel(IScreen parent)
         {
             HostScreen = parent;
         }

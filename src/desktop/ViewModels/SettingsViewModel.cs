@@ -9,6 +9,7 @@ namespace SquadOV.ViewModels
 {
     public class SettingsViewModel : ReactiveObject, IRoutableViewModel, IScreen
     {
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
 
         public RoutingState Router { get; } = new RoutingState();
@@ -36,6 +37,7 @@ namespace SquadOV.ViewModels
 
         public void GoToStorageSettings() => Router.Navigate.Execute(new StorageSettingsViewModel(this));
         public void GoToSystemSettings() => Router.Navigate.Execute(new SystemSettingsViewModel(this));
+        public void GoToLanguageSettings() => Router.Navigate.Execute(new LanguageSettingsViewModel(this));
 
         public void CheckForUpdates()
         {

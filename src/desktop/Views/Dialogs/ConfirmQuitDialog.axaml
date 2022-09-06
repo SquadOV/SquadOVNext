@@ -26,13 +26,13 @@
         TextAlignment="Center"
         HorizontalAlignment="Center"
         TextWrapping="Wrap"
-        Text="{x:Static p:Resources.QuitText}">
+        Text="{Binding Loc.QuitText}">
       </TextBlock>
 
       <StackPanel
         HorizontalAlignment="Center"
         Orientation="Horizontal">
-        <Button Command="{Binding ConfirmCommand}" Content="{x:Static p:Resources.QuitConfirm}">
+        <Button Command="{Binding ConfirmCommand}" Content="{Binding Loc.QuitConfirm}">
           <Button.CommandParameter>
             <sys:Boolean>True</sys:Boolean>
           </Button.CommandParameter>
@@ -43,7 +43,7 @@
             </Style>
           </Button.Styles>
         </Button>
-        <Button Command="{Binding ConfirmCommand}" Content="{x:Static p:Resources.DialogCancel}">
+        <Button Command="{Binding ConfirmCommand}" Content="{Binding Loc.DialogCancel}">
           <Button.CommandParameter>
             <sys:Boolean>False</sys:Boolean>
           </Button.CommandParameter>

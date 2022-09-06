@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="using:SquadOV.Resources"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Name="View" 
+             x:Class="SquadOV.Views.Settings.LanguageSettingsView">
+  <StackPanel Margin="16">
+    <TextBlock Classes="h6" Text="{Binding Loc.SettingsLanguage}"></TextBlock>
+    <TextBlock Classes="subheader" Text="{Binding Loc.LanguageSelect}"></TextBlock>
+    <ScrollViewer>
+      <ItemsControl Items="{Binding LanguageChoices}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Panel Margin="0,16,16,16">
+              <Border BorderBrush="White" BorderThickness="2">
+                <Button Width="400" Height="48" Command="{Binding ElementName=View, Path=DataContext.ChangeCulture}" CommandParameter="{Binding Culture}">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" IsChecked="{Binding IsActive}" IsHitTestVisible="False"></RadioButton>
+                    <TextBlock Margin="16,0,0,0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Native}"></TextBlock>
+                    <TextBlock Margin="0,0,16,0" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Localized}"></TextBlock>
+                    <Image Grid.Column="4" VerticalAlignment="Center" Source="{Binding IconBitmap}" Height="24"></Image>
+                  </Grid>
+                </Button>
+              </Border>
+            </Panel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </StackPanel>
+</UserControl>

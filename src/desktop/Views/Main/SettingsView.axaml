@@ -5,9 +5,9 @@
              xmlns:rxui="clr-namespace:Avalonia.ReactiveUI;assembly=Avalonia.ReactiveUI"
              xmlns:sql="using:SquadOV.Locators"
              xmlns:p="using:SquadOV.Resources"
+             xmlns:sqvm="using:SquadOV.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SquadOV.Views.Main.SettingsView">
-
   <DockPanel>
     <ScrollViewer
       DockPanel.Dock="Left"
@@ -36,24 +36,29 @@
         </Style>
       </ScrollViewer.Styles>
       <StackPanel Orientation="Vertical" Margin="10">
-        <TextBlock Classes="header" Text="{x:Static p:Resources.SettingsApp}"/>
+        <TextBlock Classes="header" Text="{Binding Loc.SettingsApp}"/>
+        <Button x:Name="LanguageSettingsButton" Command="{Binding GoToLanguageSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsLanguage}"></TextBlock>
+        </Button>
         <Button x:Name="StorageSettingsButton" Command="{Binding GoToStorageSettings}">
-          <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsStorage}"></TextBlock>
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsStorage}"></TextBlock>
         </Button>
         <Button x:Name="SystemSettingsButton" Command="{Binding GoToSystemSettings}">
-          <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsSystem}"></TextBlock>
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsSystem}"></TextBlock>
         </Button>
+        
         <Panel Height="2" Margin="0,10,0,10">
           <Panel.Background>
             <SolidColorBrush Color="#55FFFFFF"></SolidColorBrush>
           </Panel.Background>
         </Panel>
-        <TextBlock Classes="header" Text="{x:Static p:Resources.SettingsOther}"/>
+        
+        <TextBlock Classes="header" Text="{Binding Loc.SettingsOther}"/>
         <Button Command="{Binding CheckUpdatesCommand}">
-          <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsCheckForUpdates}"></TextBlock>
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsCheckForUpdates}"></TextBlock>
         </Button>
         <Button Command="{Binding ShowAboutCommand}">
-          <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsAbout}"></TextBlock>
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsAbout}"></TextBlock>
         </Button>
       </StackPanel>
     </ScrollViewer>

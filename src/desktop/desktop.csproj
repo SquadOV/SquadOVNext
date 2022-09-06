@@ -31,6 +31,7 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
     <PackageReference Include="Markdown.Avalonia" Version="0.10.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Tomlyn" Version="0.15.0" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
    </ItemGroup>
@@ -38,19 +39,29 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Resources\Resources.Designer.cs">
+    <Compile Update="Models\Localization\Localization.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Localization.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Folder Include="Assets\Text\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Text\" />
+    <None Include="Models\Localization\Localization.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Localization.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Models\Localization\Localization.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Localization.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>

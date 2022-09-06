@@ -28,8 +28,8 @@
       VerticalAlignment="Center"
       HorizontalAlignment="Center"
       Margin="20">
-      <TextBlock IsVisible="{Binding IsUpdateCheckPending}" HorizontalAlignment="Center" Padding="16" Text="{x:Static p:Resources.UpdateCheck}"/>
-      <TextBlock IsVisible="{Binding !IsUpdateCheckPending}" HorizontalAlignment="Center" Padding="16" Text="{x:Static p:Resources.NoUpdateAvailable}"/>
+      <TextBlock IsVisible="{Binding IsUpdateCheckPending}" HorizontalAlignment="Center" Padding="16" Text="{Binding Loc.UpdateCheck}"/>
+      <TextBlock IsVisible="{Binding !IsUpdateCheckPending}" HorizontalAlignment="Center" Padding="16" Text="{Binding Loc.NoUpdateAvailable}"/>
       
       <ProgressBar IsVisible="{Binding IsUpdateCheckPending}" Width="300" IsIndeterminate="True" />
       <Button
@@ -38,7 +38,7 @@
         Width="80"
         Margin="16"
         Command="{Binding CancelCommand}"
-        Content="{x:Static p:Resources.DialogCancel}">
+        Content="{Binding Loc.DialogCancel}">
         <Button.Styles>
           <Style Selector="Button">
             <Setter Property="Background" Value="#505050" />

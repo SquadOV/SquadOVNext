@@ -4,7 +4,7 @@ using System.Reflection;
 using System.IO;
 using ReactiveUI;
 
-namespace SquadOV.Models
+namespace SquadOV.Models.Settings
 {
     internal abstract class BaseConfigModel: ReactiveObject
     {

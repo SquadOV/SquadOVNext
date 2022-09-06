@@ -9,8 +9,7 @@
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="SquadOV.Views.MainWindow"
         WindowStartupLocation="CenterScreen" 
-        TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+        Background="#303030"
         Icon="/Assets/squadov.ico"
         ExtendClientAreaToDecorationsHint="True">
 
@@ -19,16 +18,6 @@
     </Design.DataContext>
   
     <Panel>
-      <ExperimentalAcrylicBorder IsHitTestVisible="False">
-          <ExperimentalAcrylicBorder.Material>
-              <ExperimentalAcrylicMaterial
-                  BackgroundSource="Digger"
-                  TintColor="Black"
-                  TintOpacity="1"
-                  MaterialOpacity="0.7" />
-          </ExperimentalAcrylicBorder.Material>
-      </ExperimentalAcrylicBorder>
-
       <DockPanel>
         <DockPanel
           DockPanel.Dock="Left"
@@ -48,7 +37,7 @@
             Command="{Binding GoHome}"
           >
             <ToolTip.Tip>
-              <TextBlock Text="{x:Static p:Resources.NavHome}"></TextBlock>
+              <TextBlock Text="{Binding Loc.NavHome}"></TextBlock>
             </ToolTip.Tip>
             <Image
               Source="/Assets/squadov.png"
@@ -71,7 +60,7 @@
             Command="{Binding GoSettings}"
           >
             <ToolTip.Tip>
-              <TextBlock Text="{x:Static p:Resources.NavSettings}"></TextBlock>
+              <TextBlock Text="{Binding Loc.NavSettings}"></TextBlock>
             </ToolTip.Tip>
             <Button.Styles>
               <Style Selector="Button">

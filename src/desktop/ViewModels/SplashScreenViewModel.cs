@@ -5,13 +5,15 @@ using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
-using SquadOV.Resources;
+using SquadOV.Models.Localization;
+using Splat;
 
 namespace SquadOV.ViewModels
 {
     public delegate void LoadingFinishedHandler(bool needsSetup);
     public class SplashScreenViewModel : ReactiveObject, IActivatableViewModel
     {
+        public Localization Loc { get; } = Locator.Current.GetService<Localization>()!;
         public ViewModelActivator Activator { get; }
         public event LoadingFinishedHandler? LoadingFinished;
 
@@ -25,7 +27,7 @@ namespace SquadOV.ViewModels
         public SplashScreenViewModel()
         {
             Activator = new ViewModelActivator();
-            _loadingMessage = Resources.Resources.SplashLoading;
+            _loadingMessage = Loc.SplashLoading;
             this.WhenActivated((CompositeDisposable disposables) =>
             {
                 StartLoading();

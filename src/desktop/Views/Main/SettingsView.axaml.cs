@@ -38,6 +38,16 @@ namespace SquadOV.Views.Main
                     .BindTo(this, x => x.SystemSettingsButton.Background)
                     .DisposeWith(disposables);
 
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/language") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.LanguageSettingsButton.Background)
+                    .DisposeWith(disposables);
+
                 ViewModel!.ShowAboutInteraction.RegisterHandler(ShowAboutDialog).DisposeWith(disposables);
                 ViewModel!.CheckUpdatesInteraction.RegisterHandler(ShowCheckUpdatesDialog).DisposeWith(disposables);
             });

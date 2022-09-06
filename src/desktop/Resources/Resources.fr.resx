@@ -126,6 +126,18 @@
   <data name="DialogOk" xml:space="preserve">
     <value>D'accord</value>
   </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>Anglais, États-Unis</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="LanguageSelect" xml:space="preserve">
+    <value>Sélectionnez une langue</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>Espagnole</value>
+  </data>
   <data name="NavHome" xml:space="preserve">
     <value>Maison</value>
   </data>
@@ -149,6 +161,9 @@
   </data>
   <data name="SettingsCheckForUpdates" xml:space="preserve">
     <value>Vérifier les mises à jour</value>
+  </data>
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>Langue</value>
   </data>
   <data name="SettingsOther" xml:space="preserve">
     <value>Autre</value>

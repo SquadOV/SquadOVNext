@@ -7,11 +7,13 @@ using Avalonia;
 using Avalonia.Platform;
 using System.Threading;
 using System.Threading.Tasks;
+using Splat;
 
 namespace SquadOV.ViewModels.Dialogs
 {
     public class CheckUpdatesViewModel : ReactiveObject
     {
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
         private bool _isUpdateCheckPending = false;

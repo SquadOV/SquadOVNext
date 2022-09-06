@@ -18,6 +18,6 @@ namespace SquadOV.Services.Config
         string ConfigFile { get; }
 
         // The actual config data that we loaded.
-        Models.ConfigModel Config { get; }
+        Models.Settings.ConfigModel Config { get; }
     }
 }

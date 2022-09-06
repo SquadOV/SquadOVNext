@@ -13,6 +13,7 @@ namespace SquadOV.ViewModels
 {
     public class MainWindowViewModel: ReactiveObject, IScreen
     {
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public bool AllowExit { get; set; } = false;
         // The Router associated with this Screen.
         // Required by the IScreen interface.

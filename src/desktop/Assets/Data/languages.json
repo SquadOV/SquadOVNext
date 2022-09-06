@@ -1,0 +1,20 @@
+[
+  {
+    "Native": "English",
+    "LocalizedReference": "LanguageEnglish",
+    "Icon": "avares://SquadOV/Assets/Flags/us.png",
+    "Culture": "en"
+  },
+  {
+    "Native": "Français",
+    "LocalizedReference": "LanguageFrench",
+    "Icon": "avares://SquadOV/Assets/Flags/fr.png",
+    "Culture": "fr"
+  },
+  {
+    "Native": "Espagnol",
+    "LocalizedReference": "LanguageSpanish",
+    "Icon": "avares://SquadOV/Assets/Flags/es.png",
+    "Culture": "es"
+  },
+]

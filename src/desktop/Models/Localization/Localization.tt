@@ -1,0 +1,94 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ output extension=".cs" #>
+
+//
+//  Copyright (C) 2022 Michael Bao
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Globalization;
+using System.Resources;
+using System.Reactive.Linq;
+using ReactiveUI;
+using Splat;
+using System.Threading;
+
+namespace SquadOV.Models.Localization
+{
+<#
+
+	string inputFile = System.IO.Path.GetDirectoryName(this.Host.TemplateFile)
+                    + @"\..\..\Resources\Resources.resx";
+	XDocument resDoc = XDocument.Load(inputFile);
+
+#>
+    public class Localization: ReactiveObject
+    {
+        private ResourceManager _manager;
+        
+        private CultureInfo _culture;
+        private CultureInfo Culture
+        {
+            get => _culture;
+            set => this.RaiseAndSetIfChanged(ref _culture, value);
+        }
+
+        public Localization()
+        {
+            _manager = new ResourceManager("SquadOV.Resources.Resources", typeof(Localization).Assembly);
+            _culture = Thread.CurrentThread.CurrentUICulture;
+
+            var systemService = Locator.Current.GetService<Services.System.ISystemService>()!;
+            systemService.CultureChange += (v) => Culture = v;
+<#
+            foreach(var dataElement in resDoc.Descendants("data").Where(elem => elem.Attribute("type") == null))
+            {
+#>
+            _obs<#= dataElement.Attribute("name").Value #> = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("<#= dataElement.Attribute("name").Value #>", x))
+                    .ToProperty(this, x => x.<#= dataElement.Attribute("name").Value #>);
+<#
+        }
+#>
+        }
+
+<#
+        foreach(var dataElement in resDoc.Descendants("data").Where(elem => elem.Attribute("type") == null))
+        {
+#>
+        private readonly ObservableAsPropertyHelper<string> _obs<#= dataElement.Attribute("name").Value #>;
+        public string <#= dataElement.Attribute("name").Value #> { get => _obs<#= dataElement.Attribute("name").Value #>.Value; }
+
+<#
+        }
+#>
+
+        public string Get(string key, CultureInfo? info = null)
+        {
+            return _manager.GetString(key, info) ?? "<INVALID>";
+        }
+    }
+}
