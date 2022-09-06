@@ -8,7 +8,7 @@
              x:Class="SquadOV.Views.Settings.LanguageSettingsView">
   <StackPanel Margin="16">
     <TextBlock Classes="h6" Text="{Binding Loc.SettingsLanguage}"></TextBlock>
-    <TextBlock Classes="subheader" Text="{Binding Loc.LanguageSelect}"></TextBlock>
+    <TextBlock Margin="0,16,0,8" Classes="subheader" Text="{Binding Loc.LanguageSelect}"></TextBlock>
     <ScrollViewer>
       <ItemsControl Items="{Binding LanguageChoices}">
         <ItemsControl.ItemsPanel>
@@ -18,7 +18,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <Panel Margin="0,16,16,16">
+            <Panel Margin="0,0,16,16">
               <Border BorderBrush="White" BorderThickness="2">
                 <Button Width="400" Height="48" Command="{Binding ElementName=View, Path=DataContext.ChangeCulture}" CommandParameter="{Binding Culture}">
                   <Grid>
