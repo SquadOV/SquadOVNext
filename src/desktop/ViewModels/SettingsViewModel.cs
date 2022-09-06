@@ -25,6 +25,13 @@ namespace SquadOV.ViewModels
                 var store = new Dialogs.AboutViewModel();
                 await ShowAboutInteraction.Handle(store);
             });
+
+            CheckUpdatesInteraction = new Interaction<Dialogs.CheckUpdatesViewModel, Unit>();
+            CheckUpdatesCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var store = new Dialogs.CheckUpdatesViewModel();
+                await CheckUpdatesInteraction.Handle(store);
+            });
         }
 
         public void GoToStorageSettings() => Router.Navigate.Execute(new StorageSettingsViewModel(this));
@@ -37,5 +44,8 @@ namespace SquadOV.ViewModels
 
         public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
+
+        public Interaction<Dialogs.CheckUpdatesViewModel, Unit> CheckUpdatesInteraction { get; }
+        public ReactiveCommand<Unit, Unit> CheckUpdatesCommand { get; }
     }
 }

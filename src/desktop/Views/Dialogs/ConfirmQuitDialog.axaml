@@ -43,7 +43,7 @@
             </Style>
           </Button.Styles>
         </Button>
-        <Button Command="{Binding ConfirmCommand}" Content="{x:Static p:Resources.QuitCancel}">
+        <Button Command="{Binding ConfirmCommand}" Content="{x:Static p:Resources.DialogCancel}">
           <Button.CommandParameter>
             <sys:Boolean>False</sys:Boolean>
           </Button.CommandParameter>

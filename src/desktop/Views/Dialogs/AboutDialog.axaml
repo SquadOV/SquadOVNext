@@ -84,7 +84,7 @@
 
       <Button
         Width="80"
-        Margin="0,16,0,16"
+        Margin="0,16,0,0"
         HorizontalAlignment="Center"
         HorizontalContentAlignment="Center"
         Command="{Binding CloseCommand}"

@@ -39,12 +39,23 @@ namespace SquadOV.Views.Main
                     .DisposeWith(disposables);
 
                 ViewModel!.ShowAboutInteraction.RegisterHandler(ShowAboutDialog).DisposeWith(disposables);
+                ViewModel!.CheckUpdatesInteraction.RegisterHandler(ShowCheckUpdatesDialog).DisposeWith(disposables);
             });
         }
 
         private async Task ShowAboutDialog(InteractionContext<ViewModels.Dialogs.AboutViewModel, Unit> interaction)
         {
             var dialog = new Dialogs.AboutDialog()
+            {
+                DataContext = interaction.Input,
+            };
+            await dialog.ShowDialog(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            interaction.SetOutput(new Unit());
+        }
+
+        private async Task ShowCheckUpdatesDialog(InteractionContext<ViewModels.Dialogs.CheckUpdatesViewModel, Unit> interaction)
+        {
+            var dialog = new Dialogs.CheckForUpdatesDialog()
             {
                 DataContext = interaction.Input,
             };

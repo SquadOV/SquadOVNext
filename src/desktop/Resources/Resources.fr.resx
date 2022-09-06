@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>SquadOV est un logiciel open source pour enregistrer, regarder et partager des VOD de jeux.</value>
   </data>
+  <data name="DialogCancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
   <data name="DialogOk" xml:space="preserve">
     <value>D'accord</value>
   </data>
@@ -129,8 +132,8 @@
   <data name="NavSettings" xml:space="preserve">
     <value>Réglages</value>
   </data>
-  <data name="QuitCancel" xml:space="preserve">
-    <value>Annuler</value>
+  <data name="NoUpdateAvailable" xml:space="preserve">
+    <value>Pas de mise a jour disponible</value>
   </data>
   <data name="QuitConfirm" xml:space="preserve">
     <value>Quitter</value>
@@ -158,5 +161,8 @@
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Chargement...</value>
+  </data>
+  <data name="UpdateCheck" xml:space="preserve">
+    <value>Vérification des mises à jour...</value>
   </data>
 </root>

@@ -70,6 +70,15 @@ namespace SquadOV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string DialogCancel {
+            get {
+                return ResourceManager.GetString("DialogCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string DialogOk {
@@ -97,11 +106,11 @@ namespace SquadOV.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to No update available..
         /// </summary>
-        public static string QuitCancel {
+        public static string NoUpdateAvailable {
             get {
-                return ResourceManager.GetString("QuitCancel", resourceCulture);
+                return ResourceManager.GetString("NoUpdateAvailable", resourceCulture);
             }
         }
         
@@ -183,6 +192,15 @@ namespace SquadOV.Resources {
         public static string SplashLoading {
             get {
                 return ResourceManager.GetString("SplashLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for updates....
+        /// </summary>
+        public static string UpdateCheck {
+            get {
+                return ResourceManager.GetString("UpdateCheck", resourceCulture);
             }
         }
     }

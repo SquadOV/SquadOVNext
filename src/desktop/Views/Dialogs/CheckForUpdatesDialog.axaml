@@ -2,8 +2,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:sys="using:System"
+        xmlns:p="using:SquadOV.Resources"
+        xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+        Width="400" Height="200"
         x:Class="SquadOV.Views.Dialogs.CheckForUpdatesDialog"
-        Title="CheckForUpdatesDialog">
-  Welcome to Avalonia!
+        Title="ConfirmQuitDialog"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="AcrylicBlur"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        HasSystemDecorations="False">
+  <Window.Background>
+    <SolidColorBrush Color="#202020"></SolidColorBrush>
+  </Window.Background>
+
+  <Window.Styles>
+  </Window.Styles>
+
+  <Border
+    BorderBrush="Black"
+    BorderThickness="2">
+    <StackPanel
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center"
+      Margin="20">
+      <TextBlock IsVisible="{Binding IsUpdateCheckPending}" HorizontalAlignment="Center" Padding="16" Text="{x:Static p:Resources.UpdateCheck}"/>
+      <TextBlock IsVisible="{Binding !IsUpdateCheckPending}" HorizontalAlignment="Center" Padding="16" Text="{x:Static p:Resources.NoUpdateAvailable}"/>
+      
+      <ProgressBar IsVisible="{Binding IsUpdateCheckPending}" Width="300" IsIndeterminate="True" />
+      <Button
+        HorizontalAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="80"
+        Margin="16"
+        Command="{Binding CancelCommand}"
+        Content="{x:Static p:Resources.DialogCancel}">
+        <Button.Styles>
+          <Style Selector="Button">
+            <Setter Property="Background" Value="#505050" />
+          </Style>
+        </Button.Styles>
+      </Button>
+    </StackPanel>
+  </Border>
+
 </Window>

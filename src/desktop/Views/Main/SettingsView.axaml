@@ -49,7 +49,7 @@
           </Panel.Background>
         </Panel>
         <TextBlock Classes="header" Text="{x:Static p:Resources.SettingsOther}"/>
-        <Button Command="{Binding CheckForUpdates}">
+        <Button Command="{Binding CheckUpdatesCommand}">
           <TextBlock Classes="link" Text="{x:Static p:Resources.SettingsCheckForUpdates}"></TextBlock>
         </Button>
         <Button Command="{Binding ShowAboutCommand}">
@@ -60,7 +60,7 @@
 
     <rxui:RoutedViewHost Router="{Binding Router}" PageTransition="{x:Null}">
       <rxui:RoutedViewHost.DefaultContent>
-        <TextBlock Text="This page was intentionally left blank."
+        <TextBlock Text="This page was (definitely) intentionally left blank."
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
       </rxui:RoutedViewHost.DefaultContent>
