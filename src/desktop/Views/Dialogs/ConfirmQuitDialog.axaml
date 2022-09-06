@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="using:System"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+        Width="400" Height="200"
+        x:Class="SquadOV.Views.Dialogs.ConfirmQuitDialog"
+        Title="ConfirmQuitDialog"
+        WindowStartupLocation="CenterScreen" 
+        TransparencyLevelHint="AcrylicBlur"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        HasSystemDecorations="False">
+  <Window.Background>
+    <SolidColorBrush Color="#303030"></SolidColorBrush>
+  </Window.Background>
+
+  <Window.Styles>
+    
+  </Window.Styles>
+
+  <Border
+    BorderBrush="Black"
+    BorderThickness="2">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+      <TextBlock
+        Padding="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="Are you sure you wish to quit out of SquadOV? Your VODs will no longer be recorded automatically.">
+      </TextBlock>
+
+      <StackPanel
+        HorizontalAlignment="Center"
+        Orientation="Horizontal">
+        <Button Command="{Binding ConfirmCommand}">
+          <Button.CommandParameter>
+            <sys:Boolean>True</sys:Boolean>
+          </Button.CommandParameter>
+
+          <Button.Styles>
+            <Style Selector="Button">
+              <Setter Property="Background" Value="Red" />
+            </Style>
+          </Button.Styles>
+          Quit
+        </Button>
+        <Button Command="{Binding ConfirmCommand}">
+          <Button.CommandParameter>
+            <sys:Boolean>False</sys:Boolean>
+          </Button.CommandParameter>
+
+          <Button.Styles>
+            <Style Selector="Button">
+              <Setter Property="Background" Value="#202020" />
+            </Style>
+          </Button.Styles>
+          Cancel
+        </Button>
+      </StackPanel>
+    </StackPanel>
+  </Border>
+  
+</Window>

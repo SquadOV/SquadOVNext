@@ -7,8 +7,8 @@ namespace SquadOV.Locators
     {
         public IViewFor? ResolveView<T>(T viewModel, string? contract = null) => viewModel switch
         {
-            ViewModels.HomeViewModel context => new Views.HomeView { DataContext = context },
-            ViewModels.SettingsViewModel context => new Views.SettingsView { DataContext = context },
+            ViewModels.HomeViewModel context => new Views.Main.HomeView { DataContext = context },
+            ViewModels.SettingsViewModel context => new Views.Main.SettingsView { DataContext = context },
             _ => throw new ArgumentOutOfRangeException(nameof(viewModel))
         };
     }

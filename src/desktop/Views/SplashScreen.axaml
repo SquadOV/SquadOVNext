@@ -8,6 +8,7 @@
         Title="SplashScreen"
         WindowStartupLocation="CenterScreen" 
         ExtendClientAreaToDecorationsHint="True"
+        CanResize="False"
         HasSystemDecorations="False">
   <Canvas Width="620" Height="300">
     <TextBlock Canvas.Bottom="110" Canvas.Left="10" Text="{Binding LoadingMessage}"/>

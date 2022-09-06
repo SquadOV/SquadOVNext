@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using Avalonia.Media;
 
-namespace SquadOV.Views
+namespace SquadOV.Views.Main
 {
     public partial class SettingsView : ReactiveUserControl<ViewModels.SettingsViewModel>
     {

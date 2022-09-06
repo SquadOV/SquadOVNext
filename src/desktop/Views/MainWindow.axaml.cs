@@ -21,6 +21,7 @@ using ReactiveUI;
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
 
 namespace SquadOV.Views
 {
@@ -42,6 +43,36 @@ namespace SquadOV.Views
                     .BindTo(this, x => x.SettingsButton.Background)
                     .DisposeWith(disposables);
             });
+
+            Closing += (s, e) =>
+            {
+                if (ViewModel!.AllowExit)
+                {
+                    return;
+                }
+
+                // Force the window to show again if it's minimized - this will make this dialog more noticeable.
+                if (WindowState == Avalonia.Controls.WindowState.Minimized)
+                {
+                    WindowState = Avalonia.Controls.WindowState.Normal;
+                }
+
+                e.Cancel = true;
+                ShowExitDialog();
+            };
+        }
+
+        private async void ShowExitDialog()
+        {
+            var dialog = new Dialogs.ConfirmQuitDialog();
+            dialog.DataContext = new ViewModels.Dialogs.ConfirmQuitViewModel();
+
+            var result = await dialog.ShowDialog<bool>(this);
+            if (result)
+            {
+                ViewModel!.AllowExit = true;
+                Close();
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ namespace SquadOV.ViewModels
 {
     public class MainWindowViewModel: ReactiveObject, IScreen
     {
+        public bool AllowExit { get; set; } = false;
         // The Router associated with this Screen.
         // Required by the IScreen interface.
         public RoutingState Router { get; } = new RoutingState();

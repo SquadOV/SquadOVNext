@@ -17,6 +17,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using ReactiveUI;
+using System.Reactive.Disposables;
+
 using Splat;
 
 namespace SquadOV

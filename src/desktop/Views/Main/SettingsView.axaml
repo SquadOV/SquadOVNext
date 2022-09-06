@@ -6,7 +6,7 @@
              xmlns:sql="using:SquadOV.Locators"
              xmlns:p="using:SquadOV.Resources"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SquadOV.Views.SettingsView">
+             x:Class="SquadOV.Views.Main.SettingsView">
 
   <DockPanel>
     <ScrollViewer

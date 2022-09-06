@@ -89,6 +89,7 @@
 
         <DockPanel>
           <StackPanel
+            IsHitTestVisible="False"
             Orientation="Horizontal"
             DockPanel.Dock="Top"
             Height="32">
