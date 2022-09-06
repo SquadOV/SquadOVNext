@@ -79,6 +79,33 @@ namespace SquadOV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string QuitCancel {
+            get {
+                return ResourceManager.GetString("QuitCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quit.
+        /// </summary>
+        public static string QuitConfirm {
+            get {
+                return ResourceManager.GetString("QuitConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you wish to quit out of SquadOV? Your VODs will no longer be recorded automatically..
+        /// </summary>
+        public static string QuitText {
+            get {
+                return ResourceManager.GetString("QuitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string SettingsAbout {

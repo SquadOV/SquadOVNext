@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="using:System"
+        xmlns:p="using:SquadOV.Resources"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
         Width="400" Height="200"
         x:Class="SquadOV.Views.Dialogs.ConfirmQuitDialog"
@@ -13,7 +14,7 @@
         ExtendClientAreaToDecorationsHint="True"
         HasSystemDecorations="False">
   <Window.Background>
-    <SolidColorBrush Color="#303030"></SolidColorBrush>
+    <SolidColorBrush Color="#202020"></SolidColorBrush>
   </Window.Background>
 
   <Window.Styles>
@@ -29,13 +30,13 @@
         TextAlignment="Center"
         HorizontalAlignment="Center"
         TextWrapping="Wrap"
-        Text="Are you sure you wish to quit out of SquadOV? Your VODs will no longer be recorded automatically.">
+        Text="{x:Static p:Resources.QuitText}">
       </TextBlock>
 
       <StackPanel
         HorizontalAlignment="Center"
         Orientation="Horizontal">
-        <Button Command="{Binding ConfirmCommand}">
+        <Button Command="{Binding ConfirmCommand}" Content="{x:Static p:Resources.QuitConfirm}">
           <Button.CommandParameter>
             <sys:Boolean>True</sys:Boolean>
           </Button.CommandParameter>
@@ -45,19 +46,17 @@
               <Setter Property="Background" Value="Red" />
             </Style>
           </Button.Styles>
-          Quit
         </Button>
-        <Button Command="{Binding ConfirmCommand}">
+        <Button Command="{Binding ConfirmCommand}" Content="{x:Static p:Resources.QuitCancel}">
           <Button.CommandParameter>
             <sys:Boolean>False</sys:Boolean>
           </Button.CommandParameter>
 
           <Button.Styles>
             <Style Selector="Button">
-              <Setter Property="Background" Value="#202020" />
+              <Setter Property="Background" Value="#505050" />
             </Style>
           </Button.Styles>
-          Cancel
         </Button>
       </StackPanel>
     </StackPanel>

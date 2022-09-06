@@ -123,6 +123,15 @@
   <data name="NavSettings" xml:space="preserve">
     <value>Réglages</value>
   </data>
+  <data name="QuitCancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="QuitConfirm" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="QuitText" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir quitter SquadOV ? Vos vidéos ne seront plus enregistrées automatiquement.</value>
+  </data>
   <data name="SettingsAbout" xml:space="preserve">
     <value>À propos de</value>
   </data>
