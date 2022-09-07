@@ -21,11 +21,17 @@ using ReactiveUI;
 using System.Reactive.Disposables;
 
 using Splat;
+using SquadOV.ViewModels;
 
 namespace SquadOV
 {
     public partial class App : Application
     {
+        public App()
+        {
+            DataContext = new AppViewModel();
+        }
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

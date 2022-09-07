@@ -13,93 +13,93 @@
         Icon="/Assets/squadov.ico"
         ExtendClientAreaToDecorationsHint="True">
 
-    <Design.DataContext>
-      <sqvm:MainWindowViewModel />
-    </Design.DataContext>
+  <Design.DataContext>
+    <sqvm:MainWindowViewModel />
+  </Design.DataContext>
   
-    <Panel>
-      <DockPanel>
-        <DockPanel
-          DockPanel.Dock="Left"
+  <Panel>
+    <DockPanel>
+      <DockPanel
+        DockPanel.Dock="Left"
+      >
+        <DockPanel.Background>
+          <SolidColorBrush Color="#202020"></SolidColorBrush>
+        </DockPanel.Background>
+
+        <Button
+          DockPanel.Dock="Top"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Top"
+          CornerRadius="32"
+          ToolTip.Placement="Right"
+          ToolTip.VerticalOffset="8"
+          ToolTip.HorizontalOffset="4"
+          Command="{Binding GoHome}"
         >
-          <DockPanel.Background>
-            <SolidColorBrush Color="#202020"></SolidColorBrush>
-          </DockPanel.Background>
-
-          <Button
-            DockPanel.Dock="Top"
+          <ToolTip.Tip>
+            <TextBlock Text="{Binding Loc.NavHome}"></TextBlock>
+          </ToolTip.Tip>
+          <Image
+            Source="/Assets/squadov.png"
+            Width="32"
+            Height="32"
+            VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            CornerRadius="32"
-            ToolTip.Placement="Right"
-            ToolTip.VerticalOffset="8"
-            ToolTip.HorizontalOffset="4"
-            Command="{Binding GoHome}"
-          >
-            <ToolTip.Tip>
-              <TextBlock Text="{Binding Loc.NavHome}"></TextBlock>
-            </ToolTip.Tip>
-            <Image
-              Source="/Assets/squadov.png"
-              Width="32"
-              Height="32"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-            />
-          </Button>
+          />
+        </Button>
           
-          <Button
-            x:Name="SettingsButton"
-            DockPanel.Dock="Bottom"
+        <Button
+          x:Name="SettingsButton"
+          DockPanel.Dock="Bottom"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Bottom"
+          CornerRadius="32"
+          ToolTip.Placement="Right"
+          ToolTip.VerticalOffset="8"
+          ToolTip.HorizontalOffset="4"
+          Command="{Binding GoSettings}"
+        >
+          <ToolTip.Tip>
+            <TextBlock Text="{Binding Loc.NavSettings}"></TextBlock>
+          </ToolTip.Tip>
+          <Button.Styles>
+            <Style Selector="Button">
+              <Setter Property="Background" Value="{Binding Background}" />
+            </Style>
+          </Button.Styles>
+          <Image
+            Source="/Assets/Buttons/settings.png"
+            Width="32"
+            Height="32"
+            VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            CornerRadius="32"
-            ToolTip.Placement="Right"
-            ToolTip.VerticalOffset="8"
-            ToolTip.HorizontalOffset="4"
-            Command="{Binding GoSettings}"
-          >
-            <ToolTip.Tip>
-              <TextBlock Text="{Binding Loc.NavSettings}"></TextBlock>
-            </ToolTip.Tip>
-            <Button.Styles>
-              <Style Selector="Button">
-                <Setter Property="Background" Value="{Binding Background}" />
-              </Style>
-            </Button.Styles>
-            <Image
-              Source="/Assets/Buttons/settings.png"
-              Width="32"
-              Height="32"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-            />
-          </Button>
-        </DockPanel>
-
-        <DockPanel>
-          <StackPanel
-            IsHitTestVisible="False"
-            Orientation="Horizontal"
-            DockPanel.Dock="Top"
-            Height="32">
-            <StackPanel.Background>
-              <SolidColorBrush Color="#202020"></SolidColorBrush>
-            </StackPanel.Background>
-          </StackPanel>
-
-          <rxui:RoutedViewHost Router="{Binding Router}" PageTransition="{x:Null}">
-            <rxui:RoutedViewHost.DefaultContent>
-              <TextBlock Text="Page Not Found!"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Center" />
-            </rxui:RoutedViewHost.DefaultContent>
-            <rxui:RoutedViewHost.ViewLocator>
-              <sql:AppViewLocator />
-            </rxui:RoutedViewHost.ViewLocator>
-          </rxui:RoutedViewHost>
-        </DockPanel>
+          />
+        </Button>
       </DockPanel>
-    </Panel>
+
+      <DockPanel>
+        <StackPanel
+          IsHitTestVisible="False"
+          Orientation="Horizontal"
+          DockPanel.Dock="Top"
+          Height="32">
+          <StackPanel.Background>
+            <SolidColorBrush Color="#202020"></SolidColorBrush>
+          </StackPanel.Background>
+        </StackPanel>
+
+        <rxui:RoutedViewHost Router="{Binding Router}" PageTransition="{x:Null}">
+          <rxui:RoutedViewHost.DefaultContent>
+            <TextBlock Text="Page Not Found!"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+          </rxui:RoutedViewHost.DefaultContent>
+          <rxui:RoutedViewHost.ViewLocator>
+            <sql:AppViewLocator />
+          </rxui:RoutedViewHost.ViewLocator>
+        </rxui:RoutedViewHost>
+      </DockPanel>
+    </DockPanel>
+  </Panel>
 
 </Window>

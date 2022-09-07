@@ -24,11 +24,13 @@ using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using ReactiveUI;
 using Splat;
+using SquadOV.Models.Settings;
 
 namespace SquadOV.ViewModels
 {
     public class MainWindowViewModel: ReactiveObject, IScreen
     {
+        private Services.Config.IConfigService _config;
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public bool AllowExit { get; set; } = false;
         // The Router associated with this Screen.
@@ -37,9 +39,11 @@ namespace SquadOV.ViewModels
 
         public void GoHome() => Router.Navigate.Execute(new HomeViewModel(this));
         public void GoSettings() => Router.Navigate.Execute(new SettingsViewModel(this));
+        public ConfigModel Config { get => _config.Config; }
 
         public MainWindowViewModel()
         {
+            _config = Locator.Current.GetService<Services.Config.IConfigService>()!;
             GoHome();
         }
     }

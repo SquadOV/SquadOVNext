@@ -4,5 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SquadOV.Views.Settings.SystemSettingsView">
-  Welcome to Avalonia!
+  <StackPanel Margin="16">
+    <TextBlock Classes="h6" Text="{Binding Loc.SettingsSystem}"></TextBlock>
+    <ScrollViewer>
+      <WrapPanel>
+        <CheckBox Margin="0,0,16,16" IsChecked="{Binding Config.Core.MinimizeOnClose}" Content="{Binding Loc.SystemMinimizeOnClose}"></CheckBox>
+        <CheckBox Margin="0,0,16,16" IsChecked="{Binding Config.Core.MinimizeToSystemTray}" Content="{Binding Loc.SystemMinimizeToSysTray}"></CheckBox>
+      </WrapPanel>
+    </ScrollViewer>
+  </StackPanel>
 </UserControl>

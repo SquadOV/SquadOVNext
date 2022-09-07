@@ -107,6 +107,12 @@ namespace SquadOV.Models.Localization
             _obsSplashLoading = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SplashLoading", x))
                     .ToProperty(this, x => x.SplashLoading);
+            _obsSystemMinimizeOnClose = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SystemMinimizeOnClose", x))
+                    .ToProperty(this, x => x.SystemMinimizeOnClose);
+            _obsSystemMinimizeToSysTray = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SystemMinimizeToSysTray", x))
+                    .ToProperty(this, x => x.SystemMinimizeToSysTray);
             _obsUpdateCheck = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("UpdateCheck", x))
                     .ToProperty(this, x => x.UpdateCheck);
@@ -171,6 +177,12 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsSplashLoading;
         public string SplashLoading { get => _obsSplashLoading.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSystemMinimizeOnClose;
+        public string SystemMinimizeOnClose { get => _obsSystemMinimizeOnClose.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSystemMinimizeToSysTray;
+        public string SystemMinimizeToSysTray { get => _obsSystemMinimizeToSysTray.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsUpdateCheck;
         public string UpdateCheck { get => _obsUpdateCheck.Value; }

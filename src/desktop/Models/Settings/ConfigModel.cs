@@ -22,7 +22,7 @@ using ReactiveUI;
 
 namespace SquadOV.Models.Settings
 {
-    internal abstract class BaseConfigModel: ReactiveObject
+    public abstract class BaseConfigModel: ReactiveObject
     {
         // This function allows us to add new config parameters and allow users with existing configs
         // to migrate over by generating the default values properly.
@@ -53,7 +53,7 @@ namespace SquadOV.Models.Settings
         }
     }
 
-    internal class CoreConfigModel: BaseConfigModel
+    public class CoreConfigModel: BaseConfigModel
     {
         private string? _databasePath;
         public string? DatabasePath
@@ -69,17 +69,33 @@ namespace SquadOV.Models.Settings
             set => this.RaiseAndSetIfChanged(ref _culture, value);
         }
 
+        private bool? _minimizeOnClose;
+        public bool? MinimizeOnClose
+        {
+            get => _minimizeOnClose;
+            set => this.RaiseAndSetIfChanged(ref _minimizeOnClose, value);
+        }
+
+        private bool? _minimizeToSystemTray;
+        public bool? MinimizeToSystemTray
+        {
+            get => _minimizeToSystemTray;
+            set => this.RaiseAndSetIfChanged(ref _minimizeToSystemTray, value);
+        }
+
         public static CoreConfigModel CreateDefault(string location)
         {
             return new CoreConfigModel()
             {
                 DatabasePath = Path.Combine(location, "Database"),
                 Culture = "en",
+                MinimizeOnClose = true,
+                MinimizeToSystemTray = true,
             };
         }
     }
 
-    internal class ConfigModel: BaseConfigModel
+    public class ConfigModel: BaseConfigModel
     {
         public static ConfigModel CreateDefault(string location)
         {

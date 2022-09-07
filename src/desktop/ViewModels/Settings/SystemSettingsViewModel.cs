@@ -15,15 +15,22 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 using ReactiveUI;
+using Splat;
+using SquadOV.Models.Settings;
+using System.Collections.Generic;
 
 namespace SquadOV.ViewModels.Settings
 {
     public class SystemSettingsViewModel : ReactiveObject, IRoutableViewModel
     {
+        private Services.Config.IConfigService _config;
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
         public string UrlPathSegment { get; } = "/system";
+        public ConfigModel Config { get => _config.Config; }
         public SystemSettingsViewModel(IScreen parent)
         {
+            _config = Locator.Current.GetService<Services.Config.IConfigService>()!;
             HostScreen = parent;
         }
     }

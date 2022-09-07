@@ -177,6 +177,12 @@
   <data name="SplashLoading" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="SystemMinimizeOnClose" xml:space="preserve">
+    <value>Minimize on Close</value>
+  </data>
+  <data name="SystemMinimizeToSysTray" xml:space="preserve">
+    <value>Minimize to System Tray</value>
+  </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>Checking for updates...</value>
   </data>

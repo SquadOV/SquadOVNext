@@ -42,15 +42,38 @@ namespace SquadOV.Views
                     })
                     .BindTo(this, x => x.SettingsButton.Background)
                     .DisposeWith(disposables);
+
+                this.WhenAnyValue(x => x.WindowState)
+                    .Subscribe(st =>
+                    {
+                        if (st == Avalonia.Controls.WindowState.Minimized)
+                        {
+                            ShowInTaskbar = !ViewModel?.Config.Core?.MinimizeToSystemTray ?? true;
+                        }
+                        else
+                        {
+                            ShowInTaskbar = true;
+                        }
+                    });
             });
 
             Closing += (s, e) =>
             {
+                // Whether or not the user has agreed to closing.
                 if (ViewModel!.AllowExit)
                 {
                     return;
                 }
 
+                // Minimize on system close will force the window to minimize instead of close.
+                if (ViewModel?.Config.Core?.MinimizeOnClose ?? false)
+                {
+                    e.Cancel = true;
+                    WindowState = Avalonia.Controls.WindowState.Minimized;
+                    return;
+                }
+
+                // At this point we know the user wants to close-close the main window.
                 // Force the window to show again if it's minimized - this will make this dialog more noticeable.
                 if (WindowState == Avalonia.Controls.WindowState.Minimized)
                 {
