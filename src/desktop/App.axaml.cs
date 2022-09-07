@@ -62,32 +62,12 @@ namespace SquadOV
 
                 // After the splash screen has loaded stuff that we consider necessary to run the app - check if there's any setup items that need to be done for the user.
                 // Only after all the above is done do we want to actually want to show the main window and proceed with normal operating behavior.
-                splashScreen.ViewModel.LoadingFinished += delegate (bool needsSetup)
+                splashScreen.ViewModel.LoadingFinished += delegate ()
                 {
-                    if (needsSetup || Locator.Current.GetService<Services.Config.IConfigService>().IsNewlyCreated)
-                    {
-                        var setupWindow = new Views.SetupWindow()
-                        {
-                            ViewModel = new ViewModels.SetupWindowViewModel(),
-                        };
-
-                        setupWindow.ViewModel.SetupFinished += delegate ()
-                        {
-                            desktop.MainWindow = mainWindow;
-                            mainWindow.Show();
-                            setupWindow.Close();
-                        };
-                        desktop.MainWindow = setupWindow;
-                    }
-                    else
-                    {
-                        desktop.MainWindow = mainWindow;
-                    }
-
+                    desktop.MainWindow = mainWindow;
                     desktop.MainWindow.Show();
                     splashScreen.Close();
                 };
-
 
                 desktop.MainWindow = splashScreen;
             }

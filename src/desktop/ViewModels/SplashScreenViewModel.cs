@@ -26,7 +26,7 @@ using Splat;
 
 namespace SquadOV.ViewModels
 {
-    public delegate void LoadingFinishedHandler(bool needsSetup);
+    public delegate void LoadingFinishedHandler();
     public class SplashScreenViewModel : ReactiveObject, IActivatableViewModel
     {
         public Localization Loc { get; } = Locator.Current.GetService<Localization>()!;
@@ -53,14 +53,14 @@ namespace SquadOV.ViewModels
         async void StartLoading()
         {
             await Task.Delay(2000);
-            OnLoadingFinished(false);
+            OnLoadingFinished();
         }
 
-        protected void OnLoadingFinished(bool needsSetup)
+        protected void OnLoadingFinished()
         {
             if (LoadingFinished != null)
             {
-                LoadingFinished.Invoke(needsSetup);
+                LoadingFinished.Invoke();
             }
         }
     }
