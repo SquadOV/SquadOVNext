@@ -52,12 +52,12 @@ namespace SquadOV
             {
                 var mainWindow = new Views.MainWindow()
                 {
-                    DataContext = new ViewModels.MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel(),
                 };
 
                 var splashScreen = new Views.SplashScreen()
                 {
-                    ViewModel = new ViewModels.SplashScreenViewModel(),
+                    ViewModel = new SplashScreenViewModel(),
                 };
 
                 // After the splash screen has loaded stuff that we consider necessary to run the app - check if there's any setup items that need to be done for the user.
