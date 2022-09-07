@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+        Width="400" Height="200"
+        x:Class="SquadOV.Views.Dialogs.MessageBox"
+        Title="MessageBox"
+        WindowStartupLocation="CenterScreen" 
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        HasSystemDecorations="False">
+  <Window.Background>
+    <SolidColorBrush Color="#202020"></SolidColorBrush>
+  </Window.Background>
+
+  <Border
+    BorderBrush="Black"
+    BorderThickness="2">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+      <TextBlock
+        Margin="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="{Binding Message}">
+      </TextBlock>
+
+      <Button HorizontalAlignment="Center" Command="{Binding ConfirmCommand}" Content="{Binding Loc.DialogOk}">
+        <Button.Styles>
+          <Style Selector="Button">
+            <Setter Property="Background" Value="#505050" />
+          </Style>
+        </Button.Styles>
+      </Button>
+    </StackPanel>
+   </Border>
+</Window>

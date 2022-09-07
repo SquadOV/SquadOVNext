@@ -4,5 +4,195 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SquadOV.Views.Settings.StorageSettingsView">
-  Welcome to Avalonia!
+  <StackPanel Margin="16">
+    <TextBlock Classes="h6" Text="{Binding Loc.SettingsStorage}"></TextBlock>
+    <ScrollViewer Margin="0,16,0,0">
+      <StackPanel>
+        <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+          <TextBlock
+            Margin="0,0,8,0"
+            VerticalAlignment="Center"
+            Classes="subheader"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="-8"
+            ToolTip.HorizontalOffset="4"
+            Text="{Binding Loc.StorageVodLocation}">
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.StorageVodLocationTooltip}"></TextBlock>
+            </ToolTip.Tip>
+          </TextBlock>
+          <TextBox Margin="0,0,8,0" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Config.Core.VodPath}" ></TextBox>
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="4"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding FolderBrowseCommand}"
+            CommandParameter="VodPath"
+          >
+              <ToolTip.Tip>
+                <TextBlock Text="{Binding Loc.ButtonBrowse}"></TextBlock>
+              </ToolTip.Tip>
+              <Image
+                Source="/Assets/Buttons/folder.png"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+            />
+            </Button>
+        </StackPanel>
+
+        <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+          <TextBlock
+            Margin="0,0,8,0"
+            VerticalAlignment="Center"
+            Classes="subheader"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Text="{Binding Loc.StorageMatchLocation}">
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.StorageMatchLocationTooltip}"></TextBlock>
+            </ToolTip.Tip>
+          </TextBlock>
+          <TextBox Margin="0,0,8,0" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Config.Core.MatchPath}" ></TextBox>
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="4"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding FolderBrowseCommand}"
+            CommandParameter="MatchPath"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.ButtonBrowse}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/folder.png"
+              Width="24"
+              Height="24"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+        </StackPanel>
+
+        <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+          <TextBlock
+            Margin="0,0,8,0"
+            VerticalAlignment="Center"
+            Classes="subheader"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="-8"
+            ToolTip.HorizontalOffset="4"
+            Text="{Binding Loc.StorageClipLocation}">
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.StorageClipLocationTooltip}"></TextBlock>
+            </ToolTip.Tip>
+          </TextBlock>
+          <TextBox Margin="0,0,8,0" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Config.Core.ClipPath}" ></TextBox>
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="4"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding FolderBrowseCommand}"
+            CommandParameter="ClipPath"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.ButtonBrowse}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/folder.png"
+              Width="24"
+              Height="24"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+        </StackPanel>
+
+        <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+          <TextBlock
+            Margin="0,0,8,0"
+            VerticalAlignment="Center"
+            Classes="subheader"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="-8"
+            ToolTip.HorizontalOffset="4"
+            Text="{Binding Loc.StorageScreenshotLocation}">
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.StorageScreenshotLocationTooltip}"></TextBlock>
+            </ToolTip.Tip>
+          </TextBlock>
+          <TextBox Margin="0,0,8,0" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Config.Core.ScreenshotPath}" ></TextBox>
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="4"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding FolderBrowseCommand}"
+            CommandParameter="ScreenshotPath"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.ButtonBrowse}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/folder.png"
+              Width="24"
+              Height="24"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+        </StackPanel>
+
+        <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+          <TextBlock
+            Margin="0,0,8,0"
+            VerticalAlignment="Center"
+            Classes="subheader"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="-8"
+            ToolTip.HorizontalOffset="4"
+            Text="{Binding Loc.StorageLogLocation}">
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.StorageLogLocationTooltip}"></TextBlock>
+            </ToolTip.Tip>
+          </TextBlock>
+          <TextBox Margin="0,0,8,0" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Config.Core.LogPath}" ></TextBox>
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="4"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding FolderBrowseCommand}"
+            CommandParameter="LogPath"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.ButtonBrowse}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/folder.png"
+              Width="24"
+              Height="24"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+  </StackPanel>
 </UserControl>

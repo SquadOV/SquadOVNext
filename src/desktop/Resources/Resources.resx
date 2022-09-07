@@ -120,11 +120,17 @@
   <data name="About" xml:space="preserve">
     <value>SquadOV is open-source software to record, watch, and share gaming VODs.</value>
   </data>
+  <data name="ButtonBrowse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="DialogOk" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="ErrorStorageFolder" xml:space="preserve">
+    <value>You must choose a folder that is empty and is not a root drive (e.g. the C:\ drive).</value>
   </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>English, U.S.</value>
@@ -176,6 +182,36 @@
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Loading...</value>
+  </data>
+  <data name="StorageClipLocation" xml:space="preserve">
+    <value>Clip Storage</value>
+  </data>
+  <data name="StorageClipLocationTooltip" xml:space="preserve">
+    <value>Where to store created clips.</value>
+  </data>
+  <data name="StorageLogLocation" xml:space="preserve">
+    <value>Log Storage</value>
+  </data>
+  <data name="StorageLogLocationTooltip" xml:space="preserve">
+    <value>Where to store application logs.</value>
+  </data>
+  <data name="StorageMatchLocation" xml:space="preserve">
+    <value>Game Data Storage</value>
+  </data>
+  <data name="StorageMatchLocationTooltip" xml:space="preserve">
+    <value>Where to store game match data.</value>
+  </data>
+  <data name="StorageScreenshotLocation" xml:space="preserve">
+    <value>Screenshot Storage</value>
+  </data>
+  <data name="StorageScreenshotLocationTooltip" xml:space="preserve">
+    <value>Where to store captured screenshots.</value>
+  </data>
+  <data name="StorageVodLocation" xml:space="preserve">
+    <value>VOD Storage</value>
+  </data>
+  <data name="StorageVodLocationTooltip" xml:space="preserve">
+    <value>Where to store recorded VODs.</value>
   </data>
   <data name="SystemMinimizeOnClose" xml:space="preserve">
     <value>Minimize on Close</value>

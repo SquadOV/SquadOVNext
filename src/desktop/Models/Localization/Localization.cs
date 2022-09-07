@@ -50,12 +50,18 @@ namespace SquadOV.Models.Localization
             _obsAbout = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("About", x))
                     .ToProperty(this, x => x.About);
+            _obsButtonBrowse = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ButtonBrowse", x))
+                    .ToProperty(this, x => x.ButtonBrowse);
             _obsDialogCancel = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DialogCancel", x))
                     .ToProperty(this, x => x.DialogCancel);
             _obsDialogOk = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DialogOk", x))
                     .ToProperty(this, x => x.DialogOk);
+            _obsErrorStorageFolder = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ErrorStorageFolder", x))
+                    .ToProperty(this, x => x.ErrorStorageFolder);
             _obsLanguageEnglish = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("LanguageEnglish", x))
                     .ToProperty(this, x => x.LanguageEnglish);
@@ -107,6 +113,36 @@ namespace SquadOV.Models.Localization
             _obsSplashLoading = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SplashLoading", x))
                     .ToProperty(this, x => x.SplashLoading);
+            _obsStorageClipLocation = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageClipLocation", x))
+                    .ToProperty(this, x => x.StorageClipLocation);
+            _obsStorageClipLocationTooltip = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageClipLocationTooltip", x))
+                    .ToProperty(this, x => x.StorageClipLocationTooltip);
+            _obsStorageLogLocation = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageLogLocation", x))
+                    .ToProperty(this, x => x.StorageLogLocation);
+            _obsStorageLogLocationTooltip = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageLogLocationTooltip", x))
+                    .ToProperty(this, x => x.StorageLogLocationTooltip);
+            _obsStorageMatchLocation = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageMatchLocation", x))
+                    .ToProperty(this, x => x.StorageMatchLocation);
+            _obsStorageMatchLocationTooltip = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageMatchLocationTooltip", x))
+                    .ToProperty(this, x => x.StorageMatchLocationTooltip);
+            _obsStorageScreenshotLocation = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageScreenshotLocation", x))
+                    .ToProperty(this, x => x.StorageScreenshotLocation);
+            _obsStorageScreenshotLocationTooltip = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageScreenshotLocationTooltip", x))
+                    .ToProperty(this, x => x.StorageScreenshotLocationTooltip);
+            _obsStorageVodLocation = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageVodLocation", x))
+                    .ToProperty(this, x => x.StorageVodLocation);
+            _obsStorageVodLocationTooltip = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StorageVodLocationTooltip", x))
+                    .ToProperty(this, x => x.StorageVodLocationTooltip);
             _obsSystemMinimizeOnClose = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SystemMinimizeOnClose", x))
                     .ToProperty(this, x => x.SystemMinimizeOnClose);
@@ -121,11 +157,17 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsAbout;
         public string About { get => _obsAbout.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsButtonBrowse;
+        public string ButtonBrowse { get => _obsButtonBrowse.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsDialogCancel;
         public string DialogCancel { get => _obsDialogCancel.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsDialogOk;
         public string DialogOk { get => _obsDialogOk.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsErrorStorageFolder;
+        public string ErrorStorageFolder { get => _obsErrorStorageFolder.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsLanguageEnglish;
         public string LanguageEnglish { get => _obsLanguageEnglish.Value; }
@@ -177,6 +219,36 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsSplashLoading;
         public string SplashLoading { get => _obsSplashLoading.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageClipLocation;
+        public string StorageClipLocation { get => _obsStorageClipLocation.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageClipLocationTooltip;
+        public string StorageClipLocationTooltip { get => _obsStorageClipLocationTooltip.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageLogLocation;
+        public string StorageLogLocation { get => _obsStorageLogLocation.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageLogLocationTooltip;
+        public string StorageLogLocationTooltip { get => _obsStorageLogLocationTooltip.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageMatchLocation;
+        public string StorageMatchLocation { get => _obsStorageMatchLocation.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageMatchLocationTooltip;
+        public string StorageMatchLocationTooltip { get => _obsStorageMatchLocationTooltip.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageScreenshotLocation;
+        public string StorageScreenshotLocation { get => _obsStorageScreenshotLocation.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageScreenshotLocationTooltip;
+        public string StorageScreenshotLocationTooltip { get => _obsStorageScreenshotLocationTooltip.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageVodLocation;
+        public string StorageVodLocation { get => _obsStorageVodLocation.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStorageVodLocationTooltip;
+        public string StorageVodLocationTooltip { get => _obsStorageVodLocationTooltip.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSystemMinimizeOnClose;
         public string SystemMinimizeOnClose { get => _obsSystemMinimizeOnClose.Value; }

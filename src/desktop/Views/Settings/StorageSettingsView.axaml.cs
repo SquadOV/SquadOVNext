@@ -14,7 +14,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using Avalonia;
 using Avalonia.ReactiveUI;
+using ReactiveUI;
+using System.Reactive.Linq;
+using System.Reactive.Disposables;
+using Avalonia.Controls.ApplicationLifetimes;
+using System.Reactive;
+using System.Threading.Tasks;
+using Avalonia.Controls;
 
 namespace SquadOV.Views.Settings
 {
@@ -23,6 +31,29 @@ namespace SquadOV.Views.Settings
         public StorageSettingsView()
         {
             InitializeComponent();
+
+            this.WhenActivated(disposables =>
+            {
+                ViewModel!.FolderBrowseInteraction.RegisterHandler(ShowFolderBrowser).DisposeWith(disposables);
+                ViewModel!.ErrorMessageInteraction.RegisterHandler(ShowMessageBox).DisposeWith(disposables);
+            });
+        }
+
+        private async Task ShowFolderBrowser(InteractionContext<Unit, string?> interaction)
+        {
+            var dialog = new OpenFolderDialog();
+            var folder = await dialog.ShowAsync(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            interaction.SetOutput(folder);
+        }
+
+        private async Task ShowMessageBox(InteractionContext<string, Unit> interaction)
+        {
+            var dialog = new Dialogs.MessageBox()
+            {
+                DataContext = new ViewModels.Dialogs.MessageBoxViewModel(interaction.Input),
+            };
+            await dialog.ShowDialog(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            interaction.SetOutput(new Unit());
         }
     }
 }

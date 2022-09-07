@@ -42,7 +42,11 @@ namespace SquadOV.Services.Config
             }
             else
             {
-                _model = Toml.ToModel<Models.Settings.ConfigModel>(File.ReadAllText(ConfigFile));
+                var opts = new TomlModelOptions()
+                {
+                    IgnoreMissingProperties = true,
+                };
+                _model = Toml.ToModel<Models.Settings.ConfigModel>(File.ReadAllText(ConfigFile), ConfigFile, opts);
             }
 
             _model.FillInMissing(defaultModel);

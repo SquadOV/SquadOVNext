@@ -120,11 +120,17 @@
   <data name="About" xml:space="preserve">
     <value>SquadOV es un software de código abierto para grabar, mirar y compartir VOD de juegos.</value>
   </data>
+  <data name="ButtonBrowse" xml:space="preserve">
+    <value>Navegar</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
   <data name="DialogOk" xml:space="preserve">
     <value>De acuerdo</value>
+  </data>
+  <data name="ErrorStorageFolder" xml:space="preserve">
+    <value>Debe elegir una carpeta que esté vacía y que no sea una unidad raíz (por ejemplo, la unidad C:\).</value>
   </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>Inglés, Estados Unidos</value>
@@ -176,6 +182,36 @@
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Cargando...</value>
+  </data>
+  <data name="StorageClipLocation" xml:space="preserve">
+    <value>Almacenamiento de clips</value>
+  </data>
+  <data name="StorageClipLocationTooltip" xml:space="preserve">
+    <value>Dónde almacenar los clips creados.</value>
+  </data>
+  <data name="StorageLogLocation" xml:space="preserve">
+    <value>Almacenamiento de registro</value>
+  </data>
+  <data name="StorageLogLocationTooltip" xml:space="preserve">
+    <value>Dónde almacenar los registros de la aplicación.</value>
+  </data>
+  <data name="StorageMatchLocation" xml:space="preserve">
+    <value>Almacenamiento de datos del juego</value>
+  </data>
+  <data name="StorageMatchLocationTooltip" xml:space="preserve">
+    <value>Dónde almacenar los datos de los partidos del juego.</value>
+  </data>
+  <data name="StorageScreenshotLocation" xml:space="preserve">
+    <value>Almacenamiento de capturas de pantalla</value>
+  </data>
+  <data name="StorageScreenshotLocationTooltip" xml:space="preserve">
+    <value>Dónde almacenar capturas de pantalla capturadas.</value>
+  </data>
+  <data name="StorageVodLocation" xml:space="preserve">
+    <value>Almacenamiento de vídeo</value>
+  </data>
+  <data name="StorageVodLocationTooltip" xml:space="preserve">
+    <value>Dónde almacenar videos grabados.</value>
   </data>
   <data name="SystemMinimizeOnClose" xml:space="preserve">
     <value>Minimizar al cerrar</value>

@@ -55,11 +55,39 @@ namespace SquadOV.Models.Settings
 
     public class CoreConfigModel: BaseConfigModel
     {
-        private string? _databasePath;
-        public string? DatabasePath
+        private string? _vodPath;
+        public string? VodPath
         {
-            get => _databasePath;
-            set => this.RaiseAndSetIfChanged(ref _databasePath, value);
+            get => _vodPath;
+            set => this.RaiseAndSetIfChanged(ref _vodPath, value);
+        }
+
+        private string? _clipPath;
+        public string? ClipPath
+        {
+            get => _clipPath;
+            set => this.RaiseAndSetIfChanged(ref _clipPath, value);
+        }
+
+        private string? _screenshotPath;
+        public string? ScreenshotPath
+        {
+            get => _screenshotPath;
+            set => this.RaiseAndSetIfChanged(ref _screenshotPath, value);
+        }
+
+        private string? _matchPath;
+        public string? MatchPath
+        {
+            get => _matchPath;
+            set => this.RaiseAndSetIfChanged(ref _matchPath, value);
+        }
+
+        private string? _logPath;
+        public string? LogPath
+        {
+            get => _logPath;
+            set => this.RaiseAndSetIfChanged(ref _logPath, value);
         }
 
         private string? _culture;
@@ -85,9 +113,14 @@ namespace SquadOV.Models.Settings
 
         public static CoreConfigModel CreateDefault(string location)
         {
+            var dbPath = Path.Combine(location, "Storage");
             return new CoreConfigModel()
             {
-                DatabasePath = Path.Combine(location, "Database"),
+                VodPath = Path.Combine(dbPath, "VOD"),
+                ClipPath = Path.Combine(dbPath, "Clip"),
+                ScreenshotPath = Path.Combine(dbPath, "Screenshot"),
+                LogPath = Path.Combine(dbPath, "Log"),
+                MatchPath = Path.Combine(dbPath, "Match"),
                 Culture = "en",
                 MinimizeOnClose = true,
                 MinimizeToSystemTray = true,
