@@ -123,11 +123,29 @@
   <data name="ButtonBrowse" xml:space="preserve">
     <value>Parcourir</value>
   </data>
+  <data name="ChooseIdentityRequirements" xml:space="preserve">
+    <value>Un nom d'utilisateur est requis et la balise doit comporter au moins 4 caractères.</value>
+  </data>
+  <data name="ChooseProfilePicture" xml:space="preserve">
+    <value>Choisissez une photo de profil (max 128x128).</value>
+  </data>
+  <data name="ChooseUsername" xml:space="preserve">
+    <value>Choisissez un nom d'utilisateur et une balise uniques.</value>
+  </data>
+  <data name="CreateUserInstruction" xml:space="preserve">
+    <value>Bienvenue sur SquadOV ! Configurez votre profil.</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
   <data name="DialogOk" xml:space="preserve">
     <value>D'accord</value>
+  </data>
+  <data name="DialogSave" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="DragAndDropOrClick" xml:space="preserve">
+    <value>Faites glisser et déposez le(s) fichier(s) ou cliquez ici !</value>
   </data>
   <data name="ErrorStorageFolder" xml:space="preserve">
     <value>Vous devez choisir un dossier vide et qui n'est pas un lecteur racine (par exemple, le lecteur C:\).</value>
@@ -144,6 +162,9 @@
   <data name="LanguageSpanish" xml:space="preserve">
     <value>Espagnole</value>
   </data>
+  <data name="LoadingIdentity" xml:space="preserve">
+    <value>Chargement de l'identité...</value>
+  </data>
   <data name="NavHome" xml:space="preserve">
     <value>Maison</value>
   </data>
@@ -152,6 +173,12 @@
   </data>
   <data name="NoUpdateAvailable" xml:space="preserve">
     <value>Pas de mise a jour disponible</value>
+  </data>
+  <data name="ProfilePictureChooseBuiltIn" xml:space="preserve">
+    <value>Choisissez une photo de profil intégrée.</value>
+  </data>
+  <data name="ProfilePictureUploadOwn" xml:space="preserve">
+    <value>Téléchargez votre propre photo de profil.</value>
   </data>
   <data name="QuitConfirm" xml:space="preserve">
     <value>Quitter</value>

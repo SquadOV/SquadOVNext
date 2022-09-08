@@ -123,11 +123,29 @@
   <data name="ButtonBrowse" xml:space="preserve">
     <value>Navegar</value>
   </data>
+  <data name="ChooseIdentityRequirements" xml:space="preserve">
+    <value>Se requiere un nombre de usuario y la etiqueta debe tener al menos 4 caracteres.</value>
+  </data>
+  <data name="ChooseProfilePicture" xml:space="preserve">
+    <value>Elija una imagen de perfil (máx. 128x128).</value>
+  </data>
+  <data name="ChooseUsername" xml:space="preserve">
+    <value>Elija un nombre de usuario y una etiqueta únicos.</value>
+  </data>
+  <data name="CreateUserInstruction" xml:space="preserve">
+    <value>¡Bienvenido a SquadOV! Configure su perfil.</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
   <data name="DialogOk" xml:space="preserve">
     <value>De acuerdo</value>
+  </data>
+  <data name="DialogSave" xml:space="preserve">
+    <value>Ahorrar</value>
+  </data>
+  <data name="DragAndDropOrClick" xml:space="preserve">
+    <value>¡Arrastre y suelte los archivos o haga clic aquí!</value>
   </data>
   <data name="ErrorStorageFolder" xml:space="preserve">
     <value>Debe elegir una carpeta que esté vacía y que no sea una unidad raíz (por ejemplo, la unidad C:\).</value>
@@ -144,6 +162,9 @@
   <data name="LanguageSpanish" xml:space="preserve">
     <value>Espagnol</value>
   </data>
+  <data name="LoadingIdentity" xml:space="preserve">
+    <value>Cargando Identidad...</value>
+  </data>
   <data name="NavHome" xml:space="preserve">
     <value>Hogar</value>
   </data>
@@ -152,6 +173,12 @@
   </data>
   <data name="NoUpdateAvailable" xml:space="preserve">
     <value>No hay actualizaciones disponibles</value>
+  </data>
+  <data name="ProfilePictureChooseBuiltIn" xml:space="preserve">
+    <value>Elija una imagen de perfil integrada.</value>
+  </data>
+  <data name="ProfilePictureUploadOwn" xml:space="preserve">
+    <value>Sube tu propia foto de perfil.</value>
   </data>
   <data name="QuitConfirm" xml:space="preserve">
     <value>Abandonar</value>

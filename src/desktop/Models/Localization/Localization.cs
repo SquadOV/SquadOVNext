@@ -49,109 +49,136 @@ namespace SquadOV.Models.Localization
             systemService.CultureChange += (v) => Culture = v;
             _obsAbout = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("About", x))
-                    .ToProperty(this, x => x.About);
+                    .ToProperty(this, nameof(About), deferSubscription: true);
             _obsButtonBrowse = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("ButtonBrowse", x))
-                    .ToProperty(this, x => x.ButtonBrowse);
+                    .ToProperty(this, nameof(ButtonBrowse), deferSubscription: true);
+            _obsChooseIdentityRequirements = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ChooseIdentityRequirements", x))
+                    .ToProperty(this, nameof(ChooseIdentityRequirements), deferSubscription: true);
+            _obsChooseProfilePicture = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ChooseProfilePicture", x))
+                    .ToProperty(this, nameof(ChooseProfilePicture), deferSubscription: true);
+            _obsChooseUsername = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ChooseUsername", x))
+                    .ToProperty(this, nameof(ChooseUsername), deferSubscription: true);
+            _obsCreateUserInstruction = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("CreateUserInstruction", x))
+                    .ToProperty(this, nameof(CreateUserInstruction), deferSubscription: true);
             _obsDialogCancel = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DialogCancel", x))
-                    .ToProperty(this, x => x.DialogCancel);
+                    .ToProperty(this, nameof(DialogCancel), deferSubscription: true);
             _obsDialogOk = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DialogOk", x))
-                    .ToProperty(this, x => x.DialogOk);
+                    .ToProperty(this, nameof(DialogOk), deferSubscription: true);
+            _obsDialogSave = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DialogSave", x))
+                    .ToProperty(this, nameof(DialogSave), deferSubscription: true);
+            _obsDragAndDropOrClick = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DragAndDropOrClick", x))
+                    .ToProperty(this, nameof(DragAndDropOrClick), deferSubscription: true);
             _obsErrorStorageFolder = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("ErrorStorageFolder", x))
-                    .ToProperty(this, x => x.ErrorStorageFolder);
+                    .ToProperty(this, nameof(ErrorStorageFolder), deferSubscription: true);
             _obsLanguageEnglish = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("LanguageEnglish", x))
-                    .ToProperty(this, x => x.LanguageEnglish);
+                    .ToProperty(this, nameof(LanguageEnglish), deferSubscription: true);
             _obsLanguageFrench = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("LanguageFrench", x))
-                    .ToProperty(this, x => x.LanguageFrench);
+                    .ToProperty(this, nameof(LanguageFrench), deferSubscription: true);
             _obsLanguageSelect = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("LanguageSelect", x))
-                    .ToProperty(this, x => x.LanguageSelect);
+                    .ToProperty(this, nameof(LanguageSelect), deferSubscription: true);
             _obsLanguageSpanish = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("LanguageSpanish", x))
-                    .ToProperty(this, x => x.LanguageSpanish);
+                    .ToProperty(this, nameof(LanguageSpanish), deferSubscription: true);
+            _obsLoadingIdentity = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("LoadingIdentity", x))
+                    .ToProperty(this, nameof(LoadingIdentity), deferSubscription: true);
             _obsNavHome = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NavHome", x))
-                    .ToProperty(this, x => x.NavHome);
+                    .ToProperty(this, nameof(NavHome), deferSubscription: true);
             _obsNavSettings = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NavSettings", x))
-                    .ToProperty(this, x => x.NavSettings);
+                    .ToProperty(this, nameof(NavSettings), deferSubscription: true);
             _obsNoUpdateAvailable = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NoUpdateAvailable", x))
-                    .ToProperty(this, x => x.NoUpdateAvailable);
+                    .ToProperty(this, nameof(NoUpdateAvailable), deferSubscription: true);
+            _obsProfilePictureChooseBuiltIn = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ProfilePictureChooseBuiltIn", x))
+                    .ToProperty(this, nameof(ProfilePictureChooseBuiltIn), deferSubscription: true);
+            _obsProfilePictureUploadOwn = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ProfilePictureUploadOwn", x))
+                    .ToProperty(this, nameof(ProfilePictureUploadOwn), deferSubscription: true);
             _obsQuitConfirm = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("QuitConfirm", x))
-                    .ToProperty(this, x => x.QuitConfirm);
+                    .ToProperty(this, nameof(QuitConfirm), deferSubscription: true);
             _obsQuitText = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("QuitText", x))
-                    .ToProperty(this, x => x.QuitText);
+                    .ToProperty(this, nameof(QuitText), deferSubscription: true);
             _obsSettingsAbout = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsAbout", x))
-                    .ToProperty(this, x => x.SettingsAbout);
+                    .ToProperty(this, nameof(SettingsAbout), deferSubscription: true);
             _obsSettingsApp = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsApp", x))
-                    .ToProperty(this, x => x.SettingsApp);
+                    .ToProperty(this, nameof(SettingsApp), deferSubscription: true);
             _obsSettingsCheckForUpdates = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsCheckForUpdates", x))
-                    .ToProperty(this, x => x.SettingsCheckForUpdates);
+                    .ToProperty(this, nameof(SettingsCheckForUpdates), deferSubscription: true);
             _obsSettingsLanguage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsLanguage", x))
-                    .ToProperty(this, x => x.SettingsLanguage);
+                    .ToProperty(this, nameof(SettingsLanguage), deferSubscription: true);
             _obsSettingsOther = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsOther", x))
-                    .ToProperty(this, x => x.SettingsOther);
+                    .ToProperty(this, nameof(SettingsOther), deferSubscription: true);
             _obsSettingsStorage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsStorage", x))
-                    .ToProperty(this, x => x.SettingsStorage);
+                    .ToProperty(this, nameof(SettingsStorage), deferSubscription: true);
             _obsSettingsSystem = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsSystem", x))
-                    .ToProperty(this, x => x.SettingsSystem);
+                    .ToProperty(this, nameof(SettingsSystem), deferSubscription: true);
             _obsSplashLoading = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SplashLoading", x))
-                    .ToProperty(this, x => x.SplashLoading);
+                    .ToProperty(this, nameof(SplashLoading), deferSubscription: true);
             _obsStorageClipLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageClipLocation", x))
-                    .ToProperty(this, x => x.StorageClipLocation);
+                    .ToProperty(this, nameof(StorageClipLocation), deferSubscription: true);
             _obsStorageClipLocationTooltip = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageClipLocationTooltip", x))
-                    .ToProperty(this, x => x.StorageClipLocationTooltip);
+                    .ToProperty(this, nameof(StorageClipLocationTooltip), deferSubscription: true);
             _obsStorageLogLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageLogLocation", x))
-                    .ToProperty(this, x => x.StorageLogLocation);
+                    .ToProperty(this, nameof(StorageLogLocation), deferSubscription: true);
             _obsStorageLogLocationTooltip = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageLogLocationTooltip", x))
-                    .ToProperty(this, x => x.StorageLogLocationTooltip);
+                    .ToProperty(this, nameof(StorageLogLocationTooltip), deferSubscription: true);
             _obsStorageMatchLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageMatchLocation", x))
-                    .ToProperty(this, x => x.StorageMatchLocation);
+                    .ToProperty(this, nameof(StorageMatchLocation), deferSubscription: true);
             _obsStorageMatchLocationTooltip = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageMatchLocationTooltip", x))
-                    .ToProperty(this, x => x.StorageMatchLocationTooltip);
+                    .ToProperty(this, nameof(StorageMatchLocationTooltip), deferSubscription: true);
             _obsStorageScreenshotLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageScreenshotLocation", x))
-                    .ToProperty(this, x => x.StorageScreenshotLocation);
+                    .ToProperty(this, nameof(StorageScreenshotLocation), deferSubscription: true);
             _obsStorageScreenshotLocationTooltip = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageScreenshotLocationTooltip", x))
-                    .ToProperty(this, x => x.StorageScreenshotLocationTooltip);
+                    .ToProperty(this, nameof(StorageScreenshotLocationTooltip), deferSubscription: true);
             _obsStorageVodLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageVodLocation", x))
-                    .ToProperty(this, x => x.StorageVodLocation);
+                    .ToProperty(this, nameof(StorageVodLocation), deferSubscription: true);
             _obsStorageVodLocationTooltip = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageVodLocationTooltip", x))
-                    .ToProperty(this, x => x.StorageVodLocationTooltip);
+                    .ToProperty(this, nameof(StorageVodLocationTooltip), deferSubscription: true);
             _obsSystemMinimizeOnClose = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SystemMinimizeOnClose", x))
-                    .ToProperty(this, x => x.SystemMinimizeOnClose);
+                    .ToProperty(this, nameof(SystemMinimizeOnClose), deferSubscription: true);
             _obsSystemMinimizeToSysTray = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SystemMinimizeToSysTray", x))
-                    .ToProperty(this, x => x.SystemMinimizeToSysTray);
+                    .ToProperty(this, nameof(SystemMinimizeToSysTray), deferSubscription: true);
             _obsUpdateCheck = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("UpdateCheck", x))
-                    .ToProperty(this, x => x.UpdateCheck);
+                    .ToProperty(this, nameof(UpdateCheck), deferSubscription: true);
         }
 
         private readonly ObservableAsPropertyHelper<string> _obsAbout;
@@ -160,11 +187,29 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsButtonBrowse;
         public string ButtonBrowse { get => _obsButtonBrowse.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsChooseIdentityRequirements;
+        public string ChooseIdentityRequirements { get => _obsChooseIdentityRequirements.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsChooseProfilePicture;
+        public string ChooseProfilePicture { get => _obsChooseProfilePicture.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsChooseUsername;
+        public string ChooseUsername { get => _obsChooseUsername.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsCreateUserInstruction;
+        public string CreateUserInstruction { get => _obsCreateUserInstruction.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsDialogCancel;
         public string DialogCancel { get => _obsDialogCancel.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsDialogOk;
         public string DialogOk { get => _obsDialogOk.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDialogSave;
+        public string DialogSave { get => _obsDialogSave.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDragAndDropOrClick;
+        public string DragAndDropOrClick { get => _obsDragAndDropOrClick.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsErrorStorageFolder;
         public string ErrorStorageFolder { get => _obsErrorStorageFolder.Value; }
@@ -181,6 +226,9 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsLanguageSpanish;
         public string LanguageSpanish { get => _obsLanguageSpanish.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsLoadingIdentity;
+        public string LoadingIdentity { get => _obsLoadingIdentity.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsNavHome;
         public string NavHome { get => _obsNavHome.Value; }
 
@@ -189,6 +237,12 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsNoUpdateAvailable;
         public string NoUpdateAvailable { get => _obsNoUpdateAvailable.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsProfilePictureChooseBuiltIn;
+        public string ProfilePictureChooseBuiltIn { get => _obsProfilePictureChooseBuiltIn.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsProfilePictureUploadOwn;
+        public string ProfilePictureUploadOwn { get => _obsProfilePictureUploadOwn.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsQuitConfirm;
         public string QuitConfirm { get => _obsQuitConfirm.Value; }

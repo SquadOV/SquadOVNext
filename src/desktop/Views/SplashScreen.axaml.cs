@@ -14,9 +14,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using ReactiveUI;
 using SquadOV.ViewModels;
+using System.Reactive;
+using System.Reactive.Disposables;
+using System.Threading.Tasks;
 
 namespace SquadOV.Views
 {
@@ -25,6 +31,22 @@ namespace SquadOV.Views
         public SplashScreen()
         {
             InitializeComponent();
+
+            this.WhenActivated(disposables =>
+            {
+                ViewModel!.CreateUserIdentityInteraction.RegisterHandler(ShowUserIdentityCreationDialog).DisposeWith(disposables);
+            });
+        }
+
+        private async Task ShowUserIdentityCreationDialog(InteractionContext<Unit, Models.Identity.UserIdentity> interaction)
+        {
+            var vm = new ViewModels.Dialogs.CreateUserIdentityViewModel();
+            var dialog = new Dialogs.CreateEditUserIdentity()
+            {
+                DataContext = vm,
+            };
+            await dialog.ShowDialog(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            interaction.SetOutput(vm.User);
         }
     }
 }

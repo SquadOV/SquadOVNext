@@ -1,0 +1,109 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+        x:Class="SquadOV.Views.Dialogs.CreateEditUserIdentity"
+        Width="800" Height="500"
+        Title="CreateEditUserIdentity"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        HasSystemDecorations="False">
+  <Window.Background>
+    <SolidColorBrush Color="#202020"></SolidColorBrush>
+  </Window.Background>
+
+  <Border
+    BorderBrush="Black"
+    BorderThickness="2">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+      <TextBlock
+        Classes="h6"
+        Margin="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="{Binding Loc.CreateUserInstruction}">
+      </TextBlock>
+
+      <TextBlock
+        Classes="subheader"
+        Margin="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="{Binding Loc.ChooseProfilePicture}">
+      </TextBlock>
+
+      <Button
+        Command="{Binding ChooseProfilePictureCommand}"
+        HorizontalAlignment="Center"
+        Margin="0,0,0,20">
+        <Canvas
+          Width="150"
+          Height="150">
+          <Panel Width="150" Height="150">
+            <Image
+              HorizontalAlignment="Center"
+              MaxWidth="128"
+              MaxHeight="128"
+              Source="{Binding User.Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=128}">
+            </Image>
+          </Panel>
+
+          <Image
+            Canvas.Bottom="8"
+            Canvas.Right="8"
+            Width="24"
+            Height="24"
+            Source="/Assets/Buttons/plus-circle.png">
+          </Image>
+        </Canvas>
+      </Button>
+
+      <TextBlock
+        Classes="subheader"
+        Margin="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="{Binding Loc.ChooseUsername}">
+      </TextBlock>
+
+      <StackPanel
+        HorizontalAlignment="Center"
+        Orientation="Horizontal"
+        Margin="0,0,0,20">
+
+        <TextBox Watermark="Username" MinWidth="100" Text="{Binding User.Username}"></TextBox>
+        <TextBlock Margin="8,0,8,0" Classes="h6" VerticalAlignment="Center" >#</TextBlock>
+        <TextBox Watermark="Tag" MinWidth="100" Text="{Binding User.Tag}"></TextBox>
+      </StackPanel>
+
+      <TextBlock
+        Classes="error"
+        IsVisible="{Binding !User.IsValid}"
+        Margin="0,0,0,20"
+        TextAlignment="Center"
+        HorizontalAlignment="Center"
+        TextWrapping="Wrap"
+        Text="{Binding Loc.ChooseIdentityRequirements}">
+      </TextBlock>
+
+      <Button
+        Width="100"
+        HorizontalContentAlignment="Center"
+        HorizontalAlignment="Center"
+        IsEnabled="{Binding User.IsValid}"
+        Command="{Binding CloseCommand}"
+        Content="{Binding Loc.DialogSave}">
+        <Button.Styles>
+          <Style Selector="Button">
+            <Setter Property="Background" Value="#505050" />
+          </Style>
+        </Button.Styles>
+      </Button>
+    </StackPanel>
+  </Border>
+</Window>

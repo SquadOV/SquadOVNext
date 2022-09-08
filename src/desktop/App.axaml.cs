@@ -39,15 +39,6 @@ namespace SquadOV
 
         public override void OnFrameworkInitializationCompleted()
         {
-            // The config service needs to be loaded first since everything will rely on the config somewhat.
-            Locator.CurrentMutable.RegisterConstant(new Services.Config.ConfigService(), typeof(Services.Config.IConfigService));
-            // Dealing with foundational stuff related to how the app runs (e.g. "system settings").
-            Locator.CurrentMutable.RegisterConstant(new Services.System.SystemService(), typeof(Services.System.ISystemService));
-            // The engine service is primarily reponsible for most of the behind the scenes work the app will do - recording, etc.
-            Locator.CurrentMutable.RegisterConstant(new Services.Engine.EngineService(), typeof(Services.Engine.IEngineService));
-            // Reactive localization so we can change this at runtime without usings restarting.
-            Locator.CurrentMutable.RegisterConstant(new Models.Localization.Localization());
-
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var mainWindow = new Views.MainWindow()

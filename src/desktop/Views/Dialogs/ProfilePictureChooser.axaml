@@ -1,0 +1,116 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+        Width="1280" Height="720"
+        x:Class="SquadOV.Views.Dialogs.ProfilePictureChooser"
+        x:Name="View"
+        Title="ProfilePictureChooser"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True">
+  <Window.Background>
+    <SolidColorBrush Color="#202020"></SolidColorBrush>
+  </Window.Background>
+
+  <Border
+    BorderBrush="Black"
+    BorderThickness="2">
+    <Grid Margin="48">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+
+      <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="48"></RowDefinition>
+          <RowDefinition Height="2*"></RowDefinition>
+          <RowDefinition Height="48"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Classes="subheader" Grid.Row="0" Text="{Binding Loc.ProfilePictureChooseBuiltIn}"/>
+
+        <ScrollViewer Grid.Row="1">
+          <WrapPanel>
+            <ItemsControl Items="{Binding PictureChoices}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Panel Margin="0,0,8,8">
+                    <Button Command="{Binding ElementName=View, Path=DataContext.ChangePictureFromHexEncoded}" CommandParameter="{Binding}">
+                      <Image
+                        Height="64"
+                        Source="{Binding, Converter={StaticResource profilePictureConverter}, ConverterParameter=64}}">
+                      </Image>
+                    </Button>
+                  </Panel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </WrapPanel>
+        </ScrollViewer>
+
+        <TextBlock Classes="subheader" Grid.Row="2" Text="{Binding Loc.ProfilePictureUploadOwn}"/>
+
+        <Border
+          Grid.Row="3"
+          BorderBrush="#AAAAAA"
+          Background="#333333"
+          BorderThickness="2"
+          Padding="24">
+          <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image
+              Margin="0,0,0,16"
+              Height="48"
+              Source="/Assets/Buttons/plus-circle.png">
+            </Image>
+            <TextBlock Text="{Binding Loc.DragAndDropOrClick}"></TextBlock>
+          </StackPanel>
+        </Border>
+      </Grid>
+      
+      <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock
+          Classes="subheader"
+          Margin="0,0,0,20"
+          TextAlignment="Center"
+          HorizontalAlignment="Center"
+          TextWrapping="Wrap"
+          Text="{Binding Loc.ChooseProfilePicture}">
+        </TextBlock>
+
+        <Image
+          Margin="0,0,0,20"
+          HorizontalAlignment="Center"
+          MaxWidth="128"
+          MaxHeight="128"
+          Source="{Binding Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=128}">
+        </Image>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+          <Button HorizontalContentAlignment="Center" Margin="0,0,16,0" Width="70" Command="{Binding CancelCommand}" Content="{Binding Loc.DialogCancel}">
+            <Button.Styles>
+              <Style Selector="Button">
+                <Setter Property="Background" Value="#505050" />
+              </Style>
+            </Button.Styles>
+          </Button>
+          
+          <Button HorizontalContentAlignment="Center" Width="70" Command="{Binding SaveCommand}" Content="{Binding Loc.DialogSave}">
+            <Button.Styles>
+              <Style Selector="Button">
+                <Setter Property="Background" Value="#505050" />
+              </Style>
+            </Button.Styles>
+          </Button>
+        </StackPanel>
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

@@ -123,11 +123,29 @@
   <data name="ButtonBrowse" xml:space="preserve">
     <value>Browse</value>
   </data>
+  <data name="ChooseIdentityRequirements" xml:space="preserve">
+    <value>A username is required and the tag must be at least 4 characters long.</value>
+  </data>
+  <data name="ChooseProfilePicture" xml:space="preserve">
+    <value>Choose a profile picture (max 128x128).</value>
+  </data>
+  <data name="ChooseUsername" xml:space="preserve">
+    <value>Choose a unique username and tag.</value>
+  </data>
+  <data name="CreateUserInstruction" xml:space="preserve">
+    <value>Welcome to SquadOV! Setup your profile.</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="DialogOk" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="DialogSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="DragAndDropOrClick" xml:space="preserve">
+    <value>Drag and drop file(s) or click here!</value>
   </data>
   <data name="ErrorStorageFolder" xml:space="preserve">
     <value>You must choose a folder that is empty and is not a root drive (e.g. the C:\ drive).</value>
@@ -144,6 +162,9 @@
   <data name="LanguageSpanish" xml:space="preserve">
     <value>Spanish</value>
   </data>
+  <data name="LoadingIdentity" xml:space="preserve">
+    <value>Loading Identity...</value>
+  </data>
   <data name="NavHome" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -152,6 +173,12 @@
   </data>
   <data name="NoUpdateAvailable" xml:space="preserve">
     <value>No update available.</value>
+  </data>
+  <data name="ProfilePictureChooseBuiltIn" xml:space="preserve">
+    <value>Choose a built-in profile picture.</value>
+  </data>
+  <data name="ProfilePictureUploadOwn" xml:space="preserve">
+    <value>Upload your own profile picture.</value>
   </data>
   <data name="QuitConfirm" xml:space="preserve">
     <value>Quit</value>
