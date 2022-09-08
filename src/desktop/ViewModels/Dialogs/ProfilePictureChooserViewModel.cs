@@ -14,14 +14,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using Avalonia.Media.Imaging;
 using ReactiveUI;
 using Splat;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Platform;
+using Avalonia;
+using SquadOV.Converters;
+using System.Threading;
 
 namespace SquadOV.ViewModels.Dialogs
 {
@@ -41,11 +48,23 @@ namespace SquadOV.ViewModels.Dialogs
 
         public ReactiveCommand<Unit, Unit> SaveCommand { get; }
 
+        public Interaction<Unit, string?> SelectProfilePictureFilesystemInteraction;
+        public ReactiveCommand<Unit, Unit> SelectProfilePictureFilesystemCommand { get; }
+
         public ProfilePictureChooserViewModel(string currentPicture)
         {
             _picture = currentPicture;
             CancelCommand = ReactiveCommand.Create(() => { });
             SaveCommand = ReactiveCommand.Create(() => { });
+            SelectProfilePictureFilesystemInteraction = new Interaction<Unit, string?>();
+            SelectProfilePictureFilesystemCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var newPic = await SelectProfilePictureFilesystemInteraction.Handle(new Unit());
+                if (newPic != null)
+                {
+                    ChangePictureFromFilename(newPic);
+                }
+            });
         }
 
         public void ChangePictureFromHexEncoded(string data)
@@ -55,6 +74,36 @@ namespace SquadOV.ViewModels.Dialogs
 
         public void ChangePictureFromFilename(string filename)
         {
+            if (!File.Exists(filename))
+            {
+                return;
+            }
+
+            var bm = new Bitmap(filename);
+            var desiredSize = bm.PixelSize;
+
+            if (desiredSize.Width > 128)
+            {
+                desiredSize = new PixelSize(
+                    128,
+                    (int)(128 / desiredSize.AspectRatio)
+                );
+            }
+
+            if (desiredSize.Height > 128)
+            {
+                desiredSize = new PixelSize(
+                    (int)(128 * desiredSize.AspectRatio),
+                    128
+                );
+            }
+
+            if (desiredSize != bm.PixelSize)
+            {
+                bm = bm.CreateScaledBitmap(desiredSize);
+            }
+            
+            Picture = (string)ProfilePictureConverter.Instance.ConvertBack(bm, typeof(string), null, Thread.CurrentThread.CurrentUICulture);
         }
     }
 }

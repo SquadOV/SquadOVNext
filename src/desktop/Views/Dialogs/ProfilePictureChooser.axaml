@@ -24,13 +24,13 @@
 
       <Grid Grid.Column="0">
         <Grid.RowDefinitions>
-          <RowDefinition Height="48"></RowDefinition>
+          <RowDefinition Height="32"></RowDefinition>
           <RowDefinition Height="2*"></RowDefinition>
-          <RowDefinition Height="48"></RowDefinition>
+          <RowDefinition Height="32"></RowDefinition>
           <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Classes="subheader" Grid.Row="0" Text="{Binding Loc.ProfilePictureChooseBuiltIn}"/>
+        <TextBlock VerticalAlignment="Center" Classes="subheader" Grid.Row="0" Text="{Binding Loc.ProfilePictureChooseBuiltIn}"/>
 
         <ScrollViewer Grid.Row="1">
           <WrapPanel>
@@ -56,23 +56,30 @@
           </WrapPanel>
         </ScrollViewer>
 
-        <TextBlock Classes="subheader" Grid.Row="2" Text="{Binding Loc.ProfilePictureUploadOwn}"/>
+        <TextBlock VerticalAlignment="Center"  Classes="subheader" Grid.Row="2" Text="{Binding Loc.ProfilePictureUploadOwn}"/>
 
-        <Border
+        <Button
+          Command="{Binding SelectProfilePictureFilesystemCommand}"
           Grid.Row="3"
-          BorderBrush="#AAAAAA"
-          Background="#333333"
-          BorderThickness="2"
-          Padding="24">
-          <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image
-              Margin="0,0,0,16"
-              Height="48"
-              Source="/Assets/Buttons/plus-circle.png">
-            </Image>
-            <TextBlock Text="{Binding Loc.DragAndDropOrClick}"></TextBlock>
-          </StackPanel>
-        </Border>
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          DragDrop.AllowDrop="True">
+          <Border
+            Grid.Row="3"
+            BorderBrush="#AAAAAA"
+            Background="#333333"
+            BorderThickness="2"
+            Padding="24">
+              <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image
+                  Margin="0,0,0,16"
+                  Height="48"
+                  Source="/Assets/Buttons/plus-circle.png">
+                </Image>
+                <TextBlock Text="{Binding Loc.DragAndDropOrClick}"></TextBlock>
+              </StackPanel>
+          </Border>
+        </Button>
       </Grid>
       
       <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">

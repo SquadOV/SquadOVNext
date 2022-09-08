@@ -14,10 +14,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using System;
+using System.Linq;
+using System.Reactive;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SquadOV.Views.Dialogs
 {
@@ -38,7 +46,68 @@ namespace SquadOV.Views.Dialogs
                 {
                     Close(ViewModel!.Picture);
                 }).DisposeWith(disposables);
+
+                ViewModel!.SelectProfilePictureFilesystemInteraction.RegisterHandler(ShowSelectProfilePictureDialog).DisposeWith(disposables);
             });
+
+            AddHandler(DragDrop.DropEvent, DropHandler);
+            AddHandler(DragDrop.DragOverEvent, DragOverHandler);
+        }
+
+        private async Task ShowSelectProfilePictureDialog(InteractionContext<Unit, string?> interaction)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                AllowMultiple = false,
+                Filters = new List<FileDialogFilter>()
+                {
+                    new FileDialogFilter()
+                    {
+                        Extensions = new List<string>()
+                        {
+                            "bmp",
+                            "png",
+                            "jpg",
+                            "jpeg"
+                        },
+                        Name = "Images",
+                    }
+                },
+            };
+
+            var files = await dialog.ShowAsync(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            if (files == null || files.Length == 0)
+            {
+                interaction.SetOutput(null);
+            }
+            else
+            {
+                interaction.SetOutput(files[0]);
+            }
+            
+        }
+
+        private void DragOverHandler(object? sender, DragEventArgs args)
+        {
+            if (!args.Data.Contains(DataFormats.FileNames))
+            {
+                args.DragEffects = DragDropEffects.None;
+            }
+            else
+            {
+                args.DragEffects = DragDropEffects.Copy;
+            }
+        }
+
+        private void DropHandler(object? sender, DragEventArgs args)
+        {
+            if (!args.Data.Contains(DataFormats.FileNames))
+            {
+                return;
+            }
+
+            args.DragEffects = args.DragEffects & DragDropEffects.Copy;
+            ViewModel!.ChangePictureFromFilename(args.Data.GetFileNames()!.First());
         }
     }
 }

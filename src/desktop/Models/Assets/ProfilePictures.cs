@@ -23,6 +23,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using SquadOV.Converters;
+using System.Threading;
 
 namespace SquadOV.Models.Assets
 {
@@ -37,9 +39,7 @@ namespace SquadOV.Models.Assets
                     .Select(x =>
                     {
                         var bm = new Bitmap(assets.Open(x));
-                        var byteStream = new MemoryStream();
-                        bm.Save(byteStream);
-                        return Convert.ToBase64String(byteStream.ToArray());
+                        return (string)ProfilePictureConverter.Instance.ConvertBack(bm, typeof(string), null, Thread.CurrentThread.CurrentUICulture);
                     })
                     .ToList();
             }
