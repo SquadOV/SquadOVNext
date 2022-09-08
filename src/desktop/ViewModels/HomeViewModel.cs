@@ -15,15 +15,36 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 using ReactiveUI;
+using System;
+using System.Linq;
+using System.Reactive.Linq;
+using Splat;
 
 namespace SquadOV.ViewModels
 {
     public class HomeViewModel: ReactiveObject, IRoutableViewModel
     {
+        private Services.Identity.IIdentityService _identity;
         public IScreen HostScreen { get; }
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
 
         public string UrlPathSegment { get; } = "/";
+        public Models.Identity.UserIdentity User
+        {
+            get => _identity.User;
+        }
 
-        public HomeViewModel(IScreen screen) => HostScreen = screen;
+        private readonly ObservableAsPropertyHelper<string> _welcomeMessage;
+        public string WelcomeMessage { get => _welcomeMessage.Value; }
+
+        public HomeViewModel(IScreen screen)
+        {
+            _identity = Locator.Current.GetService<Services.Identity.IIdentityService>();
+            HostScreen = screen;
+
+            _welcomeMessage = this.WhenAnyValue(x => x.Loc.WelcomeMessage, x => x.User.Username)
+                .Select(((string fmt, string username) inp) => string.Format(inp.fmt ?? "{0}", inp.username))
+                .ToProperty(this, x => x.WelcomeMessage);
+        }
     }
 }

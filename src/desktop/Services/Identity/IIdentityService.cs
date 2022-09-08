@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 
 namespace SquadOV.Services.Identity
 {
+
     internal interface IIdentityService
     {
         Models.Identity.UserIdentity User { get; set; }

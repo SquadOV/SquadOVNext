@@ -44,7 +44,6 @@ namespace SquadOV.ViewModels
         public MainWindowViewModel()
         {
             _config = Locator.Current.GetService<Services.Config.IConfigService>()!;
-            GoHome();
         }
     }
 }

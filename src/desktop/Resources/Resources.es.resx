@@ -249,4 +249,7 @@
   <data name="UpdateCheck" xml:space="preserve">
     <value>Comprobando actualizaciones...</value>
   </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>¡Bienvenida de nuevo, {0}!</value>
+  </data>
 </root>

@@ -4,5 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SquadOV.Views.Main.HomeView">
-  Home
+  <DockPanel>
+    <DockPanel Height="48" DockPanel.Dock="Top">
+      <DockPanel.Background>
+        <SolidColorBrush Color="#252525"></SolidColorBrush>
+      </DockPanel.Background>
+
+      <StackPanel
+        Margin="8"
+        Orientation="Horizontal"
+        DockPanel.Dock="Left">
+        <Image
+          Source="{Binding User.Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=32}"
+          VerticalAlignment="Center"
+          Margin="0,0,16,0"
+          Height="32">
+        </Image>
+
+        <TextBlock VerticalAlignment="Center" Text="{Binding WelcomeMessage}"></TextBlock>
+      </StackPanel>
+
+    </DockPanel>
+
+    <Panel></Panel>
+  </DockPanel>
 </UserControl>

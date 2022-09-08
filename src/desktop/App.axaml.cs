@@ -55,6 +55,7 @@ namespace SquadOV
                 // Only after all the above is done do we want to actually want to show the main window and proceed with normal operating behavior.
                 splashScreen.ViewModel.LoadingFinished += delegate ()
                 {
+                    mainWindow.ViewModel!.GoHome();
                     desktop.MainWindow = mainWindow;
                     desktop.MainWindow.Show();
                     splashScreen.Close();

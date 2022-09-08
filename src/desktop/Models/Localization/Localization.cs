@@ -179,6 +179,9 @@ namespace SquadOV.Models.Localization
             _obsUpdateCheck = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("UpdateCheck", x))
                     .ToProperty(this, nameof(UpdateCheck), deferSubscription: true);
+            _obsWelcomeMessage = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("WelcomeMessage", x))
+                    .ToProperty(this, nameof(WelcomeMessage), deferSubscription: true);
         }
 
         private readonly ObservableAsPropertyHelper<string> _obsAbout;
@@ -312,6 +315,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsUpdateCheck;
         public string UpdateCheck { get => _obsUpdateCheck.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsWelcomeMessage;
+        public string WelcomeMessage { get => _obsWelcomeMessage.Value; }
 
 
         public string Get(string key, CultureInfo? info = null)
