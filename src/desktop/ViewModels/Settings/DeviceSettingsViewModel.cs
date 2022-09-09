@@ -15,19 +15,20 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 using ReactiveUI;
-using System;
+using Splat;
+using SquadOV.Models.Settings;
+using System.Collections.Generic;
 
-namespace SquadOV.Locators
+namespace SquadOV.ViewModels.Settings
 {
-    public class SettingsViewLocator: IViewLocator
+    public class DeviceSettingsViewModel : ReactiveObject, IRoutableViewModel
     {
-        public IViewFor? ResolveView<T>(T viewModel, string? contract = null) => viewModel switch
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
+        public IScreen HostScreen { get; }
+        public string UrlPathSegment { get; } = "/devices";
+        public DeviceSettingsViewModel(IScreen parent)
         {
-            ViewModels.Settings.StorageSettingsViewModel context => new Views.Settings.StorageSettingsView { DataContext = context },
-            ViewModels.Settings.SystemSettingsViewModel context => new Views.Settings.SystemSettingsView { DataContext = context },
-            ViewModels.Settings.LanguageSettingsViewModel context => new Views.Settings.LanguageSettingsView { DataContext = context },
-            ViewModels.Settings.ProfileSettingsViewModel context => new Views.Settings.ProfileSettingsView { DataContext = context },
-            _ => null,
-        };
+            HostScreen = parent;
+        }
     }
 }

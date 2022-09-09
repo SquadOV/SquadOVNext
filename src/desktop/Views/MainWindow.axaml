@@ -6,6 +6,7 @@
         xmlns:sqvm="using:SquadOV.ViewModels"
         xmlns:p="using:SquadOV.Resources"
         xmlns:sql="using:SquadOV.Locators"
+        xmlns:v="using:SquadOV.Views"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="SquadOV.Views.MainWindow"
         WindowStartupLocation="CenterScreen" 
@@ -162,9 +163,7 @@
 
         <rxui:RoutedViewHost Router="{Binding Router}" PageTransition="{x:Null}">
           <rxui:RoutedViewHost.DefaultContent>
-            <TextBlock Text="Page Not Found!"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center" />
+            <v:UnderConstruction/>
           </rxui:RoutedViewHost.DefaultContent>
           <rxui:RoutedViewHost.ViewLocator>
             <sql:AppViewLocator />

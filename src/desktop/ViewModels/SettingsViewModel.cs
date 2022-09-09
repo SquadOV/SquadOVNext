@@ -55,13 +55,13 @@ namespace SquadOV.ViewModels
         public void GoToSystemSettings() => Router.Navigate.Execute(new SystemSettingsViewModel(this));
         public void GoToLanguageSettings() => Router.Navigate.Execute(new LanguageSettingsViewModel(this));
         public void GoToProfileSettings() => Router.Navigate.Execute(new ProfileSettingsViewModel(this));
-        public void GoToDeviceSettings() {}
-        public void GoToVideoRecordSettings() { }
-        public void GoToAudioRecordSettings() { }
-        public void GoToClipSettings() { }
-        public void GoToScreenshotSettings() { }
-        public void GoToOverlaySettings() { }
-        public void GoToCustomGameSettings() { }
+        public void GoToDeviceSettings() => Router.Navigate.Execute(new DeviceSettingsViewModel(this));
+        public void GoToVideoRecordSettings() => Router.Navigate.Execute(new VideoSettingsViewModel(this));
+        public void GoToAudioRecordSettings() => Router.Navigate.Execute(new AudioSettingsViewModel(this));
+        public void GoToClipSettings() => Router.Navigate.Execute(new ClipSettingsViewModel(this));
+        public void GoToScreenshotSettings() => Router.Navigate.Execute(new ScreenshotSettingsViewModel(this));
+        public void GoToOverlaySettings() => Router.Navigate.Execute(new OverlaySettingsViewModel(this));
+        public void GoToCustomGameSettings() => Router.Navigate.Execute(new CustomGameSettingsViewModel(this));
 
         public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }

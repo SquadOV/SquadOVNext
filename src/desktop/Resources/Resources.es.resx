@@ -297,6 +297,9 @@
   <data name="SystemMinimizeToSysTray" xml:space="preserve">
     <value>Minimizar a la bandeja del sistema</value>
   </data>
+  <data name="UnderConstruction" xml:space="preserve">
+    <value>¡En construcción, vuelva a consultar en una actualización futura!</value>
+  </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>Comprobando actualizaciones...</value>
   </data>

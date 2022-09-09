@@ -300,6 +300,9 @@
   <data name="SystemMinimizeToSysTray" xml:space="preserve">
     <value>Minimize to System Tray</value>
   </data>
+  <data name="UnderConstruction" xml:space="preserve">
+    <value>Under construction, check back in a future update!</value>
+  </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>Checking for updates...</value>
   </data>

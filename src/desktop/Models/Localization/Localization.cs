@@ -230,6 +230,9 @@ namespace SquadOV.Models.Localization
             _obsSystemMinimizeToSysTray = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SystemMinimizeToSysTray", x))
                     .ToProperty(this, nameof(SystemMinimizeToSysTray), deferSubscription: true);
+            _obsUnderConstruction = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("UnderConstruction", x))
+                    .ToProperty(this, nameof(UnderConstruction), deferSubscription: true);
             _obsUpdateCheck = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("UpdateCheck", x))
                     .ToProperty(this, nameof(UpdateCheck), deferSubscription: true);
@@ -426,6 +429,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsSystemMinimizeToSysTray;
         public string SystemMinimizeToSysTray { get => _obsSystemMinimizeToSysTray.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsUnderConstruction;
+        public string UnderConstruction { get => _obsUnderConstruction.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsUpdateCheck;
         public string UpdateCheck { get => _obsUpdateCheck.Value; }
