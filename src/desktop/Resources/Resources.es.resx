@@ -210,8 +210,17 @@
   <data name="SettingsApp" xml:space="preserve">
     <value>Ajustes de Aplicacion</value>
   </data>
+  <data name="SettingsAudioRecord" xml:space="preserve">
+    <value>Audio</value>
+  </data>
   <data name="SettingsCheckForUpdates" xml:space="preserve">
     <value>Buscar actualizaciones</value>
+  </data>
+  <data name="SettingsClip" xml:space="preserve">
+    <value>Clip</value>
+  </data>
+  <data name="SettingsDevices" xml:space="preserve">
+    <value>Dispositivos</value>
   </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Idioma</value>
@@ -219,11 +228,26 @@
   <data name="SettingsOther" xml:space="preserve">
     <value>Otra</value>
   </data>
+  <data name="SettingsOverlay" xml:space="preserve">
+    <value>Cubrir</value>
+  </data>
+  <data name="SettingsProfile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="SettingsRecord" xml:space="preserve">
+    <value>Grabación</value>
+  </data>
+  <data name="SettingsScreenshot" xml:space="preserve">
+    <value>Captura de pantalla</value>
+  </data>
   <data name="SettingsStorage" xml:space="preserve">
     <value>Almacenamiento</value>
   </data>
   <data name="SettingsSystem" xml:space="preserve">
     <value>Sistema</value>
+  </data>
+  <data name="SettingsVideoRecord" xml:space="preserve">
+    <value>Video</value>
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Cargando...</value>

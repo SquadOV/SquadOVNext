@@ -140,21 +140,45 @@ namespace SquadOV.Models.Localization
             _obsSettingsApp = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsApp", x))
                     .ToProperty(this, nameof(SettingsApp), deferSubscription: true);
+            _obsSettingsAudioRecord = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsAudioRecord", x))
+                    .ToProperty(this, nameof(SettingsAudioRecord), deferSubscription: true);
             _obsSettingsCheckForUpdates = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsCheckForUpdates", x))
                     .ToProperty(this, nameof(SettingsCheckForUpdates), deferSubscription: true);
+            _obsSettingsClip = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsClip", x))
+                    .ToProperty(this, nameof(SettingsClip), deferSubscription: true);
+            _obsSettingsDevices = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsDevices", x))
+                    .ToProperty(this, nameof(SettingsDevices), deferSubscription: true);
             _obsSettingsLanguage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsLanguage", x))
                     .ToProperty(this, nameof(SettingsLanguage), deferSubscription: true);
             _obsSettingsOther = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsOther", x))
                     .ToProperty(this, nameof(SettingsOther), deferSubscription: true);
+            _obsSettingsProfile = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsProfile", x))
+                    .ToProperty(this, nameof(SettingsProfile), deferSubscription: true);
+            _obsSettingsRecord = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsRecord", x))
+                    .ToProperty(this, nameof(SettingsRecord), deferSubscription: true);
+            _obsSettingsScreenshot = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsScreenshot", x))
+                    .ToProperty(this, nameof(SettingsScreenshot), deferSubscription: true);
             _obsSettingsStorage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsStorage", x))
                     .ToProperty(this, nameof(SettingsStorage), deferSubscription: true);
             _obsSettingsSystem = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsSystem", x))
                     .ToProperty(this, nameof(SettingsSystem), deferSubscription: true);
+            _obsSettingsUser = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsUser", x))
+                    .ToProperty(this, nameof(SettingsUser), deferSubscription: true);
+            _obsSettingsVideoRecord = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsVideoRecord", x))
+                    .ToProperty(this, nameof(SettingsVideoRecord), deferSubscription: true);
             _obsSplashLoading = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SplashLoading", x))
                     .ToProperty(this, nameof(SplashLoading), deferSubscription: true);
@@ -298,8 +322,17 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsSettingsApp;
         public string SettingsApp { get => _obsSettingsApp.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsAudioRecord;
+        public string SettingsAudioRecord { get => _obsSettingsAudioRecord.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsSettingsCheckForUpdates;
         public string SettingsCheckForUpdates { get => _obsSettingsCheckForUpdates.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsClip;
+        public string SettingsClip { get => _obsSettingsClip.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsDevices;
+        public string SettingsDevices { get => _obsSettingsDevices.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsLanguage;
         public string SettingsLanguage { get => _obsSettingsLanguage.Value; }
@@ -307,11 +340,26 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsSettingsOther;
         public string SettingsOther { get => _obsSettingsOther.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsProfile;
+        public string SettingsProfile { get => _obsSettingsProfile.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsRecord;
+        public string SettingsRecord { get => _obsSettingsRecord.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsScreenshot;
+        public string SettingsScreenshot { get => _obsSettingsScreenshot.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsSettingsStorage;
         public string SettingsStorage { get => _obsSettingsStorage.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsSystem;
         public string SettingsSystem { get => _obsSettingsSystem.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsUser;
+        public string SettingsUser { get => _obsSettingsUser.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsVideoRecord;
+        public string SettingsVideoRecord { get => _obsSettingsVideoRecord.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSplashLoading;
         public string SplashLoading { get => _obsSplashLoading.Value; }

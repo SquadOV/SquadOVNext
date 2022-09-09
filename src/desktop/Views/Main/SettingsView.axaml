@@ -36,6 +36,43 @@
         </Style>
       </ScrollViewer.Styles>
       <StackPanel Orientation="Vertical" Margin="10">
+        <TextBlock Classes="header" Text="{Binding Loc.SettingsUser}"/>
+        <Button x:Name="ProfileSettingsButton" Command="{Binding GoToProfileSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsProfile}"></TextBlock>
+        </Button>
+        <Button x:Name="DeviceSettingsButton" Command="{Binding GoToDeviceSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsDevices}"></TextBlock>
+        </Button>
+
+        <Panel Height="2" Margin="0,10,0,10">
+          <Panel.Background>
+            <SolidColorBrush Color="#55FFFFFF"></SolidColorBrush>
+          </Panel.Background>
+        </Panel>
+
+        <TextBlock Classes="header" Text="{Binding Loc.SettingsRecord}"/>
+        <Button x:Name="VideoRecordSettingsButton" Command="{Binding GoToVideoRecordSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsVideoRecord}"></TextBlock>
+        </Button>
+        <Button x:Name="AudioRecordSettingsButton" Command="{Binding GoToAudioRecordSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsAudioRecord}"></TextBlock>
+        </Button>
+        <Button x:Name="ClipSettingsButton" Command="{Binding GoToClipSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsClip}"></TextBlock>
+        </Button>
+        <Button x:Name="ScreenshotSettingsButton" Command="{Binding GoToScreenshotSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsScreenshot}"></TextBlock>
+        </Button>
+        <Button x:Name="OverlaySettingsButton" Command="{Binding GoToOverlaySettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsOverlay}"></TextBlock>
+        </Button>
+
+        <Panel Height="2" Margin="0,10,0,10">
+          <Panel.Background>
+            <SolidColorBrush Color="#55FFFFFF"></SolidColorBrush>
+          </Panel.Background>
+        </Panel>
+
         <TextBlock Classes="header" Text="{Binding Loc.SettingsApp}"/>
         <Button x:Name="LanguageSettingsButton" Command="{Binding GoToLanguageSettings}">
           <TextBlock Classes="link" Text="{Binding Loc.SettingsLanguage}"></TextBlock>

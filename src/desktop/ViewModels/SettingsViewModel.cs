@@ -54,6 +54,13 @@ namespace SquadOV.ViewModels
         public void GoToStorageSettings() => Router.Navigate.Execute(new StorageSettingsViewModel(this));
         public void GoToSystemSettings() => Router.Navigate.Execute(new SystemSettingsViewModel(this));
         public void GoToLanguageSettings() => Router.Navigate.Execute(new LanguageSettingsViewModel(this));
+        public void GoToProfileSettings() {}
+        public void GoToDeviceSettings() {}
+        public void GoToVideoRecordSettings() { }
+        public void GoToAudioRecordSettings() { }
+        public void GoToClipSettings() { }
+        public void GoToScreenshotSettings() { }
+        public void GoToOverlaySettings() { }
 
         public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }

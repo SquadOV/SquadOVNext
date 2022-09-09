@@ -210,8 +210,17 @@
   <data name="SettingsApp" xml:space="preserve">
     <value>Paramètres de l'application</value>
   </data>
+  <data name="SettingsAudioRecord" xml:space="preserve">
+    <value>L'audio</value>
+  </data>
   <data name="SettingsCheckForUpdates" xml:space="preserve">
     <value>Vérifier les mises à jour</value>
+  </data>
+  <data name="SettingsClip" xml:space="preserve">
+    <value>Clip</value>
+  </data>
+  <data name="SettingsDevices" xml:space="preserve">
+    <value>Dispositifs</value>
   </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Langue</value>
@@ -219,11 +228,26 @@
   <data name="SettingsOther" xml:space="preserve">
     <value>Autre</value>
   </data>
+  <data name="SettingsOverlay" xml:space="preserve">
+    <value>Recouvrir</value>
+  </data>
+  <data name="SettingsProfile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="SettingsRecord" xml:space="preserve">
+    <value>Enregistrement</value>
+  </data>
+  <data name="SettingsScreenshot" xml:space="preserve">
+    <value>Capture d'écran</value>
+  </data>
   <data name="SettingsStorage" xml:space="preserve">
     <value>Stockage</value>
   </data>
   <data name="SettingsSystem" xml:space="preserve">
     <value>Système</value>
+  </data>
+  <data name="SettingsVideoRecord" xml:space="preserve">
+    <value>Vidéo</value>
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Chargement...</value>

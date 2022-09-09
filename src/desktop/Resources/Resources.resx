@@ -210,8 +210,17 @@
   <data name="SettingsApp" xml:space="preserve">
     <value>App Settings</value>
   </data>
+  <data name="SettingsAudioRecord" xml:space="preserve">
+    <value>Audio</value>
+  </data>
   <data name="SettingsCheckForUpdates" xml:space="preserve">
     <value>Check for Updates</value>
+  </data>
+  <data name="SettingsClip" xml:space="preserve">
+    <value>Clip</value>
+  </data>
+  <data name="SettingsDevices" xml:space="preserve">
+    <value>Devices</value>
   </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Language</value>
@@ -219,11 +228,29 @@
   <data name="SettingsOther" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="SettingsOverlay" xml:space="preserve">
+    <value>Overlay</value>
+  </data>
+  <data name="SettingsProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="SettingsRecord" xml:space="preserve">
+    <value>Recording</value>
+  </data>
+  <data name="SettingsScreenshot" xml:space="preserve">
+    <value>Screenshot</value>
+  </data>
   <data name="SettingsStorage" xml:space="preserve">
     <value>Storage</value>
   </data>
   <data name="SettingsSystem" xml:space="preserve">
     <value>System</value>
+  </data>
+  <data name="SettingsUser" xml:space="preserve">
+    <value>User Settings</value>
+  </data>
+  <data name="SettingsVideoRecord" xml:space="preserve">
+    <value>Video</value>
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Loading...</value>

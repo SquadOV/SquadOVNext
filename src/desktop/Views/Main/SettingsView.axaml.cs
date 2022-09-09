@@ -64,6 +64,76 @@ namespace SquadOV.Views.Main
                     .BindTo(this, x => x.LanguageSettingsButton.Background)
                     .DisposeWith(disposables);
 
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/profile") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.ProfileSettingsButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/devices") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.DeviceSettingsButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/video") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.VideoRecordSettingsButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/audio") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.AudioRecordSettingsButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/clip") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.ClipSettingsButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/screenshot") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.ScreenshotSettingsButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/overlay") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.OverlaySettingsButton.Background)
+                    .DisposeWith(disposables);
+
                 ViewModel!.ShowAboutInteraction.RegisterHandler(ShowAboutDialog).DisposeWith(disposables);
                 ViewModel!.CheckUpdatesInteraction.RegisterHandler(ShowCheckUpdatesDialog).DisposeWith(disposables);
             });
