@@ -32,6 +32,7 @@
     </ResourceDictionary>
     
     <c:ProfilePictureConverter x:Key="profilePictureConverter"/>
+    <c:AssetConverter x:Key="assetConverter"/>
   </Application.Resources>
 
   <TrayIcon.Icons>

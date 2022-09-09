@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="using:SquadOV.Views.Settings"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SquadOV.Views.Settings.DeviceSettingsView">
+  <StackPanel Margin="16">
+    <StackPanel Orientation="Horizontal">
+      <TextBlock VerticalAlignment="Center" Margin="0,0,16,0" Classes="h6" Text="{Binding Loc.SettingsDevices}"></TextBlock>
+      <Button Command="{Binding Save}" VerticalAlignment="Center" Classes="success" IsVisible="{Binding HasChanges}" Content="{Binding Loc.DialogSave}">
+      </Button>
+    </StackPanel>
+    <StackPanel Margin="0,16,0,0">
+      <StackPanel Orientation="Horizontal">
+        <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="subheader" Text="{Binding Loc.DeviceFriendly}"></TextBlock>
+        <TextBox Text="{Binding Device.FriendlyName}"></TextBox>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+        <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="subheader" Text="{Binding Loc.DeviceType}"></TextBlock>
+        <TextBlock Text="{Binding Device.DeviceTypeStr}"></TextBlock>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+        <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="subheader" Text="{Binding Loc.DeviceId}"></TextBlock>
+        <TextBlock Text="{Binding Device.StrId}"></TextBlock>
+      </StackPanel>
+    </StackPanel>
+    <ScrollViewer Margin="0,16,0,0">
+      <ItemsControl Items="{Binding DeviceStatus}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <v:DeviceStatusView DataContext="{Binding}"/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </StackPanel>
+</UserControl>

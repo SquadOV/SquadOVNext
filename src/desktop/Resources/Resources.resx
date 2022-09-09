@@ -141,6 +141,18 @@
   <data name="CreateUserInstruction" xml:space="preserve">
     <value>Welcome to SquadOV! Setup your profile.</value>
   </data>
+  <data name="DesktopWindows" xml:space="preserve">
+    <value>Desktop (Windows)</value>
+  </data>
+  <data name="DeviceFriendly" xml:space="preserve">
+    <value>Friendly Name</value>
+  </data>
+  <data name="DeviceId" xml:space="preserve">
+    <value>Device ID</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>Device Type</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

@@ -141,6 +141,18 @@
   <data name="CreateUserInstruction" xml:space="preserve">
     <value>¡Bienvenido a SquadOV! Configure su perfil.</value>
   </data>
+  <data name="DesktopWindows" xml:space="preserve">
+    <value>Escritorio (Windows)</value>
+  </data>
+  <data name="DeviceFriendly" xml:space="preserve">
+    <value>Nombre amigable</value>
+  </data>
+  <data name="DeviceId" xml:space="preserve">
+    <value>Identificación del dispositivo</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>Tipo de dispositivo</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>

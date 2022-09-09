@@ -50,7 +50,7 @@ namespace SquadOV.Models.Localization
         private ResourceManager _manager;
         
         private CultureInfo _culture;
-        private CultureInfo Culture
+        public CultureInfo Culture
         {
             get => _culture;
             set => this.RaiseAndSetIfChanged(ref _culture, value);

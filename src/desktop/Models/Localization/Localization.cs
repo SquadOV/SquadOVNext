@@ -34,7 +34,7 @@ namespace SquadOV.Models.Localization
         private ResourceManager _manager;
         
         private CultureInfo _culture;
-        private CultureInfo Culture
+        public CultureInfo Culture
         {
             get => _culture;
             set => this.RaiseAndSetIfChanged(ref _culture, value);
@@ -71,6 +71,18 @@ namespace SquadOV.Models.Localization
             _obsCreateUserInstruction = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("CreateUserInstruction", x))
                     .ToProperty(this, nameof(CreateUserInstruction), deferSubscription: true);
+            _obsDesktopWindows = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DesktopWindows", x))
+                    .ToProperty(this, nameof(DesktopWindows), deferSubscription: true);
+            _obsDeviceFriendly = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DeviceFriendly", x))
+                    .ToProperty(this, nameof(DeviceFriendly), deferSubscription: true);
+            _obsDeviceId = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DeviceId", x))
+                    .ToProperty(this, nameof(DeviceId), deferSubscription: true);
+            _obsDeviceType = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DeviceType", x))
+                    .ToProperty(this, nameof(DeviceType), deferSubscription: true);
             _obsDialogCancel = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DialogCancel", x))
                     .ToProperty(this, nameof(DialogCancel), deferSubscription: true);
@@ -270,6 +282,18 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsCreateUserInstruction;
         public string CreateUserInstruction { get => _obsCreateUserInstruction.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDesktopWindows;
+        public string DesktopWindows { get => _obsDesktopWindows.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDeviceFriendly;
+        public string DeviceFriendly { get => _obsDeviceFriendly.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDeviceId;
+        public string DeviceId { get => _obsDeviceId.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDeviceType;
+        public string DeviceType { get => _obsDeviceType.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsDialogCancel;
         public string DialogCancel { get => _obsDialogCancel.Value; }

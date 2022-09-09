@@ -92,11 +92,7 @@ namespace SquadOV.Services.Identity
             // Load the device's identity - automatically generate if it doesn't already exist.
             if (File.Exists(DeviceIdentityPath))
             {
-                var opts = new TomlModelOptions()
-                {
-                    IgnoreMissingProperties = true,
-                };
-                Device = Toml.ToModel<Models.Identity.DeviceIdentity>(File.ReadAllText(DeviceIdentityPath), DeviceIdentityPath, opts);
+                Device = Toml.ToModel<Models.Identity.DeviceIdentity>(File.ReadAllText(DeviceIdentityPath), DeviceIdentityPath, Models.Identity.DeviceIdentity.TomlOptions);
             }
             else
             {
@@ -106,9 +102,16 @@ namespace SquadOV.Services.Identity
             if (!Device.IsValid)
             {
                 Device = Models.Identity.DeviceIdentity.Generate();
-                var toml = Toml.FromModel(Device);
-                File.WriteAllText(DeviceIdentityPath, toml);
+                OnDeviceIdentityChange(null, new PropertyChangedEventArgs(null));
             }
+
+            Device.PropertyChanged += OnDeviceIdentityChange;
+        }
+
+        private void OnDeviceIdentityChange(object? sender, PropertyChangedEventArgs args)
+        {
+            var toml = Toml.FromModel(Device, Models.Identity.DeviceIdentity.TomlOptions);
+            File.WriteAllText(DeviceIdentityPath, toml);
         }
 
         private void OnUserIdentityChange(object? sender, PropertyChangedEventArgs args)

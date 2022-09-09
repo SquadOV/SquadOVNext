@@ -16,19 +16,49 @@
 //
 using ReactiveUI;
 using Splat;
+using System.Reactive.Linq;
 using SquadOV.Models.Settings;
 using System.Collections.Generic;
+using System.Globalization;
+using SquadOV.Services.System;
 
 namespace SquadOV.ViewModels.Settings
 {
     public class DeviceSettingsViewModel : ReactiveObject, IRoutableViewModel
     {
+        private readonly Services.Identity.IIdentityService _identity = Locator.Current.GetService<Services.Identity.IIdentityService>()!;
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
         public string UrlPathSegment { get; } = "/devices";
+
+        public Models.Identity.DeviceIdentity CurrentDevice { get => _identity.Device; }
+        public Models.Identity.DeviceIdentity Device { get; }
+        private readonly ObservableAsPropertyHelper<bool> _hasChanges;
+        public bool HasChanges { get => _hasChanges.Value; }
+
+        // TODO: This needs to pull from the underlying engine service instead once we go networked.
+        public List<DeviceStatusViewModel> DeviceStatus { get; }
+
         public DeviceSettingsViewModel(IScreen parent)
         {
             HostScreen = parent;
+            Device = (Models.Identity.DeviceIdentity)_identity.Device.Clone();
+            _hasChanges = this.WhenAnyValue(
+                x => x.Device.FriendlyName,
+                x => x.CurrentDevice.FriendlyName
+            )
+                .Select(x => Device != CurrentDevice && Device.IsValid)
+                .ToProperty(this, x => x.HasChanges);
+
+            DeviceStatus = new List<DeviceStatusViewModel>()
+            {
+                new DeviceStatusViewModel(CurrentDevice)
+            };
+        }
+
+        public void Save()
+        {
+            CurrentDevice.FriendlyName = Device.FriendlyName;
         }
     }
 }
