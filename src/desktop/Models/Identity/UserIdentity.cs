@@ -25,7 +25,7 @@ using System.Security.Cryptography;
 
 namespace SquadOV.Models.Identity
 {
-    public class UserIdentity: ReactiveObject, ICloneable
+    public class UserIdentity: ReactiveObject, ICloneable, IEquatable<UserIdentity>
     {
         private string _username = "";
         public string Username
@@ -94,6 +94,37 @@ namespace SquadOV.Models.Identity
                 PublicKey = PublicKey,
                 PrivateKey = PrivateKey,
             };
+        }
+
+        public override bool Equals(object? obj) => this.Equals(obj as UserIdentity);
+        public bool Equals(UserIdentity? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return Username == other.Username
+                && Tag == other.Tag
+                && Picture == other.Picture
+                && PublicKey == other.PublicKey
+                && PrivateKey == other.PrivateKey;
+        }
+
+        public static bool operator==(UserIdentity? a, UserIdentity? b)
+        {
+            if (a is null || b is null)
+            {
+                return false;
+            }
+
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(UserIdentity? a, UserIdentity? b) => !(a == b);
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

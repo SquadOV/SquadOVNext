@@ -119,6 +119,9 @@ namespace SquadOV.Models.Localization
             _obsNoVods = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NoVods", x))
                     .ToProperty(this, nameof(NoVods), deferSubscription: true);
+            _obsProfilePicture = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ProfilePicture", x))
+                    .ToProperty(this, nameof(ProfilePicture), deferSubscription: true);
             _obsProfilePictureChooseBuiltIn = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("ProfilePictureChooseBuiltIn", x))
                     .ToProperty(this, nameof(ProfilePictureChooseBuiltIn), deferSubscription: true);
@@ -149,15 +152,24 @@ namespace SquadOV.Models.Localization
             _obsSettingsClip = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsClip", x))
                     .ToProperty(this, nameof(SettingsClip), deferSubscription: true);
+            _obsSettingsCustomGames = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsCustomGames", x))
+                    .ToProperty(this, nameof(SettingsCustomGames), deferSubscription: true);
             _obsSettingsDevices = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsDevices", x))
                     .ToProperty(this, nameof(SettingsDevices), deferSubscription: true);
+            _obsSettingsGames = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsGames", x))
+                    .ToProperty(this, nameof(SettingsGames), deferSubscription: true);
             _obsSettingsLanguage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsLanguage", x))
                     .ToProperty(this, nameof(SettingsLanguage), deferSubscription: true);
             _obsSettingsOther = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsOther", x))
                     .ToProperty(this, nameof(SettingsOther), deferSubscription: true);
+            _obsSettingsOverlay = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsOverlay", x))
+                    .ToProperty(this, nameof(SettingsOverlay), deferSubscription: true);
             _obsSettingsProfile = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsProfile", x))
                     .ToProperty(this, nameof(SettingsProfile), deferSubscription: true);
@@ -221,6 +233,9 @@ namespace SquadOV.Models.Localization
             _obsUpdateCheck = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("UpdateCheck", x))
                     .ToProperty(this, nameof(UpdateCheck), deferSubscription: true);
+            _obsUsernameTag = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("UsernameTag", x))
+                    .ToProperty(this, nameof(UsernameTag), deferSubscription: true);
             _obsVods = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("Vods", x))
                     .ToProperty(this, nameof(Vods), deferSubscription: true);
@@ -301,6 +316,9 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsNoVods;
         public string NoVods { get => _obsNoVods.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsProfilePicture;
+        public string ProfilePicture { get => _obsProfilePicture.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsProfilePictureChooseBuiltIn;
         public string ProfilePictureChooseBuiltIn { get => _obsProfilePictureChooseBuiltIn.Value; }
 
@@ -331,14 +349,23 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsSettingsClip;
         public string SettingsClip { get => _obsSettingsClip.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsCustomGames;
+        public string SettingsCustomGames { get => _obsSettingsCustomGames.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsSettingsDevices;
         public string SettingsDevices { get => _obsSettingsDevices.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsGames;
+        public string SettingsGames { get => _obsSettingsGames.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsLanguage;
         public string SettingsLanguage { get => _obsSettingsLanguage.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsOther;
         public string SettingsOther { get => _obsSettingsOther.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsOverlay;
+        public string SettingsOverlay { get => _obsSettingsOverlay.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsProfile;
         public string SettingsProfile { get => _obsSettingsProfile.Value; }
@@ -402,6 +429,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsUpdateCheck;
         public string UpdateCheck { get => _obsUpdateCheck.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsUsernameTag;
+        public string UsernameTag { get => _obsUsernameTag.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsVods;
         public string Vods { get => _obsVods.Value; }

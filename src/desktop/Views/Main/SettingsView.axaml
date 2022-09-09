@@ -89,6 +89,17 @@
             <SolidColorBrush Color="#55FFFFFF"></SolidColorBrush>
           </Panel.Background>
         </Panel>
+
+        <TextBlock Classes="header" Text="{Binding Loc.SettingsGames}"/>
+        <Button x:Name="CustomGamesSettingsButton" Command="{Binding GoToCustomGameSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsCustomGames}"></TextBlock>
+        </Button>
+
+        <Panel Height="2" Margin="0,10,0,10">
+          <Panel.Background>
+            <SolidColorBrush Color="#55FFFFFF"></SolidColorBrush>
+          </Panel.Background>
+        </Panel>
         
         <TextBlock Classes="header" Text="{Binding Loc.SettingsOther}"/>
         <Button Command="{Binding CheckUpdatesCommand}">

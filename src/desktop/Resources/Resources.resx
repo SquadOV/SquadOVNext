@@ -189,6 +189,9 @@
   <data name="NoVods" xml:space="preserve">
     <value>No videos have been recorded yet!</value>
   </data>
+  <data name="ProfilePicture" xml:space="preserve">
+    <value>Profile Picture</value>
+  </data>
   <data name="ProfilePictureChooseBuiltIn" xml:space="preserve">
     <value>Choose a built-in profile picture.</value>
   </data>
@@ -219,8 +222,14 @@
   <data name="SettingsClip" xml:space="preserve">
     <value>Clip</value>
   </data>
+  <data name="SettingsCustomGames" xml:space="preserve">
+    <value>Custom</value>
+  </data>
   <data name="SettingsDevices" xml:space="preserve">
     <value>Devices</value>
+  </data>
+  <data name="SettingsGames" xml:space="preserve">
+    <value>Games</value>
   </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Language</value>
@@ -293,6 +302,9 @@
   </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>Checking for updates...</value>
+  </data>
+  <data name="UsernameTag" xml:space="preserve">
+    <value>Username#Tag</value>
   </data>
   <data name="Vods" xml:space="preserve">
     <value>VODs</value>

@@ -20,6 +20,10 @@
       <Setter Property="FontSize" Value="12"/>
       <Setter Property="FontWeight" Value="Bold"/>
     </Style>
+
+    <Style Selector="Button.success">
+      <Setter Property="Background" Value="#09af00" />
+    </Style>
   </Application.Styles>
 
   <Application.Resources>

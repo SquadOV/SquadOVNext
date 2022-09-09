@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="using:SquadOV.Resources"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Name="View"
+             x:Class="SquadOV.Views.Settings.ProfileSettingsView">
+  <DockPanel Margin="16">
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+      <TextBlock VerticalAlignment="Center" Margin="0,0,16,0" Classes="h6" Text="{Binding Loc.SettingsProfile}"></TextBlock>
+      <Button Command="{Binding Save}" VerticalAlignment="Center" Classes="success" IsVisible="{Binding HasChanges}" Content="{Binding Loc.DialogSave}">
+      </Button>
+    </StackPanel>
+    <ScrollViewer Margin="0,16,0,0">
+      <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+        <TextBlock
+          Classes="subheader"
+          Margin="0,0,0,8"
+          TextWrapping="Wrap"
+          Text="{Binding Loc.ProfilePicture}">
+        </TextBlock>
+
+        <Button
+          Command="{Binding ChooseProfilePictureCommand}"
+          Margin="0,0,0,20">
+          <Canvas
+            Width="150"
+            Height="150">
+            <Panel Width="150" Height="150">
+              <Image
+                HorizontalAlignment="Center"
+                MaxWidth="128"
+                MaxHeight="128"
+                Source="{Binding User.Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=128}">
+              </Image>
+            </Panel>
+
+            <Image
+              Canvas.Bottom="8"
+              Canvas.Right="8"
+              Width="24"
+              Height="24"
+              Source="/Assets/Buttons/plus-circle.png">
+            </Image>
+          </Canvas>
+        </Button>
+
+        <StackPanel
+          Orientation="Horizontal"
+          Margin="0,0,0,20">
+          <TextBlock
+            Margin="0,0,16,0"
+            VerticalAlignment="Center"
+            Classes="subheader"
+            TextWrapping="Wrap"
+            Text="{Binding Loc.UsernameTag}">
+          </TextBlock>
+          <TextBox VerticalAlignment="Center" Watermark="Username" MinWidth="100" Text="{Binding User.Username}"></TextBox>
+          <TextBlock Margin="8,0,8,0" Classes="h6" VerticalAlignment="Center" >#</TextBlock>
+          <TextBox VerticalAlignment="Center" Watermark="Tag" MinWidth="100" Text="{Binding User.Tag}"></TextBox>
+        </StackPanel>
+
+        <TextBlock
+          Classes="error"
+          IsVisible="{Binding !User.IsValid}"
+          Margin="0,0,0,20"
+          TextAlignment="Center"
+          TextWrapping="Wrap"
+          Text="{Binding Loc.ChooseIdentityRequirements}">
+        </TextBlock>
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

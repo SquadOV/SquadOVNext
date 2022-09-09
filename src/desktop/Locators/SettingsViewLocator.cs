@@ -26,6 +26,7 @@ namespace SquadOV.Locators
             ViewModels.Settings.StorageSettingsViewModel context => new Views.Settings.StorageSettingsView { DataContext = context },
             ViewModels.Settings.SystemSettingsViewModel context => new Views.Settings.SystemSettingsView { DataContext = context },
             ViewModels.Settings.LanguageSettingsViewModel context => new Views.Settings.LanguageSettingsView { DataContext = context },
+            ViewModels.Settings.ProfileSettingsViewModel context => new Views.Settings.ProfileSettingsView { DataContext = context },
             _ => throw new ArgumentOutOfRangeException(nameof(viewModel))
         };
     }

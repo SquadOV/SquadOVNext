@@ -34,7 +34,7 @@ namespace SquadOV.ViewModels
         public SettingsViewModel(IScreen screen)
         {
             HostScreen = screen;
-            GoToStorageSettings();
+            GoToProfileSettings();
 
             ShowAboutInteraction = new Interaction<Dialogs.AboutViewModel, Unit>();
             ShowAboutCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -54,13 +54,14 @@ namespace SquadOV.ViewModels
         public void GoToStorageSettings() => Router.Navigate.Execute(new StorageSettingsViewModel(this));
         public void GoToSystemSettings() => Router.Navigate.Execute(new SystemSettingsViewModel(this));
         public void GoToLanguageSettings() => Router.Navigate.Execute(new LanguageSettingsViewModel(this));
-        public void GoToProfileSettings() {}
+        public void GoToProfileSettings() => Router.Navigate.Execute(new ProfileSettingsViewModel(this));
         public void GoToDeviceSettings() {}
         public void GoToVideoRecordSettings() { }
         public void GoToAudioRecordSettings() { }
         public void GoToClipSettings() { }
         public void GoToScreenshotSettings() { }
         public void GoToOverlaySettings() { }
+        public void GoToCustomGameSettings() { }
 
         public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
