@@ -19,14 +19,15 @@ using System;
 using System.Linq;
 using System.Reactive.Linq;
 using Splat;
+using System.Diagnostics.Metrics;
+using SquadOV.Models.Settings;
 
 namespace SquadOV.ViewModels
 {
     public class HomeViewModel: ReactiveObject, IRoutableViewModel
     {
-        public MainWindowViewModel Parent { get; }
         private Services.Identity.IIdentityService _identity;
-        public IScreen HostScreen { get => Parent; }
+        public IScreen HostScreen { get; }
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
 
         public string UrlPathSegment { get; } = "/";
@@ -38,14 +39,31 @@ namespace SquadOV.ViewModels
         private readonly ObservableAsPropertyHelper<string> _welcomeMessage;
         public string WelcomeMessage { get => _welcomeMessage.Value; }
 
+        public Library.VodLibraryViewModel VodVm { get; }
+        public void GoVods() => HostScreen.Router.Navigate.Execute(VodVm);
+
+        public Library.ClipLibraryViewModel ClipVm { get; }
+        public void GoClips() => HostScreen.Router.Navigate.Execute(ClipVm);
+
+
+        public Library.ScreenshotLibraryViewModel ScreenshotVm { get; }
+        public void GoScreenshots() => HostScreen.Router.Navigate.Execute(ScreenshotVm);
+
+        public Utility.ControlPanelViewModel ControlPanelVm { get; }
+
         public HomeViewModel(MainWindowViewModel screen)
         {
             _identity = Locator.Current.GetService<Services.Identity.IIdentityService>();
-            Parent = screen;
+            HostScreen = screen;
 
             _welcomeMessage = this.WhenAnyValue(x => x.Loc.WelcomeMessage, x => x.User.Username)
                 .Select(((string fmt, string username) inp) => string.Format(inp.fmt ?? "{0}", inp.username))
                 .ToProperty(this, x => x.WelcomeMessage);
+
+            VodVm = new Library.VodLibraryViewModel(HostScreen);
+            ClipVm = new Library.ClipLibraryViewModel(HostScreen);
+            ScreenshotVm = new Library.ScreenshotLibraryViewModel(HostScreen);
+            ControlPanelVm = new Utility.ControlPanelViewModel();
         }
     }
 }

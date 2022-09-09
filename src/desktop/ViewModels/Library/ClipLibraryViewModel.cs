@@ -15,6 +15,7 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 using ReactiveUI;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ namespace SquadOV.ViewModels.Library
 {
     public class ClipLibraryViewModel : ReactiveObject, IRoutableViewModel
     {
+        public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
 
-        public RoutingState Router { get; } = new RoutingState();
         public string UrlPathSegment { get; } = "/library/clips";
         public ClipLibraryViewModel(IScreen screen)
         {

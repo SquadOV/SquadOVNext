@@ -46,7 +46,7 @@
             Source="/Assets/Buttons/vods.png">
           </Image>
           <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="h6" Text="{Binding Loc.Vods}"></TextBlock>
-          <Button Command="{Binding Parent.GoVods}" Padding="0" VerticalAlignment="Center">
+          <Button Command="{Binding GoVods}" Padding="0" VerticalAlignment="Center">
             <Image
               Height="24"
               Source="/Assets/Buttons/arrow-right.png">
@@ -54,7 +54,7 @@
           </Button>
         </StackPanel>
         <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
-          <vl:VodLibrary/>
+          <vl:VodLibrary DataContext="{Binding VodVm}"/>
         </Border>
       </DockPanel>
       
@@ -78,7 +78,7 @@
               Source="/Assets/Buttons/clips.png">
             </Image>
             <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="h6" Text="{Binding Loc.Clips}"></TextBlock>
-            <Button Command="{Binding Parent.GoClips}" Padding="0" VerticalAlignment="Center">
+            <Button Command="{Binding GoClips}" Padding="0" VerticalAlignment="Center">
               <Image
                 Height="24"
                 Source="/Assets/Buttons/arrow-right.png">
@@ -86,7 +86,7 @@
             </Button>
           </StackPanel>
           <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
-            <vl:ClipLibrary/>
+            <vl:ClipLibrary DataContext="{Binding ClipVm}"/>
           </Border>
         </DockPanel>
 
@@ -101,7 +101,7 @@
               Source="/Assets/Buttons/screenshots.png">
             </Image>
             <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="h6" Text="{Binding Loc.Screenshots}"></TextBlock>
-            <Button Command="{Binding Parent.GoScreenshots}" Padding="0" VerticalAlignment="Center">
+            <Button Command="{Binding GoScreenshots}" Padding="0" VerticalAlignment="Center">
               <Image
                 Height="24"
                 Source="/Assets/Buttons/arrow-right.png">
@@ -109,7 +109,7 @@
             </Button>
           </StackPanel>
           <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
-            <vl:ScreenshotLibrary/>
+            <vl:ScreenshotLibrary DataContext="{Binding ScreenshotVm}"/>
           </Border>
         </DockPanel>
 
@@ -126,7 +126,7 @@
             <TextBlock VerticalAlignment="Center" Classes="h6" Text="{Binding Loc.ControlPanel}"></TextBlock>
           </StackPanel>
           <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
-            <vu:ControlPanel/>
+            <vu:ControlPanel DataContext="{Binding ControlPanelVm}"/>
           </Border>
         </DockPanel>
       </Grid>

@@ -4,5 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SquadOV.Views.Library.ScreenshotLibrary">
-  Welcome to Avalonia!
+  <DockPanel>
+    <Panel
+      Height="48"
+      DockPanel.Dock="Top"
+      Background="#252525">
+    </Panel>
+
+    <ScrollViewer>
+      <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Loc.NoScreenshots}"></TextBlock>
+    </ScrollViewer>
+  </DockPanel>
 </UserControl>

@@ -177,8 +177,17 @@
   <data name="NavSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="NoClips" xml:space="preserve">
+    <value>No clips have been created yet!</value>
+  </data>
+  <data name="NoScreenshots" xml:space="preserve">
+    <value>No screenshots have been taken yet!</value>
+  </data>
   <data name="NoUpdateAvailable" xml:space="preserve">
     <value>No update available.</value>
+  </data>
+  <data name="NoVods" xml:space="preserve">
+    <value>No videos have been recorded yet!</value>
   </data>
   <data name="ProfilePictureChooseBuiltIn" xml:space="preserve">
     <value>Choose a built-in profile picture.</value>

@@ -107,9 +107,18 @@ namespace SquadOV.Models.Localization
             _obsNavSettings = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NavSettings", x))
                     .ToProperty(this, nameof(NavSettings), deferSubscription: true);
+            _obsNoClips = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("NoClips", x))
+                    .ToProperty(this, nameof(NoClips), deferSubscription: true);
+            _obsNoScreenshots = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("NoScreenshots", x))
+                    .ToProperty(this, nameof(NoScreenshots), deferSubscription: true);
             _obsNoUpdateAvailable = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NoUpdateAvailable", x))
                     .ToProperty(this, nameof(NoUpdateAvailable), deferSubscription: true);
+            _obsNoVods = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("NoVods", x))
+                    .ToProperty(this, nameof(NoVods), deferSubscription: true);
             _obsProfilePictureChooseBuiltIn = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("ProfilePictureChooseBuiltIn", x))
                     .ToProperty(this, nameof(ProfilePictureChooseBuiltIn), deferSubscription: true);
@@ -256,8 +265,17 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsNavSettings;
         public string NavSettings { get => _obsNavSettings.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsNoClips;
+        public string NoClips { get => _obsNoClips.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsNoScreenshots;
+        public string NoScreenshots { get => _obsNoScreenshots.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsNoUpdateAvailable;
         public string NoUpdateAvailable { get => _obsNoUpdateAvailable.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsNoVods;
+        public string NoVods { get => _obsNoVods.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsProfilePictureChooseBuiltIn;
         public string ProfilePictureChooseBuiltIn { get => _obsProfilePictureChooseBuiltIn.Value; }
