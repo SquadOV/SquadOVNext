@@ -24,8 +24,9 @@ namespace SquadOV.ViewModels
 {
     public class HomeViewModel: ReactiveObject, IRoutableViewModel
     {
+        public MainWindowViewModel Parent { get; }
         private Services.Identity.IIdentityService _identity;
-        public IScreen HostScreen { get; }
+        public IScreen HostScreen { get => Parent; }
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
 
         public string UrlPathSegment { get; } = "/";
@@ -37,10 +38,10 @@ namespace SquadOV.ViewModels
         private readonly ObservableAsPropertyHelper<string> _welcomeMessage;
         public string WelcomeMessage { get => _welcomeMessage.Value; }
 
-        public HomeViewModel(IScreen screen)
+        public HomeViewModel(MainWindowViewModel screen)
         {
             _identity = Locator.Current.GetService<Services.Identity.IIdentityService>();
-            HostScreen = screen;
+            Parent = screen;
 
             _welcomeMessage = this.WhenAnyValue(x => x.Loc.WelcomeMessage, x => x.User.Username)
                 .Select(((string fmt, string username) inp) => string.Format(inp.fmt ?? "{0}", inp.username))

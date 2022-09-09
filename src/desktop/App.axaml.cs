@@ -41,11 +41,6 @@ namespace SquadOV
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var mainWindow = new Views.MainWindow()
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
-
                 var splashScreen = new Views.SplashScreen()
                 {
                     ViewModel = new SplashScreenViewModel(),
@@ -55,6 +50,10 @@ namespace SquadOV
                 // Only after all the above is done do we want to actually want to show the main window and proceed with normal operating behavior.
                 splashScreen.ViewModel.LoadingFinished += delegate ()
                 {
+                    var mainWindow = new Views.MainWindow()
+                    {
+                        DataContext = new MainWindowViewModel(),
+                    };
                     mainWindow.ViewModel!.GoHome();
                     desktop.MainWindow = mainWindow;
                     desktop.MainWindow.Show();

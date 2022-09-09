@@ -132,6 +132,12 @@
   <data name="ChooseUsername" xml:space="preserve">
     <value>Elija un nombre de usuario y una etiqueta únicos.</value>
   </data>
+  <data name="Clips" xml:space="preserve">
+    <value>Clips</value>
+  </data>
+  <data name="ControlPanel" xml:space="preserve">
+    <value>Panel de control</value>
+  </data>
   <data name="CreateUserInstruction" xml:space="preserve">
     <value>¡Bienvenido a SquadOV! Configure su perfil.</value>
   </data>
@@ -185,6 +191,9 @@
   </data>
   <data name="QuitText" xml:space="preserve">
     <value>¿Está seguro de que desea salir de SquadOV? Tus videos ya no se grabarán automáticamente.</value>
+  </data>
+  <data name="Screenshots" xml:space="preserve">
+    <value>Capturas de pantalla</value>
   </data>
   <data name="SettingsAbout" xml:space="preserve">
     <value>Sobre</value>
@@ -248,6 +257,9 @@
   </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>Comprobando actualizaciones...</value>
+  </data>
+  <data name="Vods" xml:space="preserve">
+    <value>Vídeos</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
     <value>¡Bienvenida de nuevo, {0}!</value>

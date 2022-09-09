@@ -55,11 +55,6 @@ namespace SquadOV.ViewModels
         public void GoToSystemSettings() => Router.Navigate.Execute(new SystemSettingsViewModel(this));
         public void GoToLanguageSettings() => Router.Navigate.Execute(new LanguageSettingsViewModel(this));
 
-        public void CheckForUpdates()
-        {
-
-        }
-
         public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
 

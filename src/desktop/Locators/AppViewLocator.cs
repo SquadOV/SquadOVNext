@@ -25,6 +25,9 @@ namespace SquadOV.Locators
         {
             ViewModels.HomeViewModel context => new Views.Main.HomeView { DataContext = context },
             ViewModels.SettingsViewModel context => new Views.Main.SettingsView { DataContext = context },
+            ViewModels.Library.ClipLibraryViewModel context => new Views.Library.ClipLibrary { DataContext = context },
+            ViewModels.Library.ScreenshotLibraryViewModel context => new Views.Library.ScreenshotLibrary { DataContext = context },
+            ViewModels.Library.VodLibraryViewModel context => new Views.Library.VodLibrary { DataContext = context },
             _ => throw new ArgumentOutOfRangeException(nameof(viewModel))
         };
     }

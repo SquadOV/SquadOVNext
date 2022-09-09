@@ -62,6 +62,12 @@ namespace SquadOV.Models.Localization
             _obsChooseUsername = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("ChooseUsername", x))
                     .ToProperty(this, nameof(ChooseUsername), deferSubscription: true);
+            _obsClips = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("Clips", x))
+                    .ToProperty(this, nameof(Clips), deferSubscription: true);
+            _obsControlPanel = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("ControlPanel", x))
+                    .ToProperty(this, nameof(ControlPanel), deferSubscription: true);
             _obsCreateUserInstruction = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("CreateUserInstruction", x))
                     .ToProperty(this, nameof(CreateUserInstruction), deferSubscription: true);
@@ -116,6 +122,9 @@ namespace SquadOV.Models.Localization
             _obsQuitText = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("QuitText", x))
                     .ToProperty(this, nameof(QuitText), deferSubscription: true);
+            _obsScreenshots = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("Screenshots", x))
+                    .ToProperty(this, nameof(Screenshots), deferSubscription: true);
             _obsSettingsAbout = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsAbout", x))
                     .ToProperty(this, nameof(SettingsAbout), deferSubscription: true);
@@ -179,6 +188,9 @@ namespace SquadOV.Models.Localization
             _obsUpdateCheck = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("UpdateCheck", x))
                     .ToProperty(this, nameof(UpdateCheck), deferSubscription: true);
+            _obsVods = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("Vods", x))
+                    .ToProperty(this, nameof(Vods), deferSubscription: true);
             _obsWelcomeMessage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("WelcomeMessage", x))
                     .ToProperty(this, nameof(WelcomeMessage), deferSubscription: true);
@@ -198,6 +210,12 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsChooseUsername;
         public string ChooseUsername { get => _obsChooseUsername.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsClips;
+        public string Clips { get => _obsClips.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsControlPanel;
+        public string ControlPanel { get => _obsControlPanel.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsCreateUserInstruction;
         public string CreateUserInstruction { get => _obsCreateUserInstruction.Value; }
@@ -252,6 +270,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsQuitText;
         public string QuitText { get => _obsQuitText.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsScreenshots;
+        public string Screenshots { get => _obsScreenshots.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsAbout;
         public string SettingsAbout { get => _obsSettingsAbout.Value; }
@@ -315,6 +336,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsUpdateCheck;
         public string UpdateCheck { get => _obsUpdateCheck.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsVods;
+        public string Vods { get => _obsVods.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsWelcomeMessage;
         public string WelcomeMessage { get => _obsWelcomeMessage.Value; }

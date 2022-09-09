@@ -26,28 +26,100 @@
           <SolidColorBrush Color="#202020"></SolidColorBrush>
         </DockPanel.Background>
 
-        <Button
-          DockPanel.Dock="Top"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Top"
-          CornerRadius="32"
-          ToolTip.Placement="Right"
-          ToolTip.VerticalOffset="8"
-          ToolTip.HorizontalOffset="4"
-          Command="{Binding GoHome}"
-        >
-          <ToolTip.Tip>
-            <TextBlock Text="{Binding Loc.NavHome}"></TextBlock>
-          </ToolTip.Tip>
-          <Image
-            Source="/Assets/squadov.png"
-            Width="32"
-            Height="32"
-            VerticalAlignment="Center"
+        <StackPanel
+          DockPanel.Dock="Top">
+          <Button
             HorizontalAlignment="Center"
-          />
-        </Button>
-          
+            VerticalAlignment="Top"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding GoHome}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.NavHome}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/squadov.png"
+              Width="32"
+              Height="32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+
+          <Panel Height="2" Margin="4,10,4,10">
+            <Panel.Background>
+              <SolidColorBrush Color="#55FFFFFF"></SolidColorBrush>
+            </Panel.Background>
+          </Panel>
+
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding GoVods}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.Vods}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/vods.png"
+              Width="32"
+              Height="32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding GoClips}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.Clips}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/clips.png"
+              Width="32"
+              Height="32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+
+          <Button
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding GoScreenshots}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.Screenshots}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/screenshots.png"
+              Width="32"
+              Height="32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+        </StackPanel>
+
+
         <Button
           x:Name="SettingsButton"
           DockPanel.Dock="Bottom"

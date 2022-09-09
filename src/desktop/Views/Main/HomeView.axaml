@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vl="using:SquadOV.Views.Library"
+             xmlns:vu="using:SquadOV.Views.Utility"
+             xmlns:sqvm="using:SquadOV.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SquadOV.Views.Main.HomeView">
   <DockPanel>
@@ -26,6 +29,107 @@
 
     </DockPanel>
 
-    <Panel></Panel>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+
+      <DockPanel Margin="8,8,4,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+        <StackPanel
+          DockPanel.Dock="Top"
+          Margin="0,0,0,8"
+          Orientation="Horizontal">
+          <Image
+            Height="24"
+            Margin="0,0,8,0"
+            Source="/Assets/Buttons/vods.png">
+          </Image>
+          <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="h6" Text="{Binding Loc.Vods}"></TextBlock>
+          <Button Command="{Binding Parent.GoVods}" Padding="0" VerticalAlignment="Center">
+            <Image
+              Height="24"
+              Source="/Assets/Buttons/arrow-right.png">
+            </Image>
+          </Button>
+        </StackPanel>
+        <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
+          <vl:VodLibrary/>
+        </Border>
+      </DockPanel>
+      
+      <Grid Grid.Column="1" Margin="4,8,8,8">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"></RowDefinition>
+          <RowDefinition Height="8"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+          <RowDefinition Height="8"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0">
+          <StackPanel
+            DockPanel.Dock="Top"
+            Margin="0,0,0,8"
+            Orientation="Horizontal">
+            <Image
+              Height="24"
+              Margin="0,0,8,0"
+              Source="/Assets/Buttons/clips.png">
+            </Image>
+            <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="h6" Text="{Binding Loc.Clips}"></TextBlock>
+            <Button Command="{Binding Parent.GoClips}" Padding="0" VerticalAlignment="Center">
+              <Image
+                Height="24"
+                Source="/Assets/Buttons/arrow-right.png">
+              </Image>
+            </Button>
+          </StackPanel>
+          <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
+            <vl:ClipLibrary/>
+          </Border>
+        </DockPanel>
+
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2">
+          <StackPanel
+            DockPanel.Dock="Top"
+            Margin="0,0,0,8"
+            Orientation="Horizontal">
+            <Image
+              Height="24"
+              Margin="0,0,8,0"
+              Source="/Assets/Buttons/screenshots.png">
+            </Image>
+            <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Classes="h6" Text="{Binding Loc.Screenshots}"></TextBlock>
+            <Button Command="{Binding Parent.GoScreenshots}" Padding="0" VerticalAlignment="Center">
+              <Image
+                Height="24"
+                Source="/Assets/Buttons/arrow-right.png">
+              </Image>
+            </Button>
+          </StackPanel>
+          <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
+            <vl:ScreenshotLibrary/>
+          </Border>
+        </DockPanel>
+
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4">
+          <StackPanel
+            DockPanel.Dock="Top"
+            Margin="0,0,0,8"
+            Orientation="Horizontal">
+            <Image
+              Height="24"
+              Margin="0,0,8,0"
+              Source="/Assets/Buttons/controlpanel.png">
+            </Image>
+            <TextBlock VerticalAlignment="Center" Classes="h6" Text="{Binding Loc.ControlPanel}"></TextBlock>
+          </StackPanel>
+          <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
+            <vu:ControlPanel/>
+          </Border>
+        </DockPanel>
+      </Grid>
+    </Grid>
   </DockPanel>
 </UserControl>
