@@ -24,6 +24,14 @@
     <Style Selector="Button.success">
       <Setter Property="Background" Value="#09af00" />
     </Style>
+
+    <Style Selector="Button.error">
+      <Setter Property="Background" Value="#ff0000" />
+    </Style>
+
+    <Style Selector="Button.standard">
+      <Setter Property="Background" Value="#252525" />
+    </Style>
   </Application.Styles>
 
   <Application.Resources>

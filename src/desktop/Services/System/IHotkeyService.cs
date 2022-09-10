@@ -16,16 +16,16 @@
 //
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SquadOV.Services.Engine
+namespace SquadOV.Services.System
 {
-    internal class EngineService: IEngineService
+    public delegate void HotkeyDelegate();
+    public interface IHotkeyService
     {
-        public void TakeScreenshot()
-        {
-        }
+        void EnableHotkeys(bool v);
     }
 }

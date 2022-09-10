@@ -19,6 +19,11 @@ using System.ComponentModel;
 using System.Reflection;
 using System.IO;
 using ReactiveUI;
+using Avalonia.Collections;
+using SquadOV.Constants;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace SquadOV.Models.Settings
 {
@@ -36,7 +41,15 @@ namespace SquadOV.Models.Settings
                     var propFrom = (BaseConfigModel?)prop.GetValue(from);
                     if (propFrom != null)
                     {
-                        ((BaseConfigModel?)prop.GetValue(this))?.FillInMissing(propFrom);
+                        var propTo = ((BaseConfigModel?)prop.GetValue(this));
+                        if (propTo == null)
+                        {
+                            prop.SetValue(this, propFrom);
+                        }
+                        else
+                        {
+                            propTo?.FillInMissing(propFrom);
+                        }
                     }
                 }
                 else
@@ -50,6 +63,38 @@ namespace SquadOV.Models.Settings
                     }
                 }
             }
+        }
+    }
+
+    public class HotkeyConfigModel: BaseConfigModel
+    {
+        private Hotkey? _screenshot;
+        public Hotkey? Screenshot
+        {
+            get => _screenshot;
+            set => this.RaiseAndSetIfChanged(ref _screenshot, value);
+        }
+
+        private List<Hotkey?>? _allHotkeys = null;
+        [IgnoreDataMember]
+        public List<Hotkey?> AllHotkeys => _allHotkeys ??= new List<Hotkey?>()
+        {
+            Screenshot,
+        };
+
+        public static HotkeyConfigModel CreateDefault()
+        {
+            return new HotkeyConfigModel()
+            {
+                Screenshot = new Hotkey()
+                {
+                    Action = LogicalAction.Screenshot,
+                    Keys = new ObservableCollection<int>()
+                    {
+                        (int)Keys.Codes.Snapshot,
+                    },
+                }
+            };
         }
     }
 
@@ -135,6 +180,7 @@ namespace SquadOV.Models.Settings
             return new ConfigModel()
             {
                 Core = CoreConfigModel.CreateDefault(location),
+                Hotkeys = HotkeyConfigModel.CreateDefault(),
             };
         }
 
@@ -142,7 +188,28 @@ namespace SquadOV.Models.Settings
         public CoreConfigModel? Core
         {
             get => _core;
-            private set => this.RaiseAndSetIfChanged(ref _core, value);
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _core, value);
+                if (_core != null)
+                {
+                    _core.PropertyChanged += (s, e) => this.RaisePropertyChanged($"Core.{e.PropertyName}");
+                }
+            }
+        }
+
+        private HotkeyConfigModel? _hotkeys;
+        public HotkeyConfigModel? Hotkeys
+        {
+            get => _hotkeys;
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _hotkeys, value);
+                if (_hotkeys != null)
+                {
+                    _hotkeys.PropertyChanged += (s, e) => this.RaisePropertyChanged($"Hotkeys.{e.PropertyName}");
+                }
+            }
         }
     }
 }

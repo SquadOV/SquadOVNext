@@ -83,6 +83,10 @@ namespace SquadOV.ViewModels
                 // TODO: Make sure we can actually use this identity on the P2P network.
             }
 
+            // Hotkey service should probably be registered last so the user doesn't randomly hit a hotkey that requires
+            // something else (e.g. the engine) to be initialized.
+            Locator.CurrentMutable.RegisterConstant(new Services.System.HotkeyService(), typeof(Services.System.IHotkeyService));
+
             OnLoadingFinished();
         }
 

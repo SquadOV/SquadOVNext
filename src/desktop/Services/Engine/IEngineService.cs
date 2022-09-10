@@ -24,5 +24,6 @@ namespace SquadOV.Services.Engine
 {
     internal interface IEngineService
     {
+        void TakeScreenshot();
     }
 }

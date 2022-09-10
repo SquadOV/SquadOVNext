@@ -1,4 +1,4 @@
-﻿//
+//
 //  Copyright (C) 2022 Michael Bao
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -14,18 +14,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
 
-namespace SquadOV.Services.Engine
+namespace SquadOV.Views.Settings
 {
-    internal class EngineService: IEngineService
+    public partial class HotKeyEditorView : ReactiveUserControl<ViewModels.Settings.HotKeyEditorViewModel>
     {
-        public void TakeScreenshot()
+        public HotKeyEditorView()
         {
+            InitializeComponent();
+
+            this.WhenActivated(disposables =>
+            {
+                // Use KeyUp instead of KeyDown because certain keys (e.g. the print screen button) get ignored on KeyDown for whatever reason.
+                Control.AddHandler(KeyUpEvent, ViewModel!.OnKey, Avalonia.Interactivity.RoutingStrategies.Tunnel);
+            });
         }
     }
 }

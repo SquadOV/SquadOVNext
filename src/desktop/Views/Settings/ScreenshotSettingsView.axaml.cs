@@ -1,4 +1,4 @@
-﻿//
+//
 //  Copyright (C) 2022 Michael Bao
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -14,18 +14,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Avalonia.ReactiveUI;
 
-namespace SquadOV.Services.Engine
+namespace SquadOV.Views.Settings
 {
-    internal class EngineService: IEngineService
+    public partial class ScreenshotSettingsView : ReactiveUserControl<ViewModels.Settings.ScreenshotSettingsViewModel>
     {
-        public void TakeScreenshot()
+        public ScreenshotSettingsView()
         {
+            InitializeComponent();
         }
     }
 }

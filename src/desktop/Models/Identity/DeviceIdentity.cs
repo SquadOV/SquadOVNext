@@ -88,35 +88,6 @@ namespace SquadOV.Models.Identity
             };
         }
 
-        public static TomlModelOptions TomlOptions
-        {
-            get
-            {
-                var options = new TomlModelOptions()
-                {
-                    IgnoreMissingProperties = true,
-                    ConvertToToml = (input) =>
-                    {
-                        if (input.GetType() == typeof(DeviceType))
-                        {
-                            return input.ToString();
-                        }
-                        return null;
-                    },
-                    ConvertToModel = (input, type) =>
-                    {
-                        if (type != typeof(DeviceType))
-                        {
-                            return null;
-                        }
-
-                        return Enum.Parse(typeof(DeviceType), (string)input);
-                    },
-                };
-                return options;
-            }
-        }
-
         public object Clone()
         {
             return new DeviceIdentity()

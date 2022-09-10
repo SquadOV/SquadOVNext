@@ -42,16 +42,11 @@ namespace SquadOV.Services.Config
             }
             else
             {
-                var opts = new TomlModelOptions()
-                {
-                    IgnoreMissingProperties = true,
-                };
-                _model = Toml.ToModel<Models.Settings.ConfigModel>(File.ReadAllText(ConfigFile), ConfigFile, opts);
+                _model = Toml.ToModel<Models.Settings.ConfigModel>(File.ReadAllText(ConfigFile), ConfigFile, Constants.Toml.TomlOptions);
             }
 
             _model.FillInMissing(defaultModel);
             _model.PropertyChanged += OnModelChange;
-            _model.Core!.PropertyChanged += OnModelChange;
             OnModelChange(null, new PropertyChangedEventArgs(""));
         }
 
@@ -79,7 +74,7 @@ namespace SquadOV.Services.Config
         private void OnModelChange(object? sender, PropertyChangedEventArgs args)
         {
             // Save the model to disk.
-            var toml = Toml.FromModel(this.Config);
+            var toml = Toml.FromModel(Config, Constants.Toml.TomlOptions);
             File.WriteAllText(ConfigFile, toml);
         }
     }

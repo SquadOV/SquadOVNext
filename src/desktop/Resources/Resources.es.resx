@@ -156,6 +156,9 @@
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="DialogEdit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
   <data name="DialogOk" xml:space="preserve">
     <value>De acuerdo</value>
   </data>
@@ -167,6 +170,321 @@
   </data>
   <data name="ErrorStorageFolder" xml:space="preserve">
     <value>Debe elegir una carpeta que esté vacía y que no sea una unidad raíz (por ejemplo, la unidad C:\).</value>
+  </data>
+  <data name="Key0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Key1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Key2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Key3" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Key4" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Key5" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Key6" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="Key7" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="Key8" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="Key9" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="KeyA" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="KeyAlt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="KeyB" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="KeyBack" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="KeyC" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="KeyCapsLock" xml:space="preserve">
+    <value>Caps Lock</value>
+  </data>
+  <data name="KeyControl" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="KeyD" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="KeyDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="KeyDown" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="KeyE" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="KeyEnd" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="KeyEnter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="KeyEscape" xml:space="preserve">
+    <value>Escape</value>
+  </data>
+  <data name="KeyF" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="KeyF1" xml:space="preserve">
+    <value>F1</value>
+  </data>
+  <data name="KeyF10" xml:space="preserve">
+    <value>F10</value>
+  </data>
+  <data name="KeyF11" xml:space="preserve">
+    <value>F11</value>
+  </data>
+  <data name="KeyF12" xml:space="preserve">
+    <value>F12</value>
+  </data>
+  <data name="KeyF13" xml:space="preserve">
+    <value>F13</value>
+  </data>
+  <data name="KeyF14" xml:space="preserve">
+    <value>F14</value>
+  </data>
+  <data name="KeyF15" xml:space="preserve">
+    <value>F15</value>
+  </data>
+  <data name="KeyF16" xml:space="preserve">
+    <value>F16</value>
+  </data>
+  <data name="KeyF17" xml:space="preserve">
+    <value>F17</value>
+  </data>
+  <data name="KeyF18" xml:space="preserve">
+    <value>F18</value>
+  </data>
+  <data name="KeyF19" xml:space="preserve">
+    <value>F19</value>
+  </data>
+  <data name="KeyF2" xml:space="preserve">
+    <value>F2</value>
+  </data>
+  <data name="KeyF20" xml:space="preserve">
+    <value>F20</value>
+  </data>
+  <data name="KeyF21" xml:space="preserve">
+    <value>F21</value>
+  </data>
+  <data name="KeyF22" xml:space="preserve">
+    <value>F22</value>
+  </data>
+  <data name="KeyF23" xml:space="preserve">
+    <value>F23</value>
+  </data>
+  <data name="KeyF24" xml:space="preserve">
+    <value>F24</value>
+  </data>
+  <data name="KeyF3" xml:space="preserve">
+    <value>F3</value>
+  </data>
+  <data name="KeyF4" xml:space="preserve">
+    <value>F4</value>
+  </data>
+  <data name="KeyF5" xml:space="preserve">
+    <value>F5</value>
+  </data>
+  <data name="KeyF6" xml:space="preserve">
+    <value>F6</value>
+  </data>
+  <data name="KeyF7" xml:space="preserve">
+    <value>F7</value>
+  </data>
+  <data name="KeyF8" xml:space="preserve">
+    <value>F8</value>
+  </data>
+  <data name="KeyF9" xml:space="preserve">
+    <value>F9</value>
+  </data>
+  <data name="KeyG" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="KeyH" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="KeyHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="KeyHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="KeyI" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="KeyInsert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="KeyJ" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="KeyK" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="KeyL" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="KeyLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="KeyLeftAlt" xml:space="preserve">
+    <value>Left Alt</value>
+  </data>
+  <data name="KeyLeftControl" xml:space="preserve">
+    <value>Left Control</value>
+  </data>
+  <data name="KeyLeftMouseButton" xml:space="preserve">
+    <value>LMB</value>
+  </data>
+  <data name="KeyLeftShift" xml:space="preserve">
+    <value>Left Shift</value>
+  </data>
+  <data name="KeyM" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="KeyMiddleMouseButton" xml:space="preserve">
+    <value>MMB</value>
+  </data>
+  <data name="KeyMouseButton1" xml:space="preserve">
+    <value>Mouse Button 1</value>
+  </data>
+  <data name="KeyMouseButton2" xml:space="preserve">
+    <value>Mouse Button 2</value>
+  </data>
+  <data name="KeyN" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="KeyNumLock" xml:space="preserve">
+    <value>Num Lock</value>
+  </data>
+  <data name="KeyNumPad0" xml:space="preserve">
+    <value>NumPad 0</value>
+  </data>
+  <data name="KeyNumPad1" xml:space="preserve">
+    <value>NumPad 1</value>
+  </data>
+  <data name="KeyNumPad2" xml:space="preserve">
+    <value>NumPad 2</value>
+  </data>
+  <data name="KeyNumPad3" xml:space="preserve">
+    <value>NumPad 3</value>
+  </data>
+  <data name="KeyNumPad4" xml:space="preserve">
+    <value>NumPad 4</value>
+  </data>
+  <data name="KeyNumPad5" xml:space="preserve">
+    <value>NumPad 5</value>
+  </data>
+  <data name="KeyNumPad6" xml:space="preserve">
+    <value>NumPad 6</value>
+  </data>
+  <data name="KeyNumPad7" xml:space="preserve">
+    <value>NumPad 7</value>
+  </data>
+  <data name="KeyNumPad8" xml:space="preserve">
+    <value>NumPad 8</value>
+  </data>
+  <data name="KeyNumPad9" xml:space="preserve">
+    <value>NumPad 9</value>
+  </data>
+  <data name="KeyO" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="KeyP" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="KeyPageDown" xml:space="preserve">
+    <value>Page Down</value>
+  </data>
+  <data name="KeyPageup" xml:space="preserve">
+    <value>Page Up</value>
+  </data>
+  <data name="KeyPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="KeyPrintScreen" xml:space="preserve">
+    <value>Imprimir pantalla</value>
+  </data>
+  <data name="KeyQ" xml:space="preserve">
+    <value>Q</value>
+  </data>
+  <data name="KeyR" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="KeyRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="KeyRightAlt" xml:space="preserve">
+    <value>Right Alt</value>
+  </data>
+  <data name="KeyRightControl" xml:space="preserve">
+    <value>Right Control</value>
+  </data>
+  <data name="KeyRightMouseButton" xml:space="preserve">
+    <value>RMB</value>
+  </data>
+  <data name="KeyRightShift" xml:space="preserve">
+    <value>Right Shift</value>
+  </data>
+  <data name="KeyS" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="KeyScrollLock" xml:space="preserve">
+    <value>Scroll Lock</value>
+  </data>
+  <data name="KeyShift" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="KeySpace" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="KeyT" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="KeyTab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="KeyU" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="KeyUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="KeyV" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="KeyW" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="KeyX" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="KeyY" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="KeyZ" xml:space="preserve">
+    <value>Z</value>
   </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>Inglés, Estados Unidos</value>
@@ -215,6 +533,9 @@
   </data>
   <data name="QuitText" xml:space="preserve">
     <value>¿Está seguro de que desea salir de SquadOV? Tus videos ya no se grabarán automáticamente.</value>
+  </data>
+  <data name="ScreenshotHotkey" xml:space="preserve">
+    <value>Tecla de acceso directo de captura de pantalla</value>
   </data>
   <data name="Screenshots" xml:space="preserve">
     <value>Capturas de pantalla</value>
@@ -311,6 +632,9 @@
   </data>
   <data name="UnderConstruction" xml:space="preserve">
     <value>¡En construcción, vuelva a consultar en una actualización futura!</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconocido</value>
   </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>Comprobando actualizaciones...</value>

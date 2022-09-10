@@ -23,12 +23,16 @@ namespace SquadOV.ViewModels.Settings
 {
     public class ScreenshotSettingsViewModel : ReactiveObject, IRoutableViewModel
     {
+        private Services.Config.IConfigService _config;
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
         public string UrlPathSegment { get; } = "/screenshot";
+        public HotKeyEditorViewModel Hotkey { get; }
         public ScreenshotSettingsViewModel(IScreen parent)
         {
+            _config = Locator.Current.GetService<Services.Config.IConfigService>()!;
             HostScreen = parent;
+            Hotkey = new HotKeyEditorViewModel(_config.Config.Hotkeys!.Screenshot!);
         }
     }
 }

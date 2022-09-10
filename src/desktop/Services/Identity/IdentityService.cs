@@ -77,11 +77,7 @@ namespace SquadOV.Services.Identity
             // Load the stored user's identity - if any.
             if (File.Exists(UserIdentityPath))
             {
-                var opts = new TomlModelOptions()
-                {
-                    IgnoreMissingProperties = true,
-                };
-                _user = Toml.ToModel<Models.Identity.UserIdentity>(File.ReadAllText(UserIdentityPath), UserIdentityPath, opts);
+                _user = Toml.ToModel<Models.Identity.UserIdentity>(File.ReadAllText(UserIdentityPath), UserIdentityPath, Constants.Toml.TomlOptions);
             }
             else
             {
@@ -92,7 +88,7 @@ namespace SquadOV.Services.Identity
             // Load the device's identity - automatically generate if it doesn't already exist.
             if (File.Exists(DeviceIdentityPath))
             {
-                Device = Toml.ToModel<Models.Identity.DeviceIdentity>(File.ReadAllText(DeviceIdentityPath), DeviceIdentityPath, Models.Identity.DeviceIdentity.TomlOptions);
+                Device = Toml.ToModel<Models.Identity.DeviceIdentity>(File.ReadAllText(DeviceIdentityPath), DeviceIdentityPath, Constants.Toml.TomlOptions);
             }
             else
             {
@@ -110,13 +106,13 @@ namespace SquadOV.Services.Identity
 
         private void OnDeviceIdentityChange(object? sender, PropertyChangedEventArgs args)
         {
-            var toml = Toml.FromModel(Device, Models.Identity.DeviceIdentity.TomlOptions);
+            var toml = Toml.FromModel(Device, Constants.Toml.TomlOptions);
             File.WriteAllText(DeviceIdentityPath, toml);
         }
 
         private void OnUserIdentityChange(object? sender, PropertyChangedEventArgs args)
         {
-            var toml = Toml.FromModel(User);
+            var toml = Toml.FromModel(User, Constants.Toml.TomlOptions);
             File.WriteAllText(UserIdentityPath, toml);
         }
     }
