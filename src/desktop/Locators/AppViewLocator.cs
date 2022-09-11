@@ -28,6 +28,7 @@ namespace SquadOV.Locators
             ViewModels.Library.ClipLibraryViewModel context => new Views.Library.ClipLibrary { DataContext = context },
             ViewModels.Library.ScreenshotLibraryViewModel context => new Views.Library.ScreenshotLibrary { DataContext = context },
             ViewModels.Library.VodLibraryViewModel context => new Views.Library.VodLibrary { DataContext = context },
+            ViewModels.Library.StatLibraryViewModel context => new Views.Library.StatLibrary { DataContext = context },
             _ => null,
         };
     }

@@ -121,12 +121,18 @@
             <Image
               Height="24"
               Margin="0,0,8,0"
-              Source="/Assets/Buttons/controlpanel.png">
+              Source="/Assets/Buttons/stats.png">
             </Image>
-            <TextBlock VerticalAlignment="Center" Classes="h6" Text="{Binding Loc.ControlPanel}"></TextBlock>
+            <TextBlock VerticalAlignment="Center" Classes="h6" Text="{Binding Loc.Stats}"></TextBlock>
+            <Button Command="{Binding GoStats}" Padding="0" VerticalAlignment="Center">
+              <Image
+                Height="24"
+                Source="/Assets/Buttons/arrow-right.png">
+              </Image>
+            </Button>
           </StackPanel>
           <Border BorderBrush="#555555" BorderThickness="2" CornerRadius="4">
-            <vu:ControlPanel DataContext="{Binding ControlPanelVm}"/>
+            <vl:StatLibrary DataContext="{Binding StatVm}"/>
           </Border>
         </DockPanel>
       </Grid>

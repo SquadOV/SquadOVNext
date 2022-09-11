@@ -443,6 +443,9 @@ namespace SquadOV.Models.Localization
             _obsNoScreenshots = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NoScreenshots", x))
                     .ToProperty(this, nameof(NoScreenshots), deferSubscription: true);
+            _obsNoStats = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("NoStats", x))
+                    .ToProperty(this, nameof(NoStats), deferSubscription: true);
             _obsNoUpdateAvailable = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("NoUpdateAvailable", x))
                     .ToProperty(this, nameof(NoUpdateAvailable), deferSubscription: true);
@@ -527,6 +530,9 @@ namespace SquadOV.Models.Localization
             _obsSplashLoading = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SplashLoading", x))
                     .ToProperty(this, nameof(SplashLoading), deferSubscription: true);
+            _obsStats = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("Stats", x))
+                    .ToProperty(this, nameof(Stats), deferSubscription: true);
             _obsStorageClipLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageClipLocation", x))
                     .ToProperty(this, nameof(StorageClipLocation), deferSubscription: true);
@@ -979,6 +985,9 @@ namespace SquadOV.Models.Localization
         private readonly ObservableAsPropertyHelper<string> _obsNoScreenshots;
         public string NoScreenshots { get => _obsNoScreenshots.Value; }
 
+        private readonly ObservableAsPropertyHelper<string> _obsNoStats;
+        public string NoStats { get => _obsNoStats.Value; }
+
         private readonly ObservableAsPropertyHelper<string> _obsNoUpdateAvailable;
         public string NoUpdateAvailable { get => _obsNoUpdateAvailable.Value; }
 
@@ -1062,6 +1071,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsSplashLoading;
         public string SplashLoading { get => _obsSplashLoading.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStats;
+        public string Stats { get => _obsStats.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsStorageClipLocation;
         public string StorageClipLocation { get => _obsStorageClipLocation.Value; }

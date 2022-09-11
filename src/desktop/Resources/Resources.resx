@@ -513,6 +513,9 @@
   <data name="NoScreenshots" xml:space="preserve">
     <value>No screenshots have been taken yet!</value>
   </data>
+  <data name="NoStats" xml:space="preserve">
+    <value>No stats have been recorded yet!</value>
+  </data>
   <data name="NoUpdateAvailable" xml:space="preserve">
     <value>No update available.</value>
   </data>
@@ -596,6 +599,9 @@
   </data>
   <data name="SplashLoading" xml:space="preserve">
     <value>Loading...</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Stats</value>
   </data>
   <data name="StorageClipLocation" xml:space="preserve">
     <value>Clip Storage</value>

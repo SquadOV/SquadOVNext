@@ -49,7 +49,8 @@ namespace SquadOV.ViewModels
         public Library.ScreenshotLibraryViewModel ScreenshotVm { get; }
         public void GoScreenshots() => HostScreen.Router.Navigate.Execute(ScreenshotVm);
 
-        public Utility.ControlPanelViewModel ControlPanelVm { get; }
+        public Library.StatLibraryViewModel StatVm { get; }
+        public void GoStats() => HostScreen.Router.Navigate.Execute(StatVm);
 
         public HomeViewModel(MainWindowViewModel screen)
         {
@@ -63,7 +64,7 @@ namespace SquadOV.ViewModels
             VodVm = new Library.VodLibraryViewModel(HostScreen);
             ClipVm = new Library.ClipLibraryViewModel(HostScreen);
             ScreenshotVm = new Library.ScreenshotLibraryViewModel(HostScreen);
-            ControlPanelVm = new Utility.ControlPanelViewModel();
+            StatVm = new Library.StatLibraryViewModel(HostScreen);
         }
     }
 }

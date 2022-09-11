@@ -43,6 +43,46 @@ namespace SquadOV.Views
                     .BindTo(this, x => x.SettingsButton.Background)
                     .DisposeWith(disposables);
 
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/library/vods") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.VodButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/library/clips") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.ClipButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/library/screenshots") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.ScreenshotButton.Background)
+                    .DisposeWith(disposables);
+
+                this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
+                    .Select(x =>
+                    {
+                        return (x?.UrlPathSegment == "/library/stats") ?
+                            new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
+                            new SolidColorBrush();
+                    })
+                    .BindTo(this, x => x.StatButton.Background)
+                    .DisposeWith(disposables);
+
                 this.WhenAnyValue(x => x.WindowState)
                     .Subscribe(st =>
                     {

@@ -57,6 +57,7 @@
           </Panel>
 
           <Button
+            x:Name="VodButton"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             CornerRadius="32"
@@ -78,6 +79,7 @@
           </Button>
 
           <Button
+            x:Name="ClipButton"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             CornerRadius="32"
@@ -99,6 +101,7 @@
           </Button>
 
           <Button
+            x:Name="ScreenshotButton"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             CornerRadius="32"
@@ -112,6 +115,28 @@
             </ToolTip.Tip>
             <Image
               Source="/Assets/Buttons/screenshots.png"
+              Width="32"
+              Height="32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+            />
+          </Button>
+
+          <Button
+            x:Name="StatButton"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding GoStats}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.Stats}"></TextBlock>
+            </ToolTip.Tip>
+            <Image
+              Source="/Assets/Buttons/stats.png"
               Width="32"
               Height="32"
               VerticalAlignment="Center"

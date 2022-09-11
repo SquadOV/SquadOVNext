@@ -42,6 +42,7 @@ namespace SquadOV.ViewModels
         public void GoVods() => Router.Navigate.Execute(new Library.VodLibraryViewModel(this));
         public void GoClips() => Router.Navigate.Execute(new Library.ClipLibraryViewModel(this));
         public void GoScreenshots() => Router.Navigate.Execute(new Library.ScreenshotLibraryViewModel(this));
+        public void GoStats() => Router.Navigate.Execute(new Library.StatLibraryViewModel(this));
         public ConfigModel Config { get => _config.Config; }
 
         public MainWindowViewModel()
