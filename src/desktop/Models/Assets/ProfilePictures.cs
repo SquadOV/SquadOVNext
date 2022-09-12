@@ -39,7 +39,7 @@ namespace SquadOV.Models.Assets
                     .Select(x =>
                     {
                         var bm = new Bitmap(assets.Open(x));
-                        return (string)ProfilePictureConverter.Instance.ConvertBack(bm, typeof(string), null, Thread.CurrentThread.CurrentUICulture);
+                        return (string)Base64PictureConverter.Instance.ConvertBack(bm, typeof(string), null, Thread.CurrentThread.CurrentUICulture);
                     })
                     .ToList();
             }

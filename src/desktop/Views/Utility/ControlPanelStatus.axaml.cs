@@ -18,9 +18,9 @@ using Avalonia.ReactiveUI;
 
 namespace SquadOV.Views.Utility
 {
-    public partial class ControlPanel : ReactiveWindow<ViewModels.Utility.ControlPanelViewModel>
+    public partial class ControlPanelStatus : ReactiveUserControl<ViewModels.Utility.ControlPanelViewModel>
     {
-        public ControlPanel()
+        public ControlPanelStatus()
         {
             InitializeComponent();
         }

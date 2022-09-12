@@ -533,6 +533,21 @@ namespace SquadOV.Models.Localization
             _obsStats = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("Stats", x))
                     .ToProperty(this, nameof(Stats), deferSubscription: true);
+            _obsStatusInGame = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StatusInGame", x))
+                    .ToProperty(this, nameof(StatusInGame), deferSubscription: true);
+            _obsStatusPaused = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StatusPaused", x))
+                    .ToProperty(this, nameof(StatusPaused), deferSubscription: true);
+            _obsStatusReady = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StatusReady", x))
+                    .ToProperty(this, nameof(StatusReady), deferSubscription: true);
+            _obsStatusRecording = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StatusRecording", x))
+                    .ToProperty(this, nameof(StatusRecording), deferSubscription: true);
+            _obsStatusStopped = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("StatusStopped", x))
+                    .ToProperty(this, nameof(StatusStopped), deferSubscription: true);
             _obsStorageClipLocation = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("StorageClipLocation", x))
                     .ToProperty(this, nameof(StorageClipLocation), deferSubscription: true);
@@ -1074,6 +1089,21 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsStats;
         public string Stats { get => _obsStats.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStatusInGame;
+        public string StatusInGame { get => _obsStatusInGame.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStatusPaused;
+        public string StatusPaused { get => _obsStatusPaused.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStatusReady;
+        public string StatusReady { get => _obsStatusReady.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStatusRecording;
+        public string StatusRecording { get => _obsStatusRecording.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsStatusStopped;
+        public string StatusStopped { get => _obsStatusStopped.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsStorageClipLocation;
         public string StorageClipLocation { get => _obsStorageClipLocation.Value; }

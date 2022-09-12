@@ -103,7 +103,7 @@ namespace SquadOV.ViewModels.Dialogs
                 bm = bm.CreateScaledBitmap(desiredSize);
             }
             
-            Picture = (string)ProfilePictureConverter.Instance.ConvertBack(bm, typeof(string), null, Thread.CurrentThread.CurrentUICulture);
+            Picture = (string)Base64PictureConverter.Instance.ConvertBack(bm, typeof(string), null, Thread.CurrentThread.CurrentUICulture);
         }
     }
 }

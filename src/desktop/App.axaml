@@ -21,6 +21,11 @@
       <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
+    <Style Selector="TextBlock.status">
+      <Setter Property="FontSize" Value="8"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
     <Style Selector="Button.success">
       <Setter Property="Background" Value="#09af00" />
     </Style>
@@ -39,7 +44,7 @@
       <x:Double x:Key="ControlContentThemeFontSize">12</x:Double>
     </ResourceDictionary>
     
-    <c:ProfilePictureConverter x:Key="profilePictureConverter"/>
+    <c:Base64PictureConverter x:Key="base64PictureConverter"/>
     <c:AssetConverter x:Key="assetConverter"/>
   </Application.Resources>
 

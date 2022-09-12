@@ -18,7 +18,7 @@
         Orientation="Horizontal"
         DockPanel.Dock="Left">
         <Image
-          Source="{Binding User.Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=32}"
+          Source="{Binding User.Picture, Converter={StaticResource base64PictureConverter}, ConverterParameter=32}"
           VerticalAlignment="Center"
           Margin="0,0,16,0"
           Height="32">

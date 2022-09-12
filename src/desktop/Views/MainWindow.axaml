@@ -7,6 +7,7 @@
         xmlns:p="using:SquadOV.Resources"
         xmlns:sql="using:SquadOV.Locators"
         xmlns:v="using:SquadOV.Views"
+        xmlns:vu="using:SquadOV.Views.Utility"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="SquadOV.Views.MainWindow"
         WindowStartupLocation="CenterScreen" 
@@ -20,15 +21,21 @@
   
   <Panel>
     <DockPanel>
-      <DockPanel
+      <Grid
         DockPanel.Dock="Left"
       >
-        <DockPanel.Background>
+        <Grid.Background>
           <SolidColorBrush Color="#202020"></SolidColorBrush>
-        </DockPanel.Background>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+          <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
         <StackPanel
-          DockPanel.Dock="Top">
+          Grid.Row="0">
           <Button
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
@@ -144,36 +151,54 @@
             />
           </Button>
         </StackPanel>
+        
+        <StackPanel
+          Grid.Row="2">
 
-
-        <Button
-          x:Name="SettingsButton"
-          DockPanel.Dock="Bottom"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Bottom"
-          CornerRadius="32"
-          ToolTip.Placement="Right"
-          ToolTip.VerticalOffset="8"
-          ToolTip.HorizontalOffset="4"
-          Command="{Binding GoSettings}"
-        >
-          <ToolTip.Tip>
-            <TextBlock Text="{Binding Loc.NavSettings}"></TextBlock>
-          </ToolTip.Tip>
-          <Button.Styles>
-            <Style Selector="Button">
-              <Setter Property="Background" Value="{Binding Background}" />
-            </Style>
-          </Button.Styles>
-          <Image
-            Source="/Assets/Buttons/settings.png"
-            Width="32"
-            Height="32"
-            VerticalAlignment="Center"
+          <Button
+            x:Name="ControlPanelButton"
             HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding OpenControlPanel}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.ControlPanel}"></TextBlock>
+            </ToolTip.Tip>
+            <vu:ControlPanelStatus DataContext="{Binding ControlPanel}"></vu:ControlPanelStatus>
+          </Button>
+
+          <Button
+            x:Name="SettingsButton"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            CornerRadius="32"
+            ToolTip.Placement="Right"
+            ToolTip.VerticalOffset="8"
+            ToolTip.HorizontalOffset="4"
+            Command="{Binding GoSettings}"
+          >
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Loc.NavSettings}"></TextBlock>
+            </ToolTip.Tip>
+            <Button.Styles>
+              <Style Selector="Button">
+                <Setter Property="Background" Value="{Binding Background}" />
+              </Style>
+            </Button.Styles>
+            <Image
+              Source="/Assets/Buttons/settings.png"
+              Width="32"
+              Height="32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
           />
-        </Button>
-      </DockPanel>
+          </Button>
+        </StackPanel>
+      </Grid>
 
       <DockPanel>
         <StackPanel

@@ -25,6 +25,9 @@ using System.Reactive.Disposables;
 using ReactiveUI;
 using Splat;
 using SquadOV.Models.Settings;
+using SquadOV.Views.Utility;
+using Avalonia.Controls;
+using Avalonia.Media;
 
 namespace SquadOV.ViewModels
 {
@@ -45,9 +48,20 @@ namespace SquadOV.ViewModels
         public void GoStats() => Router.Navigate.Execute(new Library.StatLibraryViewModel(this));
         public ConfigModel Config { get => _config.Config; }
 
+        public Utility.ControlPanelViewModel ControlPanel { get; } = new Utility.ControlPanelViewModel();
+
         public MainWindowViewModel()
         {
             _config = Locator.Current.GetService<Services.Config.IConfigService>()!;
+        }
+
+        public void OpenControlPanel()
+        {
+            var win = new ControlPanel()
+            {
+                DataContext = ControlPanel,
+            };
+            win.Show();
         }
     }
 }

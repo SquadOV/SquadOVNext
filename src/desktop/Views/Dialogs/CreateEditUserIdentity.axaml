@@ -48,7 +48,7 @@
               HorizontalAlignment="Center"
               MaxWidth="128"
               MaxHeight="128"
-              Source="{Binding User.Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=128}">
+              Source="{Binding User.Picture, Converter={StaticResource base64PictureConverter}, ConverterParameter=128}">
             </Image>
           </Panel>
 

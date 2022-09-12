@@ -46,7 +46,7 @@
                     <Button Command="{Binding ElementName=View, Path=DataContext.ChangePictureFromHexEncoded}" CommandParameter="{Binding}">
                       <Image
                         Height="64"
-                        Source="{Binding, Converter={StaticResource profilePictureConverter}, ConverterParameter=64}}">
+                        Source="{Binding, Converter={StaticResource base64PictureConverter}, ConverterParameter=64}}">
                       </Image>
                     </Button>
                   </Panel>
@@ -97,7 +97,7 @@
           HorizontalAlignment="Center"
           MaxWidth="128"
           MaxHeight="128"
-          Source="{Binding Picture, Converter={StaticResource profilePictureConverter}, ConverterParameter=128}">
+          Source="{Binding Picture, Converter={StaticResource base64PictureConverter}, ConverterParameter=128}">
         </Image>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -603,6 +603,21 @@
   <data name="Stats" xml:space="preserve">
     <value>Stats</value>
   </data>
+  <data name="StatusInGame" xml:space="preserve">
+    <value>In-Game</value>
+  </data>
+  <data name="StatusPaused" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="StatusRecording" xml:space="preserve">
+    <value>Recording</value>
+  </data>
+  <data name="StatusStopped" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
   <data name="StorageClipLocation" xml:space="preserve">
     <value>Clip Storage</value>
   </data>
