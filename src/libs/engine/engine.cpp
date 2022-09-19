@@ -17,7 +17,7 @@
 #include "engine/engine.h"
 #include <titan/utility/ntp_client.h>
 #include <titan/utility/log.h>
-
+#include <titan/utility/strings.h>
 
 #include <filesystem>
 
@@ -37,6 +37,21 @@ Engine::Engine(const EngineOptions& options):
     TITAN_INFO("Initializing NTP client...");
     // Initialize NTP. TODO: Initialize the initial offset better based off some server's time.
     titan::utility::NTPClient::singleton()->initialize(0);
+
+    TITAN_INFO("Starting process watcher...");
+    _processWatcher = std::make_shared<ProcessWatcher>(std::bind(&Engine::onProcessChange, this, std::placeholders::_1, std::placeholders::_2));
+}
+
+void Engine::addProcessToWatch(const std::string& process) {
+    _processWatcher->add(process);
+}
+
+void Engine::removeProcessToWatch(const std::string& process) {
+    _processWatcher->remove(process);
+}
+
+void Engine::onProcessChange(const titan::system::Process& p, ProcessChangeStatus change) {
+    TITAN_INFO("On Process Change: {}",  titan::utility::wcsToUtf8(p.path().native()));
 }
 
 }

@@ -23,7 +23,7 @@ using System.Reactive.Linq;
 using DynamicData;
 using ReactiveUI;
 using DynamicData.Binding;
-
+using System.Linq;
 
 namespace SquadOV.Models.Settings.Config
 {
@@ -74,8 +74,6 @@ namespace SquadOV.Models.Settings.Config
 
     public class GameConfigModel : BaseConfigModel
     {
-        private ObservableAsPropertyHelper<Dictionary<string, GameSupportConfig>>? _supportMap = null;
-
         private ObservableCollection<GameSupportConfig> _support = new ObservableCollection<GameSupportConfig>();
         public ObservableCollection<GameSupportConfig> Support
         {
@@ -87,10 +85,18 @@ namespace SquadOV.Models.Settings.Config
             }
         }
 
+        private ObservableAsPropertyHelper<Dictionary<string, GameSupportConfig>>? _idSupportMap = null;
         [IgnoreDataMember]
-        public Dictionary<string, GameSupportConfig> SupportMap
+        public Dictionary<string, GameSupportConfig> IdSupportMap
         {
-            get => _supportMap?.Value ?? new Dictionary<string, GameSupportConfig>();
+            get => _idSupportMap?.Value ?? new Dictionary<string, GameSupportConfig>();
+        }
+
+        private ObservableAsPropertyHelper<Dictionary<string, GameSupportConfig>>? _exeSupportMap = null;
+        [IgnoreDataMember]
+        public Dictionary<string, GameSupportConfig> ExeSupportMap
+        {
+            get => _exeSupportMap?.Value ?? new Dictionary<string, GameSupportConfig>();
         }
 
         private void ConnectToSupport()
@@ -101,7 +107,7 @@ namespace SquadOV.Models.Settings.Config
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Publish();
 
-            _supportMap = dynamic.ToCollection()
+            _idSupportMap = dynamic.ToCollection()
                 .Select((IReadOnlyCollection<GameSupportConfig> arr) =>
                 {
                     var ret = new Dictionary<string, GameSupportConfig>();
@@ -111,7 +117,19 @@ namespace SquadOV.Models.Settings.Config
                     }
                     return ret;
                 })
-                .ToProperty(this, x => x.SupportMap);
+                .ToProperty(this, x => x.IdSupportMap);
+
+            _exeSupportMap = dynamic.ToCollection()
+                .Select((IReadOnlyCollection<GameSupportConfig> arr) =>
+                {
+                    var ret = new Dictionary<string, GameSupportConfig>();
+                    foreach (var x in arr)
+                    {
+                        ret.Add(x.Executable, x);
+                    }
+                    return ret;
+                })
+                .ToProperty(this, x => x.ExeSupportMap);
 
             dynamic
                 .AutoRefresh(x => x.Enabled)

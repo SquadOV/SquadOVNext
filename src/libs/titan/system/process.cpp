@@ -27,12 +27,18 @@
 
 namespace titan::system {
 
-Process::Process(NativeProcessId id, const NativeProcessDIPtr& di):
+Process::Process(NativeProcessId id, ProcessLoadType loadType, const NativeProcessDIPtr& di):
     _id(id),
     _di(di)
 {
+    if (loadType == ProcessLoadType::Immediate) {
+        loadInfo();
+    }
+}
+
+void Process::loadInfo() {
     // Open up a process handle to use for the duration of the constructor.
-    auto handle = di->openProcessHandleLimited(_id);
+    auto handle = _di->openProcessHandleLimited(_id);
     _fullPath = _di->getProcessPath(handle.handle());
     _name = _di->getProcessFriendlyName(_fullPath.native());
     _startTime = _di->getProcessStartTime(handle.handle());
@@ -70,13 +76,13 @@ void Process::initializeActiveWindow(size_t minSize, const NativeWindowDIPtr& wi
     _activeWindow = window.value();
 }
 
-std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di) {
+std::vector<Process> loadRunningProcesses(ProcessLoadType loadType, const NativeProcessDIPtr& di) {
     std::vector<NativeProcessId> handles = di->enumProcesses();
 
     std::vector<Process> processes;
     processes.reserve(handles.size());
     for (const auto& hnd : handles) {
-        processes.emplace_back(Process{hnd, di});
+        processes.emplace_back(Process{hnd, loadType, di});
     }
 
     std::sort(processes.begin(), processes.end(), [](const Process& a, const Process& b){

@@ -115,7 +115,7 @@ TEST_CASE("Load Running Processes Order") {
         {15243123, {"Test2", L"Test5", 1}}
     };
     auto di = std::make_shared<TestProcessDI>(cases);
-    auto processes = titan::system::loadRunningProcesses(di);
+    auto processes = titan::system::loadRunningProcesses(titan::system::ProcessLoadType::Immediate, di);
     CHECK(processes.size() == 2);
     CHECK(processes[0].startTime() == 54421);
     CHECK(processes[1].startTime() == 1);

@@ -76,8 +76,9 @@ namespace SquadOV.ViewModels.Settings
             var bitmap = icon?.ToBitmap().ToAvaloniaBitmap() ?? new Avalonia.Media.Imaging.Bitmap(assets.Open(new Uri("avares://SquadOV/Assets/Buttons/program.png")));
             var fi = FileVersionInfo.GetVersionInfo(exe);
 
-            var gameId = $"CUSTOM:{Path.GetFileName(exe)}";
-            if (_config.Config.Games!.SupportMap.ContainsKey(gameId))
+            var gameExe = Path.GetFileName(exe);
+            var gameId = $"CUSTOM:{gameExe}";
+            if (_config.Config.Games!.IdSupportMap.ContainsKey(gameId) || _config.Config.Games!.ExeSupportMap.ContainsKey(gameExe))
             {
                 return;
             }
@@ -86,7 +87,7 @@ namespace SquadOV.ViewModels.Settings
             {
                 Id = gameId,
                 Name = fi.ProductName ?? "Unknown",
-                Executable = exe,
+                Executable = gameExe,
                 Icon = (string)Base64PictureConverter.Instance.ConvertBack(bitmap, typeof(string), null, Thread.CurrentThread.CurrentUICulture),
                 Enabled = true,
                 Plugin = null,
@@ -95,12 +96,12 @@ namespace SquadOV.ViewModels.Settings
 
         public void ToggleGame(string id)
         {
-            if (!_config.Config.Games!.SupportMap.ContainsKey(id))
+            if (!_config.Config.Games!.IdSupportMap.ContainsKey(id))
             {
                 return;
             }
 
-            _config.Config.Games!.SupportMap[id].Enabled = !_config.Config.Games!.SupportMap[id].Enabled;
+            _config.Config.Games!.IdSupportMap[id].Enabled = !_config.Config.Games!.IdSupportMap[id].Enabled;
         }
     }
 }

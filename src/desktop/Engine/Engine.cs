@@ -48,6 +48,16 @@ public class Engine : global::System.IDisposable {
     if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
   }
 
+  public void addProcessToWatch(string process) {
+    LibEnginePINVOKE.Engine_addProcessToWatch(swigCPtr, process);
+    if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void removeProcessToWatch(string process) {
+    LibEnginePINVOKE.Engine_removeProcessToWatch(swigCPtr, process);
+    if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+  }
+
 }
 
 }

@@ -490,6 +490,42 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_LibEngine_new_Engine(void * jarg1) {
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_Engine_addProcessToWatch(void * jarg1, char * jarg2) {
+  engine::Engine *arg1 = (engine::Engine *) 0 ;
+  std::string *arg2 = 0 ;
+  std::shared_ptr< engine::Engine > *smartarg1 = 0 ;
+  
+  
+  smartarg1 = (std::shared_ptr<  engine::Engine > *)jarg1;
+  arg1 = (engine::Engine *)(smartarg1 ? smartarg1->get() : 0); 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  (arg1)->addProcessToWatch((std::string const &)*arg2);
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_Engine_removeProcessToWatch(void * jarg1, char * jarg2) {
+  engine::Engine *arg1 = (engine::Engine *) 0 ;
+  std::string *arg2 = 0 ;
+  std::shared_ptr< engine::Engine > *smartarg1 = 0 ;
+  
+  
+  smartarg1 = (std::shared_ptr<  engine::Engine > *)jarg1;
+  arg1 = (engine::Engine *)(smartarg1 ? smartarg1->get() : 0); 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  (arg1)->removeProcessToWatch((std::string const &)*arg2);
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_delete_Engine(void * jarg1) {
   engine::Engine *arg1 = (engine::Engine *) 0 ;
   std::shared_ptr< engine::Engine > *smartarg1 = 0 ;

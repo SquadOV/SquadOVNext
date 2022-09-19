@@ -1,9 +1,11 @@
 set(SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/process.cpp
 )
 
 set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/engine.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/process.h
     ${CMAKE_CURRENT_SOURCE_DIR}/dll.h
 )
 

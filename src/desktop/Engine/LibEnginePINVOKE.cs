@@ -232,6 +232,12 @@ class LibEnginePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_new_Engine")]
   public static extern global::System.IntPtr new_Engine(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_Engine_addProcessToWatch")]
+  public static extern void Engine_addProcessToWatch(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_Engine_removeProcessToWatch")]
+  public static extern void Engine_removeProcessToWatch(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_delete_Engine")]
   public static extern void delete_Engine(global::System.Runtime.InteropServices.HandleRef jarg1);
 }

@@ -19,6 +19,9 @@
 #include <memory>
 #include <string>
 #include "engine/dll.h"
+#include "engine/process.h"
+
+#include <titan/system/process.h>
 
 namespace engine {
 
@@ -34,8 +37,14 @@ class ENGINEEXPORT Engine {
 public:
     explicit Engine(const EngineOptions& options);
 
+    // Process watcher interface.
+    void addProcessToWatch(const std::string& process);
+    void removeProcessToWatch(const std::string& process);
 private:
     EngineOptions _options;
+
+    void onProcessChange(const titan::system::Process& p, ProcessChangeStatus change);
+    ProcessWatcherPtr _processWatcher;
 };
 
 using EnginePtr = std::shared_ptr<Engine>;

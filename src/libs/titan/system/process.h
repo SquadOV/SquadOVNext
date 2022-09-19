@@ -29,6 +29,13 @@
 
 namespace titan::system {
 
+// Whether to load the process information immediately or later (manually).
+enum class ProcessLoadType
+{
+    Immediate,
+    Defer
+};
+
 // A wrapper around the OS's native process ID/handle.
 //
 // In addition to keep track of the process ID/handle, this object
@@ -40,9 +47,13 @@ class TITANEXPORT Process {
 public:
     Process(
         NativeProcessId id,
+        ProcessLoadType loadType,
         const NativeProcessDIPtr& di = getDefaultNativeProcessDI()
     );
 
+    void loadInfo();
+
+    NativeProcessId id() const { return _id; }
     const std::string& name() const { return _name; }
     const std::filesystem::path& path() const { return _fullPath; }
     int64_t startTime() const { return _startTime; }
@@ -78,6 +89,6 @@ private:
 
 // Returns all the running processes at the time of this function call.
 // The process that *most recently* started (the newest process) will be first.
-TITANEXPORT std::vector<Process> loadRunningProcesses(const NativeProcessDIPtr& di = getDefaultNativeProcessDI());
+TITANEXPORT std::vector<Process> loadRunningProcesses(ProcessLoadType loadType = ProcessLoadType::Immediate, const NativeProcessDIPtr& di = getDefaultNativeProcessDI());
 
 }
