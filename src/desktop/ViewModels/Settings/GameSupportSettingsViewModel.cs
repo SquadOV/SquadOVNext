@@ -30,6 +30,7 @@ using SquadOV.Extensions;
 using Avalonia.Platform;
 using Avalonia;
 using System.Diagnostics;
+using Windows.Gaming.Input;
 
 namespace SquadOV.ViewModels.Settings
 {
@@ -94,7 +95,12 @@ namespace SquadOV.ViewModels.Settings
 
         public void ToggleGame(string id)
         {
+            if (!_config.Config.Games!.SupportMap.ContainsKey(id))
+            {
+                return;
+            }
 
+            _config.Config.Games!.SupportMap[id].Enabled = !_config.Config.Games!.SupportMap[id].Enabled;
         }
     }
 }

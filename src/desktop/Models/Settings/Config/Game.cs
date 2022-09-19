@@ -113,10 +113,12 @@ namespace SquadOV.Models.Settings.Config
                 })
                 .ToProperty(this, x => x.SupportMap);
 
-            dynamic.Subscribe(x =>
-            {
-                this.RaisePropertyChanged("Support");
-            });
+            dynamic
+                .AutoRefresh(x => x.Enabled)
+                .Subscribe(x =>
+                {
+                    this.RaisePropertyChanged("Support");
+                });
             dynamic.Connect();
         }
 
