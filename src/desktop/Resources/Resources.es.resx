@@ -153,6 +153,9 @@
   <data name="DeviceType" xml:space="preserve">
     <value>Tipo de dispositivo</value>
   </data>
+  <data name="DialogBrowse" xml:space="preserve">
+    <value>Navegar</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>

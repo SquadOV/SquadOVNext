@@ -14,8 +14,16 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
+using ReactiveUI;
+using SquadOV.Views.Dialogs;
+using System.Collections.Generic;
+using System.Reactive;
+using System.Threading.Tasks;
+using System.Reactive.Disposables;
 
 namespace SquadOV.Views.Settings
 {
@@ -24,6 +32,40 @@ namespace SquadOV.Views.Settings
         public GameSupportSettingsView()
         {
             InitializeComponent();
+
+            this.WhenActivated(disposables =>
+            {
+                ViewModel!.GameFinderInteraction.RegisterHandler(ShowGameFinder).DisposeWith(disposables);
+            });
+        }
+
+        private async Task ShowGameFinder(InteractionContext<Unit, string?> interaction)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                AllowMultiple = false,
+                Filters = new List<FileDialogFilter>()
+                {
+                    new FileDialogFilter()
+                    {
+                        Extensions = new List<string>()
+                        {
+                            "exe",
+                        },
+                        Name = "Executables",
+                    }
+                },
+            };
+
+            var files = await dialog.ShowAsync(((IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!).MainWindow);
+            if (files == null || files.Length == 0)
+            {
+                interaction.SetOutput(null);
+            }
+            else
+            {
+                interaction.SetOutput(files[0]);
+            }
         }
     }
 }

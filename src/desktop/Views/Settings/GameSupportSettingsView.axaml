@@ -3,6 +3,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SquadOV.Views.Settings.GameSupportSettingsView">
-  Welcome to Avalonia!
+             x:Class="SquadOV.Views.Settings.GameSupportSettingsView"
+             x:Name="View">
+  <DockPanel Margin="16">
+    <Grid DockPanel.Dock="Top">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+
+      <StackPanel Margin="0,0,0,16" Orientation="Horizontal" Grid.Row="0">
+        <TextBlock Classes="h6" VerticalAlignment="Center" Margin="0,0,16,0" Text="{Binding Loc.SettingsGameSupport}"></TextBlock>
+        <Button VerticalAlignment="Center" Classes="standard" Content="{Binding Loc.DialogBrowse}" Command="{Binding GameFinderCommand}"></Button>
+      </StackPanel>
+
+      <ScrollViewer Grid.Row="1">
+        <ItemsControl Items="{Binding Games}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Panel Margin="0,0,16,16">
+                <Border BorderBrush="White" BorderThickness="2">
+                  <Button Width="400" Height="48" Command="{Binding ElementName=View, Path=DataContext.ToggleGame}" CommandParameter="{Binding Id}">
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+                      
+                      <Image Margin="0,0,8,0" Grid.Column="0" Height="32" VerticalAlignment="Center" Source="{Binding Icon, Converter={StaticResource base64PictureConverter}, ConverterParameter=32}"></Image>
+
+                      <StackPanel Margin="0,0,8,0" Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1">
+                        <TextBlock Classes="subheader" Text="{Binding Name}"></TextBlock>
+                        <TextBlock Classes="status" Text="{Binding Id}"></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Classes="status" Text="{Binding Executable}"></TextBlock>
+                      </StackPanel>
+
+                      <CheckBox VerticalAlignment="Center" IsChecked="{Binding Enabled}" Grid.Column="2" IsHitTestVisible="False"></CheckBox>
+                    </Grid>
+                  </Button>
+                </Border>
+              </Panel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </Grid>
+  </DockPanel>
 </UserControl>

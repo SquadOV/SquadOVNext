@@ -153,6 +153,9 @@
   <data name="DeviceType" xml:space="preserve">
     <value>Type d'appareil</value>
   </data>
+  <data name="DialogBrowse" xml:space="preserve">
+    <value>Parcourir</value>
+  </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Annuler</value>
   </data>

@@ -14,21 +14,87 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using DynamicData;
+using DynamicData.Binding;
 using ReactiveUI;
 using Splat;
-using SquadOV.Models.Settings;
-using System.Collections.Generic;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Collections.ObjectModel;
+using System.Reactive;
+using System.Reactive.Linq;
+using SquadOV.Converters;
+using System.Threading;
+using SquadOV.Extensions;
+using Avalonia.Platform;
+using Avalonia;
+using System.Diagnostics;
 
 namespace SquadOV.ViewModels.Settings
 {
     public class GameSupportSettingsViewModel : ReactiveObject, IRoutableViewModel
     {
+        private Services.Config.IConfigService _config = Locator.Current.GetService<Services.Config.IConfigService>()!;
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
         public string UrlPathSegment { get; } = "/games/support";
+
+        private readonly ReadOnlyObservableCollection<Models.Settings.Config.GameSupportConfig> _games;
+        public ReadOnlyObservableCollection<Models.Settings.Config.GameSupportConfig> Games { get => _games; }
+
+        public Interaction<Unit, string?> GameFinderInteraction { get; }
+        public ReactiveCommand<Unit, Unit> GameFinderCommand { get; }
+
         public GameSupportSettingsViewModel(IScreen parent)
         {
             HostScreen = parent;
+            _config.Config.Games!.Support
+                .ToObservableChangeSet()
+                .AsObservableList()
+                .Connect()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Bind(out _games)
+                .Subscribe();
+
+            GameFinderInteraction = new Interaction<Unit, string?>();
+            GameFinderCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var newExe = await GameFinderInteraction.Handle(new Unit());
+                if (newExe != null)
+                {
+                    AddNewGameFromExecutable(newExe);
+                }
+            });
+        }
+
+        private void AddNewGameFromExecutable(string exe)
+        {
+            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
+            var icon = Icon.ExtractAssociatedIcon(exe);
+            var bitmap = icon?.ToBitmap().ToAvaloniaBitmap() ?? new Avalonia.Media.Imaging.Bitmap(assets.Open(new Uri("avares://SquadOV/Assets/Buttons/program.png")));
+            var fi = FileVersionInfo.GetVersionInfo(exe);
+
+            var gameId = $"CUSTOM:{Path.GetFileName(exe)}";
+            if (_config.Config.Games!.SupportMap.ContainsKey(gameId))
+            {
+                return;
+            }
+
+            _config.Config.Games!.Support.Add(new Models.Settings.Config.GameSupportConfig()
+            {
+                Id = gameId,
+                Name = fi.ProductName ?? "Unknown",
+                Executable = exe,
+                Icon = (string)Base64PictureConverter.Instance.ConvertBack(bitmap, typeof(string), null, Thread.CurrentThread.CurrentUICulture),
+                Enabled = true,
+                Plugin = null,
+            });
+        }
+
+        public void ToggleGame(string id)
+        {
+
         }
     }
 }

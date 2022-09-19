@@ -83,6 +83,9 @@ namespace SquadOV.Models.Localization
             _obsDeviceType = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DeviceType", x))
                     .ToProperty(this, nameof(DeviceType), deferSubscription: true);
+            _obsDialogBrowse = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("DialogBrowse", x))
+                    .ToProperty(this, nameof(DialogBrowse), deferSubscription: true);
             _obsDialogCancel = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("DialogCancel", x))
                     .ToProperty(this, nameof(DialogCancel), deferSubscription: true);
@@ -642,6 +645,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsDeviceType;
         public string DeviceType { get => _obsDeviceType.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsDialogBrowse;
+        public string DialogBrowse { get => _obsDialogBrowse.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsDialogCancel;
         public string DialogCancel { get => _obsDialogCancel.Value; }

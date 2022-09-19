@@ -14,6 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -73,24 +74,34 @@ namespace SquadOV.Models.Settings.Config
 
     public class GameConfigModel : BaseConfigModel
     {
+        private ObservableAsPropertyHelper<Dictionary<string, GameSupportConfig>>? _supportMap = null;
+
         private ObservableCollection<GameSupportConfig> _support = new ObservableCollection<GameSupportConfig>();
         public ObservableCollection<GameSupportConfig> Support
         {
             get => _support;
-            set => this.RaiseAndSetIfChanged(ref _support, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _support, value);
+                ConnectToSupport();
+            }
         }
-
-        private ObservableAsPropertyHelper<Dictionary<string, GameSupportConfig>> _supportMap;
 
         [IgnoreDataMember]
         public Dictionary<string, GameSupportConfig> SupportMap
         {
-            get => _supportMap.Value;
+            get => _supportMap?.Value ?? new Dictionary<string, GameSupportConfig>();
         }
 
-        public GameConfigModel()
+        private void ConnectToSupport()
         {
-            _supportMap = Support.ToObservableChangeSet().ToCollection()
+            var dynamic = Support.ToObservableChangeSet()
+                .AsObservableList()
+                .Connect()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Publish();
+
+            _supportMap = dynamic.ToCollection()
                 .Select((IReadOnlyCollection<GameSupportConfig> arr) =>
                 {
                     var ret = new Dictionary<string, GameSupportConfig>();
@@ -101,6 +112,17 @@ namespace SquadOV.Models.Settings.Config
                     return ret;
                 })
                 .ToProperty(this, x => x.SupportMap);
+
+            dynamic.Subscribe(x =>
+            {
+                this.RaisePropertyChanged("Support");
+            });
+            dynamic.Connect();
+        }
+
+        public GameConfigModel()
+        {
+            ConnectToSupport();
         }
 
         public static GameConfigModel CreateDefault()

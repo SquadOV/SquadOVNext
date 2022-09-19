@@ -16,6 +16,7 @@
     <AssemblyVersion>0.1</AssemblyVersion>
     <TransformOnBuild>true</TransformOnBuild>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+    <ApplicationIcon>Assets\squadov.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Remove=".gitignore" />
@@ -40,6 +41,9 @@
    </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\squadov.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Models\Localization\Localization.cs">
