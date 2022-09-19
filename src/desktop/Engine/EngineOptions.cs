@@ -44,6 +44,66 @@ public class EngineOptions : global::System.IDisposable {
     }
   }
 
+  public string vodPath {
+    set {
+      LibEnginePINVOKE.EngineOptions_vodPath_set(swigCPtr, value);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+    } 
+    get {
+      string ret = LibEnginePINVOKE.EngineOptions_vodPath_get(swigCPtr);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+      return ret;
+    } 
+  }
+
+  public string clipPath {
+    set {
+      LibEnginePINVOKE.EngineOptions_clipPath_set(swigCPtr, value);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+    } 
+    get {
+      string ret = LibEnginePINVOKE.EngineOptions_clipPath_get(swigCPtr);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+      return ret;
+    } 
+  }
+
+  public string screenshotPath {
+    set {
+      LibEnginePINVOKE.EngineOptions_screenshotPath_set(swigCPtr, value);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+    } 
+    get {
+      string ret = LibEnginePINVOKE.EngineOptions_screenshotPath_get(swigCPtr);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+      return ret;
+    } 
+  }
+
+  public string matchPath {
+    set {
+      LibEnginePINVOKE.EngineOptions_matchPath_set(swigCPtr, value);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+    } 
+    get {
+      string ret = LibEnginePINVOKE.EngineOptions_matchPath_get(swigCPtr);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+      return ret;
+    } 
+  }
+
+  public string logPath {
+    set {
+      LibEnginePINVOKE.EngineOptions_logPath_set(swigCPtr, value);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+    } 
+    get {
+      string ret = LibEnginePINVOKE.EngineOptions_logPath_get(swigCPtr);
+      if (LibEnginePINVOKE.SWIGPendingException.Pending) throw LibEnginePINVOKE.SWIGPendingException.Retrieve();
+      return ret;
+    } 
+  }
+
   public EngineOptions() : this(LibEnginePINVOKE.new_EngineOptions(), true) {
   }
 

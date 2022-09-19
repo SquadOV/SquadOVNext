@@ -15,13 +15,28 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 #include "engine/engine.h"
+#include <titan/utility/ntp_client.h>
+#include <titan/utility/log.h>
 
+
+#include <filesystem>
+
+namespace fs = std::filesystem;
 namespace engine {
 
 Engine::Engine(const EngineOptions& options):
     _options(options)
 {
+    // Initialize logging.
+    const auto logPath = fs::path(_options.logPath);
+    if (!fs::exists(logPath)) {
+        fs::create_directories(logPath);
+    }
+    titan::utility::Logger::get()->addFileSystemSink(logPath / fs::path("squadov.log"));
 
+    TITAN_INFO("Initializing NTP client...");
+    // Initialize NTP. TODO: Initialize the initial offset better based off some server's time.
+    titan::utility::NTPClient::singleton()->initialize(0);
 }
 
 }

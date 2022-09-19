@@ -17,11 +17,17 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include "engine/dll.h"
 
 namespace engine {
 
 struct ENGINEEXPORT EngineOptions {
+    std::string vodPath;
+    std::string clipPath;
+    std::string screenshotPath;
+    std::string matchPath;
+    std::string logPath;
 };
 
 class ENGINEEXPORT Engine {

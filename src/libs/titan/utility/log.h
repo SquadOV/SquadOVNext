@@ -27,6 +27,7 @@
 #include <fmt/core.h>
 #include <fmt/std.h>
 
+#include <filesystem>
 #include <vector>
 #include <thread>
 
@@ -65,7 +66,10 @@ public:
 
     // Create a "scoped" logger with the sinks we currently have available.
     // A "scope" will prepend itself to the log message as [SCOPE].
-    LoggerInstPtr createScopedLogger(const std::string& scope) const;
+    LoggerInstPtr createScopedLogger(const std::string& scope, std::optional<spdlog::level::level_enum> level = std::nullopt) const;
+
+    // Add a sink that will output logs to the specified file.
+    void addFileSystemSink(const std::filesystem::path& filename);
 
 private:
     // Protect against multi-threaded access to the underlying sinks.

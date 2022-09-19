@@ -193,6 +193,36 @@ class LibEnginePINVOKE {
   }
 
 
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_vodPath_set")]
+  public static extern void EngineOptions_vodPath_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_vodPath_get")]
+  public static extern string EngineOptions_vodPath_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_clipPath_set")]
+  public static extern void EngineOptions_clipPath_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_clipPath_get")]
+  public static extern string EngineOptions_clipPath_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_screenshotPath_set")]
+  public static extern void EngineOptions_screenshotPath_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_screenshotPath_get")]
+  public static extern string EngineOptions_screenshotPath_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_matchPath_set")]
+  public static extern void EngineOptions_matchPath_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_matchPath_get")]
+  public static extern string EngineOptions_matchPath_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_logPath_set")]
+  public static extern void EngineOptions_logPath_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_EngineOptions_logPath_get")]
+  public static extern string EngineOptions_logPath_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("libenginenet", EntryPoint="CSharp_LibEngine_new_EngineOptions")]
   public static extern global::System.IntPtr new_EngineOptions();
 

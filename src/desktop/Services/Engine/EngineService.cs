@@ -14,6 +14,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,15 @@ namespace SquadOV.Services.Engine
 
         public EngineService()
         {
-            _options = new LibEngine.EngineOptions();
+            var config = Locator.Current.GetService<Config.IConfigService>()!;
+            _options = new LibEngine.EngineOptions()
+            {
+                vodPath = config.Config.Core!.VodPath!,
+                clipPath = config.Config.Core!.ClipPath!,
+                screenshotPath = config.Config.Core!.ScreenshotPath!,
+                matchPath = config.Config.Core!.MatchPath!,
+                logPath = config.Config.Core!.LogPath!,
+            };
             _engine = new LibEngine.Engine(_options);
         }
 

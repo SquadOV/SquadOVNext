@@ -40,11 +40,13 @@ public:
     void initialize(int64_t initialOffset);
     void enable(bool enabled, bool doTick = false);
 
+    void tick();
+    void startTick();
+
     TimePoint now() const;
     TimePoint adjustTime(const TimePoint& tm) const;
     TimePoint revertTime(const TimePoint& tm) const;
 private:
-    void tick();
     TimePoint clientNow() const;
     int64_t offsetToServer(const std::string& server) const;
 

@@ -19,11 +19,12 @@
 
 #include <memory>
 #include <spdlog/sinks/stdout_sinks.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 #ifdef NDEBUG
 #define FILE_LOC_PATTERN 
 #else
-#define FILE_LOC_PATTERN [loc: (%@) %!:%#]
+#define FILE_LOC_PATTERN [loc: (%@) %!]
 #endif 
 
 #define LOG_PATTERN [%D %X.%e][%l][%n][pid: %P][tid: %t]FILE_LOC_PATTERN %v 
@@ -84,11 +85,13 @@ Logger::~Logger() {
 }
 
 void Logger::refreshDefaultLogger() {
-    auto logger = createScopedLogger("global");
+    auto level = spdlog::get_level();
+    spdlog::drop("global");
+    auto logger = createScopedLogger("global", level);
     spdlog::set_default_logger(logger);
 }
 
-LoggerInstPtr Logger::createScopedLogger(const std::string& scope) const {
+LoggerInstPtr Logger::createScopedLogger(const std::string& scope, std::optional<spdlog::level::level_enum> level) const {
     std::scoped_lock guard(_sinkMutex);
     auto logger = std::make_shared<spdlog::async_logger>(
         scope,
@@ -100,9 +103,28 @@ LoggerInstPtr Logger::createScopedLogger(const std::string& scope) const {
 
     logger->flush_on(spdlog::level::err);
     logger->set_pattern(XSTR(LOG_PATTERN), spdlog::pattern_time_type::utc);
-    logger->set_level(spdlog::get_level());
+    if (level) {
+        logger->set_level(level.value());
+    } else {
+        logger->set_level(spdlog::get_level());
+    }
     spdlog::register_logger(logger);
     return logger;
+}
+
+void Logger::addFileSystemSink(const std::filesystem::path& filename) {
+    {
+        std::scoped_lock guard(_sinkMutex);
+        _sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
+            filename.native(),
+            // 100MB log file size maximum
+            static_cast<std::size_t>(100 * 1024 * 1024),
+            static_cast<std::size_t>(25),
+            true
+        ));
+    }
+
+    refreshDefaultLogger();
 }
 
 }

@@ -113,13 +113,17 @@ NTPClient::~NTPClient() {
 }
 
 void NTPClient::initialize(int64_t initialOffset) {
-    _running = true;
     _offsetMs = initialOffset;
-    // Start a thread that refreshes the offset every once in awhile.
+    tick();
+    startTick();
+}
+
+void NTPClient::startTick() {
+    _running = true;
     _tickThread = std::thread([this](){
         const auto interval = std::chrono::seconds(NTP_TICK_INTERVAL_SECONDS);
         const auto step = std::chrono::seconds(1);
-        auto elapsed = std::chrono::seconds(NTP_TICK_INTERVAL_SECONDS);
+        auto elapsed = std::chrono::seconds(0);
 
         while (_running) {
             // Run the tick in a thread since we don't want it to block the entire program if we aren't able to

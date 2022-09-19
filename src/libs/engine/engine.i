@@ -21,6 +21,7 @@
 
 %include <windows.i>
 %include <std_shared_ptr.i>
+%include <std_string.i>
 %include "engine/dll.h"
 
 %shared_ptr(engine::Engine)

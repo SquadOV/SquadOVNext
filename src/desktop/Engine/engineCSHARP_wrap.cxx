@@ -302,6 +302,9 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_LibEngine(SWIG_CSharpStri
 #include "engine/engine.h"
 
 
+#include <string>
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -315,6 +318,141 @@ struct SWIG_null_deleter {
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_EngineOptions_vodPath_set(void * jarg1, char * jarg2) {
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  if (arg1) (arg1)->vodPath = *arg2;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_LibEngine_EngineOptions_vodPath_get(void * jarg1) {
+  char * jresult ;
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *result = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  result = (std::string *) & ((arg1)->vodPath);
+  jresult = SWIG_csharp_string_callback(result->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_EngineOptions_clipPath_set(void * jarg1, char * jarg2) {
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  if (arg1) (arg1)->clipPath = *arg2;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_LibEngine_EngineOptions_clipPath_get(void * jarg1) {
+  char * jresult ;
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *result = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  result = (std::string *) & ((arg1)->clipPath);
+  jresult = SWIG_csharp_string_callback(result->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_EngineOptions_screenshotPath_set(void * jarg1, char * jarg2) {
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  if (arg1) (arg1)->screenshotPath = *arg2;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_LibEngine_EngineOptions_screenshotPath_get(void * jarg1) {
+  char * jresult ;
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *result = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  result = (std::string *) & ((arg1)->screenshotPath);
+  jresult = SWIG_csharp_string_callback(result->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_EngineOptions_matchPath_set(void * jarg1, char * jarg2) {
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  if (arg1) (arg1)->matchPath = *arg2;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_LibEngine_EngineOptions_matchPath_get(void * jarg1) {
+  char * jresult ;
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *result = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  result = (std::string *) & ((arg1)->matchPath);
+  jresult = SWIG_csharp_string_callback(result->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_LibEngine_EngineOptions_logPath_set(void * jarg1, char * jarg2) {
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  if (arg1) (arg1)->logPath = *arg2;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_LibEngine_EngineOptions_logPath_get(void * jarg1) {
+  char * jresult ;
+  engine::EngineOptions *arg1 = (engine::EngineOptions *) 0 ;
+  std::string *result = 0 ;
+  
+  arg1 = (engine::EngineOptions *)jarg1; 
+  result = (std::string *) & ((arg1)->logPath);
+  jresult = SWIG_csharp_string_callback(result->c_str()); 
+  return jresult;
+}
+
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_LibEngine_new_EngineOptions() {
   void * jresult ;
