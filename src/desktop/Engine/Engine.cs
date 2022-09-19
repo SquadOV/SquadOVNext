@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace engine {
+namespace LibEngine {
 
 public class Engine : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;

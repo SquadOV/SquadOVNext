@@ -61,7 +61,7 @@ namespace SquadOV.ViewModels
         public void GoToClipSettings() => Router.Navigate.Execute(new ClipSettingsViewModel(this));
         public void GoToScreenshotSettings() => Router.Navigate.Execute(new ScreenshotSettingsViewModel(this));
         public void GoToOverlaySettings() => Router.Navigate.Execute(new OverlaySettingsViewModel(this));
-        public void GoToCustomGameSettings() => Router.Navigate.Execute(new CustomGameSettingsViewModel(this));
+        public void GoToGameSupportSettings() => Router.Navigate.Execute(new GameSupportSettingsViewModel(this));
 
         public Interaction<Dialogs.AboutViewModel, Unit> ShowAboutInteraction { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }

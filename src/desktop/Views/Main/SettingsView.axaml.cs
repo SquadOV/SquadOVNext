@@ -137,11 +137,11 @@ namespace SquadOV.Views.Main
                 this.WhenAnyObservable(x => x.ViewModel!.Router.CurrentViewModel)
                     .Select(x =>
                     {
-                        return (x?.UrlPathSegment == "/games/custom") ?
+                        return (x?.UrlPathSegment == "/games/support") ?
                             new SolidColorBrush(Constants.Colors.SelectedLinkBackground, 1.0) :
                             new SolidColorBrush();
                     })
-                    .BindTo(this, x => x.CustomGamesSettingsButton.Background)
+                    .BindTo(this, x => x.GamesSupportSettingsButton.Background)
                     .DisposeWith(disposables);
 
                 ViewModel!.ShowAboutInteraction.RegisterHandler(ShowAboutDialog).DisposeWith(disposables);

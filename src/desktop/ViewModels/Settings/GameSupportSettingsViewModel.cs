@@ -21,12 +21,12 @@ using System.Collections.Generic;
 
 namespace SquadOV.ViewModels.Settings
 {
-    public class CustomGameSettingsViewModel : ReactiveObject, IRoutableViewModel
+    public class GameSupportSettingsViewModel : ReactiveObject, IRoutableViewModel
     {
         public Models.Localization.Localization Loc { get; } = Locator.Current.GetService<Models.Localization.Localization>()!;
         public IScreen HostScreen { get; }
-        public string UrlPathSegment { get; } = "/games/custom";
-        public CustomGameSettingsViewModel(IScreen parent)
+        public string UrlPathSegment { get; } = "/games/support";
+        public GameSupportSettingsViewModel(IScreen parent)
         {
             HostScreen = parent;
         }

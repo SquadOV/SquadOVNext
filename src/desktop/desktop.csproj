@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Text\" />
+    <Folder Include="Engine\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Localization\Localization.cs">

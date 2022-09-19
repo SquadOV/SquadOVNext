@@ -35,7 +35,7 @@ set(SWIG_SOURCES
 standard_swig_wrapper(
     libenginenet
     libengine
-    engine
+    LibEngine
     LIBENGINE_EXPORTS
     "${SWIG_SOURCES}"
 )

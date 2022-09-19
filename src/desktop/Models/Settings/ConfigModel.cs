@@ -15,15 +15,8 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 using System;
-using System.ComponentModel;
 using System.Reflection;
-using System.IO;
 using ReactiveUI;
-using Avalonia.Collections;
-using SquadOV.Constants;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
 
 namespace SquadOV.Models.Settings
 {
@@ -66,126 +59,20 @@ namespace SquadOV.Models.Settings
         }
     }
 
-    public class HotkeyConfigModel: BaseConfigModel
-    {
-        private Hotkey? _screenshot;
-        public Hotkey? Screenshot
-        {
-            get => _screenshot;
-            set => this.RaiseAndSetIfChanged(ref _screenshot, value);
-        }
-
-        private List<Hotkey?>? _allHotkeys = null;
-        [IgnoreDataMember]
-        public List<Hotkey?> AllHotkeys => _allHotkeys ??= new List<Hotkey?>()
-        {
-            Screenshot,
-        };
-
-        public static HotkeyConfigModel CreateDefault()
-        {
-            return new HotkeyConfigModel()
-            {
-                Screenshot = new Hotkey()
-                {
-                    Action = LogicalAction.Screenshot,
-                    Keys = new ObservableCollection<int>()
-                    {
-                        (int)Keys.Codes.Snapshot,
-                    },
-                }
-            };
-        }
-    }
-
-    public class CoreConfigModel: BaseConfigModel
-    {
-        private string? _vodPath;
-        public string? VodPath
-        {
-            get => _vodPath;
-            set => this.RaiseAndSetIfChanged(ref _vodPath, value);
-        }
-
-        private string? _clipPath;
-        public string? ClipPath
-        {
-            get => _clipPath;
-            set => this.RaiseAndSetIfChanged(ref _clipPath, value);
-        }
-
-        private string? _screenshotPath;
-        public string? ScreenshotPath
-        {
-            get => _screenshotPath;
-            set => this.RaiseAndSetIfChanged(ref _screenshotPath, value);
-        }
-
-        private string? _matchPath;
-        public string? MatchPath
-        {
-            get => _matchPath;
-            set => this.RaiseAndSetIfChanged(ref _matchPath, value);
-        }
-
-        private string? _logPath;
-        public string? LogPath
-        {
-            get => _logPath;
-            set => this.RaiseAndSetIfChanged(ref _logPath, value);
-        }
-
-        private string? _culture;
-        public string? Culture
-        {
-            get => _culture;
-            set => this.RaiseAndSetIfChanged(ref _culture, value);
-        }
-
-        private bool? _minimizeOnClose;
-        public bool? MinimizeOnClose
-        {
-            get => _minimizeOnClose;
-            set => this.RaiseAndSetIfChanged(ref _minimizeOnClose, value);
-        }
-
-        private bool? _minimizeToSystemTray;
-        public bool? MinimizeToSystemTray
-        {
-            get => _minimizeToSystemTray;
-            set => this.RaiseAndSetIfChanged(ref _minimizeToSystemTray, value);
-        }
-
-        public static CoreConfigModel CreateDefault(string location)
-        {
-            var dbPath = Path.Combine(location, "Storage");
-            return new CoreConfigModel()
-            {
-                VodPath = Path.Combine(dbPath, "VOD"),
-                ClipPath = Path.Combine(dbPath, "Clip"),
-                ScreenshotPath = Path.Combine(dbPath, "Screenshot"),
-                LogPath = Path.Combine(dbPath, "Log"),
-                MatchPath = Path.Combine(dbPath, "Match"),
-                Culture = "en",
-                MinimizeOnClose = true,
-                MinimizeToSystemTray = true,
-            };
-        }
-    }
-
     public class ConfigModel: BaseConfigModel
     {
         public static ConfigModel CreateDefault(string location)
         {
             return new ConfigModel()
             {
-                Core = CoreConfigModel.CreateDefault(location),
-                Hotkeys = HotkeyConfigModel.CreateDefault(),
+                Core = Config.CoreConfigModel.CreateDefault(location),
+                Hotkeys = Config.HotkeyConfigModel.CreateDefault(),
+                Games = Config.GameConfigModel.CreateDefault(),
             };
         }
 
-        private CoreConfigModel? _core;
-        public CoreConfigModel? Core
+        private Config.CoreConfigModel? _core;
+        public Config.CoreConfigModel? Core
         {
             get => _core;
             private set
@@ -198,8 +85,8 @@ namespace SquadOV.Models.Settings
             }
         }
 
-        private HotkeyConfigModel? _hotkeys;
-        public HotkeyConfigModel? Hotkeys
+        private Config.HotkeyConfigModel? _hotkeys;
+        public Config.HotkeyConfigModel? Hotkeys
         {
             get => _hotkeys;
             private set
@@ -208,6 +95,20 @@ namespace SquadOV.Models.Settings
                 if (_hotkeys != null)
                 {
                     _hotkeys.PropertyChanged += (s, e) => this.RaisePropertyChanged($"Hotkeys.{e.PropertyName}");
+                }
+            }
+        }
+
+        private Config.GameConfigModel? _games;
+        public Config.GameConfigModel? Games
+        {
+            get => _games;
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _games, value);
+                if (_games != null)
+                {
+                    _games.PropertyChanged += (s, e) => this.RaisePropertyChanged($"Games.{e.PropertyName}");
                 }
             }
         }

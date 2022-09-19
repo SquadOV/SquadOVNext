@@ -29,6 +29,7 @@ namespace SquadOV.Locators
             ViewModels.Settings.ProfileSettingsViewModel context => new Views.Settings.ProfileSettingsView { DataContext = context },
             ViewModels.Settings.DeviceSettingsViewModel context => new Views.Settings.DeviceSettingsView { DataContext = context },
             ViewModels.Settings.ScreenshotSettingsViewModel context => new Views.Settings.ScreenshotSettingsView { DataContext = context },
+            ViewModels.Settings.GameSupportSettingsViewModel context => new Views.Settings.GameSupportSettingsView { DataContext = context },
             _ => null,
         };
     }

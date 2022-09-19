@@ -567,6 +567,9 @@
   <data name="SettingsGames" xml:space="preserve">
     <value>Games</value>
   </data>
+  <data name="SettingsGameSupport" xml:space="preserve">
+    <value>Supported</value>
+  </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Language</value>
   </data>

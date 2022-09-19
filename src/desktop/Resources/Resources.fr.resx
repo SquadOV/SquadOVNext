@@ -567,6 +567,9 @@
   <data name="SettingsGames" xml:space="preserve">
     <value>Jeux</value>
   </data>
+  <data name="SettingsGameSupport" xml:space="preserve">
+    <value>Prise en charge</value>
+  </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Langue</value>
   </data>
@@ -644,6 +647,9 @@
   </data>
   <data name="StorageVodLocationTooltip" xml:space="preserve">
     <value>Où stocker les vidéos enregistrées.</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>Support.ToObservableChangeSet().ToCollection()</value>
   </data>
   <data name="SystemMinimizeOnClose" xml:space="preserve">
     <value>Réduire à la fermeture</value>

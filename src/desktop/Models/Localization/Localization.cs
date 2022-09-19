@@ -497,6 +497,9 @@ namespace SquadOV.Models.Localization
             _obsSettingsGames = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsGames", x))
                     .ToProperty(this, nameof(SettingsGames), deferSubscription: true);
+            _obsSettingsGameSupport = this.WhenAnyValue(x => x.Culture)
+                    .Select(x => Get("SettingsGameSupport", x))
+                    .ToProperty(this, nameof(SettingsGameSupport), deferSubscription: true);
             _obsSettingsLanguage = this.WhenAnyValue(x => x.Culture)
                     .Select(x => Get("SettingsLanguage", x))
                     .ToProperty(this, nameof(SettingsLanguage), deferSubscription: true);
@@ -1053,6 +1056,9 @@ namespace SquadOV.Models.Localization
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsGames;
         public string SettingsGames { get => _obsSettingsGames.Value; }
+
+        private readonly ObservableAsPropertyHelper<string> _obsSettingsGameSupport;
+        public string SettingsGameSupport { get => _obsSettingsGameSupport.Value; }
 
         private readonly ObservableAsPropertyHelper<string> _obsSettingsLanguage;
         public string SettingsLanguage { get => _obsSettingsLanguage.Value; }

@@ -21,7 +21,7 @@ using Tomlyn;
 
 namespace SquadOV.Services.Config
 {
-    // Provides an easy way to get/modify any USER-FACING setting.
+    // Provides an easy way to get/modify any setting a user may need to tweak to change the behavior of the app.
     internal class ConfigService: IConfigService
     {
         private Models.Settings.ConfigModel _model;

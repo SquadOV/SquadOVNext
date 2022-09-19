@@ -92,8 +92,8 @@
         </Panel>
 
         <TextBlock Classes="header" Text="{Binding Loc.SettingsGames}"/>
-        <Button x:Name="CustomGamesSettingsButton" Command="{Binding GoToCustomGameSettings}">
-          <TextBlock Classes="link" Text="{Binding Loc.SettingsCustomGames}"></TextBlock>
+        <Button x:Name="GamesSupportSettingsButton" Command="{Binding GoToGameSupportSettings}">
+          <TextBlock Classes="link" Text="{Binding Loc.SettingsGameSupport}"></TextBlock>
         </Button>
 
         <Panel Height="2" Margin="0,10,0,10">
